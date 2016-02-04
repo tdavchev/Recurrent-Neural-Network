@@ -4,6 +4,7 @@ import gensim
 import math
 import numpy # I included this
 from copy import copy
+from sets import Set
 
 from itertools import repeat
 from collections import defaultdict
@@ -150,19 +151,97 @@ input: freqVectors, a list of frequency-based vectors
 output: tfIdfVectors, a list of tf-idf-based vectors
 '''
 def tf_idf(freqVectors):
-    tfIdfVectors = [[] for i in repeat(None, len(freqVectors))]
-    nDocs=len(freqVectors)
+    #print freqVectors[0]
+    # z = []
+    # print len(freqVectors)
+    tfIdfVectors = []
+    # nDocs=len(freqVectors)
+    # compute how many times one finds a file
+    lista = []
+    N = len(freqVectors)
+    print "begin..."
+    # for vector in xrange(0,len(freqVectors)):
+    #     for word in xrange(0,len(freqVectors[vector])):
+    #         if int(freqVectors[vector][word][0]):
+
+    #             print "00000000000000000000000"
+    #             print vector
+    #             print "**********************"
+    #             print freqVectors[vector][word]
+    #             print "!!!!!!!!!!!!!!!!!!!!!!"
+    #             print int(freqVectors[vector][word][0])
     
+    lista=[int(freqVectors[vector][word][0]) for vector in xrange(0,len(freqVectors)) for word in xrange(0,len(freqVectors[vector]))]
+    lista.sort()
+    # print lista
+    print "list with counts gathered"
+    #print lista
+    wordFreq = []
+    idx = ""
+    prevWord = ""
+    count = 0
+    countedDict = {}
+    for word in lista:
+        if idx == "":
+            idx = word
+        if word == idx:
+            count = count + 1
+        else: # the word has changed
+            prevWord = idx
+            countedDict[idx]=count
+            idx = word
+            count = 1
+    if idx not in countedDict.keys():
+        countedDict[idx]=count
+    # wordFreq = [lista.count(w) for w in lista]
+    # print wordFreq
+    # nT =  zip(lista,wordFreq)
+    print "nT computed;"
+    N=3 
+    tf_idf = [[] for i in repeat(None, len(freqVectors))]
+
     for vector in xrange(0,len(freqVectors)):
-        for word in freqVectors[vector]:
-            term=word[0]
-            tf=word[1]
-            nTerms = []
-            # get the number of documents where term occurs
-            nTerms=[jword[0] for ivec in freqVectors for jword in ivec if term == jword[0]]
-            tf_idf=(1+numpy.log2(int(tf)))*(1+numpy.log2(nDocs/len(nTerms)))
-            tfIdfVectors[vector].append(tf_idf)
-            
+        for item in xrange(0,len(freqVectors[vector])):
+            word = freqVectors[vector][item][0]
+            freq = freqVectors[vector][item][1]
+            tf_ = 1+numpy.log2(float(freq))
+            _idf = numpy.log2(float(N)/float((1+countedDict[int(word)])))
+            tf_idf[vector].append((word,tf_*_idf))
+    print "tf_idf computed"
+    
+    print "removing all zeros;"
+    for j in xrange(0,len(tf_idf)):
+        tf_idf[j] = filter(lambda a: a != 0, tf_idf[j])
+
+    tfIdfVectors = tf_idf
+    # # for vector in xrange(0, len(freqVectors)):
+    # tf = [float(freqVectors[vector][j][1]) for vector in xrange(0,len(freqVectors)) for j in xrange(0,len(freqVectors[vector]))] # celiq spisuk s sizeove
+    # words = [freqVectors[vector][j][0] for vector in xrange(0,len(freqVectors)) for j in xrange(0,len(freqVectors[vector]))]
+    # print "tf computed"
+    # lengths = [len(freqVectors[vector]) for vector in xrange(0,len(freqVectors))] # broi elementi ot kude do kude znaesh e vseki vector
+    # '''
+    # Computing lengths from vectors 0 to 5 results in --> [4999, 4593, 4602, 3793, 4449] but we want a 0 in front for the tf_ computation
+    # '''
+    # lengths.insert(0,0)
+    # print "lengths computed"
+    # tf_ = [[] for i in repeat(None, len(lengths))]
+    # idf_ = [[] for i in repeat(None, len(lengths))]
+    # for document in xrange(1,len(lengths)):
+    #     for idx,_tf in enumerate(tf[lengths[document-1]:lengths[document]]):
+    #         tf_[document-1].append(float(1+numpy.log2(_tf)))
+    #         idf_[document-1].append(float((numpy.log2(float(N)/float(words[idx])))))
+    
+    # print type(tf_)
+    # print type(idf_)
+    # # tf_idf = numpy.zeros()
+    # # tf_idf = numpy.asarray(tf_idf)
+    # # tf_idf = numpy.dot(a,b)
+    # # print len(tf_idf[0])
+    # print tf_idf
+    # print len(idf_[0])
+    # print len(tf_[0]) # results in 4999
+    # _idf = 
+
     return tfIdfVectors
 
 '''
@@ -208,6 +287,7 @@ if __name__ == '__main__':
         print("(a): load corpus")
         try:
             id2word, word2id, vectors = load_corpus(sys.argv[2], sys.argv[3])
+            print len(vectors)
             if not id2word:
                 print("\tError: id2word is None or empty")
                 exit()
@@ -278,7 +358,6 @@ if __name__ == '__main__':
                     homeVector.append((key,vectors[key][element][1]))
                 if vectors[key][element][0]=='12':
                     timeVector.append((key,vectors[key][element][1]))
-
         cos = cosine_similarity(houseVector, homeVector)
         cos2 = cosine_similarity(timeVector, homeVector)
         cos3 = cosine_similarity(houseVector, timeVector)
@@ -304,7 +383,8 @@ if __name__ == '__main__':
         print("(d) converting to tf-idf space")
         id2word, word2id, vectors = load_corpus(sys.argv[2], sys.argv[3])
         try:
-            tfIdfSpace = tf_idf(vectors)
+            tfIdfSpace = tf_idf(vectors) #must pass a [vector[0]] in case of 1 vector
+            # print tfIdfSpace
             if not len(vectors) == len(tfIdfSpace):
                 print("\tError: tf-idf space does not correspond to original vector space")
             else:
@@ -316,8 +396,12 @@ if __name__ == '__main__':
     # you may complete this part to get answers for part e (similarity in tf-idf space)
     if part == "e":
         print("(e) similarity of house, home and time in tf-idf space")
-        
         # your code here
+        _, word2id, vectors = load_corpus(sys.argv[2], sys.argv[3])
+        tfIdfSpace = tf_idf(vectors)
+        print("similarity of house and home is %s" % (cosine_similarity(tfIdfSpace[word2id["house.n"]], tfIdfSpace[word2id["home.n"]])))
+        print("similarity of house and time is %s" % (cosine_similarity(tfIdfSpace[word2id["house.n"]], tfIdfSpace[word2id["time.n"]])))
+        print("similarity of home and time is %s" % (cosine_similarity(tfIdfSpace[word2id["home.n"]], tfIdfSpace[word2id["time.n"]])))
     
     # you may complete this part for the first part of f (estimating best learning rate, sample rate and negative samplings)
     if part == "f1":
