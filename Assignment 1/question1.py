@@ -4,10 +4,13 @@ import gensim
 import math
 import numpy # I included this
 from copy import copy
+import logging
 from sets import Set
 
 from itertools import repeat
 from collections import defaultdict
+
+logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 '''
 (f) helper class, do not modify.
@@ -193,6 +196,7 @@ def tf_idf(freqVectors):
             count = 1
     if idx not in countedDict.keys():
         countedDict[idx]=count
+    print len(countedDict)
     # wordFreq = [lista.count(w) for w in lista]
     # print wordFreq
     # nT =  zip(lista,wordFreq)
@@ -247,9 +251,21 @@ def tf_idf(freqVectors):
 '''
 (f) function word2vec to build a word2vec vector model with 100 dimensions and window size 5
 '''
-def word2vec(corpus, learningRate, downsampleRate, negSampling):
-    # your code here
-    return None
+def word2vec(corpus, learningRate, downsampleRate, negSampling,test_set):
+    corpus = BncSentences(corpus, n=100000)
+    # model = gensim.models.Word2Vec(sentences=sntcs, size=100, negative=negSampling, sample=downsampleRate, alpha=learningRate)
+    #model = gensim.models.Word2Vec(sentences=sntcs, size=100, window=5, alpha=learningRate, sample=downsampleRate, sg=0, negative=negSampling)
+    model = gensim.models.Word2Vec(sentences=corpus, size=100, window=5, alpha = learningRate, negative = negSampling, sample=downsampleRate)
+    #model.init_sims(replace=True)
+    #trained_model = gensim.models.word2vec.train_sg_pair(model, sntcs, context_index, learningRate, learn_vectors=True, learn_hidden=True, context_vectors=None, context_locks=None)
+
+
+
+    return model
+
+def test_accuracy(test_set, model):
+    acc=model.accuracy(test_set)
+    return acc
 
 '''
 (h) function lda to build an LDA model with 100 topics from a frequency vector space
@@ -384,7 +400,7 @@ if __name__ == '__main__':
         id2word, word2id, vectors = load_corpus(sys.argv[2], sys.argv[3])
         try:
             tfIdfSpace = tf_idf(vectors) #must pass a [vector[0]] in case of 1 vector
-            # print tfIdfSpace
+            print tfIdfSpace
             if not len(vectors) == len(tfIdfSpace):
                 print("\tError: tf-idf space does not correspond to original vector space")
             else:
@@ -405,9 +421,13 @@ if __name__ == '__main__':
     
     # you may complete this part for the first part of f (estimating best learning rate, sample rate and negative samplings)
     if part == "f1":
-        print("(f1) word2vec, estimating best learning rate, sample rate, negative sampling")
-        
-        # your code here
+        lRate=0.01
+        sRate=0.01
+        nSampling=5
+        print("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,sys.argv[3])
+        print("(f1) word2vec, testing model...")
+        acc=test_accuracy(sys.argv[3],w2v)
     
     # you may complete this part for the second part of f (training and saving the actual word2vec model)
     if part == "f2":
