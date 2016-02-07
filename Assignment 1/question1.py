@@ -9,8 +9,7 @@ from sets import Set
 
 from itertools import repeat
 from collections import defaultdict
-
-logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+logging.basicConfig(filename='task-f-big-final.log',format='%(asctime)s : %(levelname)s : %(message)s',level=logging.INFO)
 
 '''
 (f) helper class, do not modify.
@@ -42,7 +41,7 @@ class BncSentences:
                     word = parts[-1]
                     idx = word.rfind("-")
                     word, pos = word[:idx], word[idx+1:]
-                    if word in ["thus", "late", "often", "only"]:
+                    if word in ['thus', 'late', 'often', 'only', 'usually', 'however', 'lately', 'absolutely', 'hardly', 'fairly', 'near', 'similarly', 'sooner', 'there', 'seriously', 'consequently', 'recently', 'across', 'softly', 'together', 'obviously', 'slightly', 'instantly', 'well', 'therefore', 'solely', 'intimately', 'correctly', 'roughly', 'truly', 'briefly', 'clearly', 'effectively', 'sometimes', 'everywhere', 'somewhat', 'behind', 'heavily', 'indeed', 'sufficiently', 'abruptly', 'narrowly', 'frequently', 'lightly', 'likewise', 'utterly', 'now', 'previously', 'barely', 'seemingly', 'along', 'equally', 'so', 'below', 'apart', 'rather', 'already', 'underneath', 'currently', 'here', 'quite', 'regularly', 'elsewhere', 'today', 'still', 'continuously', 'yet', 'virtually', 'of', 'exclusively', 'right', 'forward', 'properly', 'instead', 'this', 'immediately', 'nowadays', 'around', 'perfectly', 'reasonably', 'much', 'nevertheless', 'intently', 'forth', 'significantly', 'merely', 'repeatedly', 'soon', 'closely', 'shortly', 'accordingly', 'badly', 'formerly', 'alternatively', 'hard', 'hence', 'nearly', 'honestly', 'wholly', 'commonly', 'completely', 'perhaps', 'carefully', 'possibly', 'quietly', 'out', 'really', 'close', 'strongly', 'fiercely', 'strictly', 'jointly', 'earlier', 'round', 'as', 'definitely', 'purely', 'little', 'initially', 'ahead', 'occasionally', 'totally', 'severely', 'maybe', 'evidently', 'before', 'later', 'apparently', 'actually', 'onwards', 'almost', 'tightly', 'practically', 'extremely', 'just', 'accurately', 'entirely', 'faintly', 'away', 'since', 'genuinely', 'neatly', 'directly', 'potentially', 'presently', 'approximately', 'very', 'forwards', 'aside', 'that', 'hitherto', 'beforehand', 'fully', 'firmly', 'generally', 'altogether', 'gently', 'about', 'exceptionally', 'exactly', 'straight', 'on', 'off', 'ever', 'also', 'sharply', 'violently', 'undoubtedly', 'more', 'over', 'quickly', 'plainly', 'necessarily']:
                         pos = "r"
                     if pos == "j":
                         pos = "a"
@@ -64,7 +63,6 @@ def load_corpus(vocabFile, contextFile):
     fp = open(vocabFile)
     contents = fp.read()
     vocab = contents.split()
-
     keys = list(range(0,len(vocab)))
 
     _id2word = zip(keys,vocab)
@@ -84,7 +82,7 @@ def load_corpus(vocabFile, contextFile):
             # print brei[0]
             if brei[1].find(":") > -1:
                 w,n =  brei[1].split(":")
-                vectorsFast[vector].append((w,n))
+                vectorsFast[vector].append((int(w),int(n)))
         # vectorsFast[vector] = dict((vectorsFast[vector][element][0],vectors[vector][element][1]) for element in xrange(0,len(vectors)))
 
     vectors = vectorsFast
@@ -104,21 +102,20 @@ def cosine_similarity(vector1, vector2):
     v2=vector2
     keys1=[]
     keys2=[]
-    
     # vector1=map(int,vector1)
     # vector2=map(int,vector2)
-    if type(vector1[0])==tuple:
+    if type(vector1[0])==tuple or type(vector1[0])==list:
         #convert to dictionary
         dictionary1 = dict((x, y) for x, y in vector1)
         vector1=dictionary1.values() #get all values for the Euclidean distance
-        vector1 = map(int, vector1) # provide itemsize for data type
+        vector1 = map(float, vector1) # provide itemsize for data type
         v1=[] # will be recomuputed
         keys1 = dictionary1.keys() # we need all keys to be able to compare
-    if type(vector2[0])==tuple:
+    if type(vector2[0])==tuple or type(vector1[0])==list:
         #convert to dictionary
         dictionary2 = dict((x, y) for x, y in vector2)
         vector2=dictionary2.values() #get all values for the Euclidean distance
-        vector2 = map(int, vector2) # provide itemsize for data type
+        vector2 = map(float, vector2) # provide itemsize for data type
         v2=[] # will be recomputed
         keys2 = dictionary2.keys() # we need all keys to be able to compare
 
@@ -143,8 +140,8 @@ def cosine_similarity(vector1, vector2):
             v2.append(dictionary2[key])
 
     # provide itemsize for data type
-    v1 = map(int,v1)
-    v2 = map(int,v2)
+    v1 = map(float,v1)
+    v2 = map(float,v2)
 
     return numpy.dot(v1,v2)/numpy.dot(numpy.linalg.norm(vector1),numpy.linalg.norm(vector2))
 
@@ -154,31 +151,14 @@ input: freqVectors, a list of frequency-based vectors
 output: tfIdfVectors, a list of tf-idf-based vectors
 '''
 def tf_idf(freqVectors):
-    #print freqVectors[0]
-    # z = []
-    # print len(freqVectors)
     tfIdfVectors = []
-    # nDocs=len(freqVectors)
     # compute how many times one finds a file
     lista = []
     N = len(freqVectors)
     print "begin..."
-    # for vector in xrange(0,len(freqVectors)):
-    #     for word in xrange(0,len(freqVectors[vector])):
-    #         if int(freqVectors[vector][word][0]):
-
-    #             print "00000000000000000000000"
-    #             print vector
-    #             print "**********************"
-    #             print freqVectors[vector][word]
-    #             print "!!!!!!!!!!!!!!!!!!!!!!"
-    #             print int(freqVectors[vector][word][0])
-    
     lista=[int(freqVectors[vector][word][0]) for vector in xrange(0,len(freqVectors)) for word in xrange(0,len(freqVectors[vector]))]
     lista.sort()
-    # print lista
     print "list with counts gathered"
-    #print lista
     wordFreq = []
     idx = ""
     prevWord = ""
@@ -187,7 +167,7 @@ def tf_idf(freqVectors):
     for word in lista:
         if idx == "":
             idx = word
-        if word == idx:
+        elif word == idx:
             count = count + 1
         else: # the word has changed
             prevWord = idx
@@ -196,26 +176,24 @@ def tf_idf(freqVectors):
             count = 1
     if idx not in countedDict.keys():
         countedDict[idx]=count
-    print len(countedDict)
-    # wordFreq = [lista.count(w) for w in lista]
-    # print wordFreq
-    # nT =  zip(lista,wordFreq)
+
     print "nT computed;"
-    N=3 
     tf_idf = [[] for i in repeat(None, len(freqVectors))]
 
     for vector in xrange(0,len(freqVectors)):
         for item in xrange(0,len(freqVectors[vector])):
             word = freqVectors[vector][item][0]
             freq = freqVectors[vector][item][1]
-            tf_ = 1+numpy.log2(float(freq))
-            _idf = numpy.log2(float(N)/float((1+countedDict[int(word)])))
+            tf_ = 1.0+float(numpy.log2(float(freq)))
+            div = float(N)
+            denom=(1.0+float(countedDict[int(word)]))
+            _idf = numpy.log2(div/denom)
             tf_idf[vector].append((word,tf_*_idf))
     print "tf_idf computed"
-    
-    print "removing all zeros;"
+
     for j in xrange(0,len(tf_idf)):
         tf_idf[j] = filter(lambda a: a != 0, tf_idf[j])
+    print "all zeros were removed;"
 
     tfIdfVectors = tf_idf
     # # for vector in xrange(0, len(freqVectors)):
@@ -251,18 +229,16 @@ def tf_idf(freqVectors):
 '''
 (f) function word2vec to build a word2vec vector model with 100 dimensions and window size 5
 '''
-def word2vec(corpus, learningRate, downsampleRate, negSampling,test_set):
-    corpus = BncSentences(corpus, n=100000)
-    # model = gensim.models.Word2Vec(sentences=sntcs, size=100, negative=negSampling, sample=downsampleRate, alpha=learningRate)
-    #model = gensim.models.Word2Vec(sentences=sntcs, size=100, window=5, alpha=learningRate, sample=downsampleRate, sg=0, negative=negSampling)
-    model = gensim.models.Word2Vec(sentences=corpus, size=100, window=5, alpha = learningRate, negative = negSampling, sample=downsampleRate)
-    #model.init_sims(replace=True)
-    #trained_model = gensim.models.word2vec.train_sg_pair(model, sntcs, context_index, learningRate, learn_vectors=True, learn_hidden=True, context_vectors=None, context_locks=None)
-
-
-
+def word2vec(corpus, learningRate, downsampleRate, negSampling,n,name='vector.bin'):
+    sntncs = BncSentences(corpus, n=n)
+    model = gensim.models.Word2Vec(sentences=sntncs, size=100, window=5, alpha=learningRate, negative=negSampling, sg=1, workers=8, sample=downsampleRate)
+    model.init_sims(replace=True)
+    model.save(name)
     return model
 
+'''
+A function to test the accuracy
+'''
 def test_accuracy(test_set, model):
     acc=model.accuracy(test_set)
     return acc
@@ -273,9 +249,14 @@ input: vectors
 input: wordMapping (optional) mapping from word IDs to words
 output: an LDA topic model with 100 topics, using the frequency vectors
 '''
-def lda(vectors, wordMapping):
-    # your code here
-    return None
+def lda(vectors, wordMapping=None):
+    print "Starting lda"
+    lda = gensim.models.ldamodel.LdaModel(vectors, id2word=wordMapping, num_topics=100, update_every=0, passes=10)
+    print "Lda completed, saving.."
+    lda.save('lda_model_v2', ignore=['state', 'dispatcher'])
+    print "Model saved. Showing topics.."
+    print lda.show_topics(num_topics=10, num_words=10, log=False, formatted=True)
+    print "End."
 
 '''
 (j) function get_topic_words, to get words in a given LDA topic
@@ -284,8 +265,7 @@ input: topicID, ID of the topic for which to get topic words
 input: wordMapping, mapping from words to IDs (optional)
 '''
 def get_topic_words(ldaModel, topicID):
-    # your code here
-    return None
+    return ldaModel.show_topic(topicID)
 
 if __name__ == '__main__':
     import sys
@@ -303,7 +283,6 @@ if __name__ == '__main__':
         print("(a): load corpus")
         try:
             id2word, word2id, vectors = load_corpus(sys.argv[2], sys.argv[3])
-            print len(vectors)
             if not id2word:
                 print("\tError: id2word is None or empty")
                 exit()
@@ -368,11 +347,11 @@ if __name__ == '__main__':
         id2word, word2id, vectors = load_corpus(sys.argv[2], sys.argv[3])
         for key in xrange(0,len(vectors)):
             for element in xrange(0,len(vectors[key])):
-                if vectors[key][element][0]=='80':
+                if vectors[key][element][0]==80:
                     houseVector.append((key,vectors[key][element][1]))
-                if vectors[key][element][0]=='143':
+                if vectors[key][element][0]==143:
                     homeVector.append((key,vectors[key][element][1]))
-                if vectors[key][element][0]=='12':
+                if vectors[key][element][0]==12:
                     timeVector.append((key,vectors[key][element][1]))
         cos = cosine_similarity(houseVector, homeVector)
         cos2 = cosine_similarity(timeVector, homeVector)
@@ -400,65 +379,203 @@ if __name__ == '__main__':
         id2word, word2id, vectors = load_corpus(sys.argv[2], sys.argv[3])
         try:
             tfIdfSpace = tf_idf(vectors) #must pass a [vector[0]] in case of 1 vector
-            print tfIdfSpace
             if not len(vectors) == len(tfIdfSpace):
                 print("\tError: tf-idf space does not correspond to original vector space")
             else:
                 print("\tPass: converted to tf-idf space")
+            if not numpy.isclose(29.3685342569, tfIdfSpace[0][0][1]):
+                print("\tError: tf-idf has miscomputed")
+            else:
+                print("\tPass: output from tf-idf is correct")
         except Exception as e:
             print("\tError: could not convert to tf-idf space")
             print(e)
-    
+        
     # you may complete this part to get answers for part e (similarity in tf-idf space)
     if part == "e":
         print("(e) similarity of house, home and time in tf-idf space")
         # your code here
         _, word2id, vectors = load_corpus(sys.argv[2], sys.argv[3])
         tfIdfSpace = tf_idf(vectors)
-        print("similarity of house and home is %s" % (cosine_similarity(tfIdfSpace[word2id["house.n"]], tfIdfSpace[word2id["home.n"]])))
-        print("similarity of house and time is %s" % (cosine_similarity(tfIdfSpace[word2id["house.n"]], tfIdfSpace[word2id["time.n"]])))
-        print("similarity of home and time is %s" % (cosine_similarity(tfIdfSpace[word2id["home.n"]], tfIdfSpace[word2id["time.n"]])))
+
+        print("similarity of house and home is {0}".format(cosine_similarity(tfIdfSpace[word2id["house.n"]], tfIdfSpace[word2id["home.n"]])))
+        print("similarity of house and time is {0}".format(cosine_similarity(tfIdfSpace[word2id["house.n"]], tfIdfSpace[word2id["time.n"]])))
+        print("similarity of home and time is {0}".format(cosine_similarity(tfIdfSpace[word2id["home.n"]], tfIdfSpace[word2id["time.n"]])))
     
     # you may complete this part for the first part of f (estimating best learning rate, sample rate and negative samplings)
     if part == "f1":
-        lRate=0.01
-        sRate=0.01
-        nSampling=5
+        # Total: 7.0% (243/3476)
+        lRate=0.05
+        sRate=0.001
+        nSampling=10
         print("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
-        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,sys.argv[3])
+        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
         print("(f1) word2vec, testing model...")
         acc=test_accuracy(sys.argv[3],w2v)
-    
+
+        # Total 8.0%
+        lRate=0.05
+        sRate=0.01
+        nSampling=10
+        print("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
+        print("(f1) word2vec, testing model...")
+        acc=test_accuracy(sys.argv[3],w2v)
+
+
+        # Total 3.0%
+        # lRate=0.01
+        # sRate=0.01
+        # nSampling=5
+        # print("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
+        # print("(f1) word2vec, testing model...")
+        # acc=test_accuracy(sys.argv[3],w2v)
+
+        # # Total 7.6%
+        # lRate=0.03
+        # sRate=0.01
+        # nSampling=5
+        # logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
+        # logging.info("(f1) word2vec, testing model...")
+        # acc=test_accuracy(sys.argv[3],w2v)
+
+        # # what happens if we ttry the final values suggested in paper
+        # lRate=0.05
+        # sRate=0.00001
+        # nSampling=10
+        # logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
+        # logging.info("(f1) word2vec, testing model...")
+        # acc=test_accuracy(sys.argv[3],w2v)
+
+        # # apparently this shows good performance Total 7.7%
+        # lRate=0.05
+        # sRate=0.01
+        # nSampling=10
+        # logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
+        # logging.info("(f1) word2vec, testing model...")
+        # acc=test_accuracy(sys.argv[3],w2v)
+
+        # #full vector training will happen on those total 8%
+        # lRate=0.03
+        # sRate=0.01
+        # nSampling=10
+        # logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
+        # logging.info("(f1) word2vec, testing model...")
+        # acc=test_accuracy(sys.argv[3],w2v)
+
+        # # total: 0.0% (1/3476)
+        # lRate=0.01
+        # sRate=0.01
+        # nSampling=0
+        # logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
+        # logging.info("(f1) word2vec, testing model...")
+        # acc=test_accuracy(sys.argv[3],w2v)
+
+        # # total: 3.6% (124/3476)
+        # lRate=0.01
+        # sRate=0.01
+        # nSampling=10
+        # logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
+        # logging.info("(f1) word2vec, testing model...")
+        # acc=test_accuracy(sys.argv[3],w2v)
+
+        # # total: 0.4% (14/3476)
+        # lRate=0.01
+        # sRate=0.0001
+        # nSampling=5
+        # print("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,sys.argv[3])
+        # print("(f1) word2vec, testing model...")
+        # acc=test_accuracy(sys.argv[3],w2v)
+        
     # you may complete this part for the second part of f (training and saving the actual word2vec model)
     if part == "f2":
         import logging
         logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
         print("(f2) word2vec, building full model with best parameters. May take a while.")
         
-        # your code here
+        lRate=0.05
+        sRate=0.01
+        nSampling=10
+        logging.info("(f2) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,-1,"final-model.bin")
+        logging.info("(f2) word2vec, testing model...")
+        acc=test_accuracy(sys.argv[3],w2v)
     
     # you may complete this part to get answers for part g (similarity in your word2vec model)
     if part == "g":
         print("(g): word2vec based similarity")
-        
-        # your code here
+        # model = gensim.models.Word2Vec(sentences=sntncs, size=100, window=5, alpha = learningRate, negative = negSampling, sg=1, workers=8, sample=downsampleRate)
+
+        w2v=gensim.models.Word2Vec.load('final-model.bin')
+        houseHome = w2v.similarity('house.n', 'home.n')
+        houseTime = w2v.similarity('house.n', 'time.n')
+        homeTime = w2v.similarity('time.n', 'home.n')
+
+        print("similarity of house and home is {0}".format(houseHome))
+        print("similarity of house and time is {0}".format(houseTime))
+        print("similarity of home and time is {0}".format(homeTime))
     
     # you may complete this for part h (training and saving the LDA model)
     if part == "h":
         import logging
         logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
         print("(h) LDA model")
-        
+        id2word, word2id, vectors = load_corpus(sys.argv[2], sys.argv[3])
+        # since tuples are strings workaround...
+        # iVectors = [[] for i in repeat(None, len(vectors))]
+        # for vector in xrange(0,len(vectors)):
+        #     for item in xrange(0,len(vectors[vector])):
+        #         iVectors[vector].append((int(vectors[vector][item][0]),int(vectors[vector][item][1])))
+        ldaModel=lda(vectors,id2word)
         # your code here
     
     # you may complete this part to get answers for part i (similarity in your LDA model)
     if part == "i":
         print("(i): lda-based similarity")
-        
+        id2word, word2id, vectors = load_corpus(sys.argv[2], sys.argv[3])
+        ldaModel = gensim.models.LdaModel.load('lda_model_v2', mmap='r')
+        house = ldaModel[vectors[word2id["house.n"]]]
+        home = ldaModel[vectors[word2id["home.n"]]]
+        time = ldaModel[vectors[word2id["time.n"]]]
+
+        print("similarity of house and home is {0}".format(cosine_similarity(house, home)))
+        print("similarity of house and time is {0}".format(cosine_similarity(house, time)))
+        print("similarity of home and time is {0}".format(cosine_similarity(home, time)))
         # your code here
 
     # you may complete this part to get answers for part j (topic words in your LDA model)
     if part == "j":
         print("(j) get topics from LDA model")
-        
-        # your code here
+        id2word, word2id, vectors = load_corpus(sys.argv[2], sys.argv[3])
+        ldaModel = gensim.models.LdaModel.load('lda_model_complete', mmap='r')
+        topics = ldaModel.show_topics(num_topics=10, num_words=10, log=False, formatted=True)
+        topicIDs = [topics[j][0] for j in xrange(0,len(topics))]
+        for _id in topicIDs:
+            realWords = []
+            topicWords = get_topic_words(ldaModel,_id)
+            for word,probability in topicWords:
+                realWords.append(id2word[int(word)])
+            print "The words associated with topic {0} are: {1}".format(_id, realWords)
+        # print topicWords
+
+
+
+    # topics = []
+    # for tID in topicID:
+    #      topics.append((tID,ldaModel.print_topic(tID)))
+
+    # # what am I expected to do here?
+    # # get the print topic output and then split the string get the ints and index2word them ?
+    # for topic in topics:
+    #     wordsProbs = topic[1].split('+')
+    #     for wp in wordsProbs:
+    #         wordsP = wp.split('*')
+    # return topics
