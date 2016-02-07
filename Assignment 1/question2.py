@@ -22,9 +22,11 @@ def load_json():
     i=[]
     sent=[]
     t=[]
+    sentid=[]
     for line in lines:
         s = json.loads(line)
         # print(s)
+        sentid.append(s["id"])
         i.append(s["target_position"])
         sent.append((s["sentence"].split(" ")))
         # print sent
@@ -41,7 +43,7 @@ def load_json():
       # outFile.write("\n")
 
     # outFile.close()
-    return t,i,sent
+    return t,i,sent,sentid
 
 
 '''
@@ -324,18 +326,30 @@ if __name__ == "__main__":
     if part == "b":
         print("(b) using addition to calculate best substitution words")
         id2word,word2id,vectors=load_corpus(sys.argv[2], sys.argv[3])
-        t,i,sent=load_json()        
+        t,i,sent,sentid=load_json()        
         thesaurus=load_tt()
         # thesaurus = thesaurus[t[0]]
         thesaurus = [thesaurus[topic] for topic in t]
         frequencyVectors =tf_idf(vectors)
-        print "Substitute {0}".format(t[0])
+        # print "Substitute {0}".format(t[0])
         substitute = best_substitute([t,i,sent], thesaurus, word2id, None, frequencyVectors, "addition")
-        print substitute[0]
-        print "---------------------------------"
-        print " Sentence"
-        print "---------------------------------"
-        print sent[0]
+        outFileTFIDF = open("tf-idf_addition.txt","w")
+        for f in xrange(0,len(substitute)):
+            outFileTFIDF.write(t[f])
+            outFileTFIDF.write(" ")
+            outFileTFIDF.write(sentid[f])
+            outFileTFIDF.write(" :: ")
+            try:
+                outFileTFIDF.write(substitute[f])
+            except Exception, e:
+                outFileTFIDF.write(" ")
+            outFileTFIDF.write("\n")
+        outFileTFIDF.close
+        # print substitute[0]
+        # print "---------------------------------"
+        # print " Sentence"
+        # print "---------------------------------"
+        # print sent[0]
 
     # you may complete this to get answers for part c (best substitution words with tf-idf and word2vec, using multiplication)
     if part == "c":
