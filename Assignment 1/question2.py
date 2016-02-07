@@ -182,83 +182,44 @@ get the best substitution word in a given sentence, according to a given model (
 '''
 def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, csType):
     t,i,sent = jsonSentence
-    # context=set_contexts(t[0],i[0],sent[0])
-    # print len(jsonSentence[0])
     contexts=[set_contexts(t[br],i[br],sent[br]) for br in xrange(0,len(jsonSentence[0]))]
-    # contexts = [contextsAll[0]]
     # (b) use addition to get context sensitive vectors
     if csType == "addition":
-        # cs_new=[[] for y in repeat(None, len(contexts))]
-        # for word in context:
-        #     try:
-        #         cs_new.append((word2id[word]))
-        #     except Exception, e:
-        #         continue
-        
-        br = 0;
-        # print len(contexts)
-        finalScore = numpy.zeros(len(contexts))
-        finalWord = [[] for y in repeat(None, len(contexts))]
+        br = 0; #indicates the current id of a cycle i.e. count
+        finalScore = numpy.zeros(len(contexts)) # list of all final scores unnecessary imo
+        finalWord = [[] for y in repeat(None, len(contexts))] #list of returned substitution words
         for context in contexts:
-            # print context
-            cs_new = []
+            cs_new = [] #the id of each context word (document) and the list of context words associated with it 
             vt = None
-            for position,word in context:
-                # print word
+            for position,word in context: # there are four context words before and four after each target word
                 try:
-                    # print "lengths for word {0} with id {1}".format(word,word2id[word])
-                    # print ((len(word2id[word]),len(vectors[word2id[word]])))
-                    cs_new.append((word2id[word],frequencyVectors[word2id[word]]))
+                    cs_new.append((word2id[word],model[word])) if type(model)==gensim.models.word2vec.Word2Vec else cs_new.append((word2id[word],model[word2id[word]]))
+                    # if model==gensim.models.word2vec.Word2Vec:
+                    #     cs_new.append((word2id[word],model[word])) 
+                    # else: 
+                    #     cs_new.append((word2id[word],model[word2id[word]]))                    
                 except Exception, e:
                     # print "word {0} does not exist in vectors list".format(word)
                     continue
-            # print len(cs_new)
+
             try:
-                # print t[br]
-                vt=word2id[t[br]]
+                vt = t[br] if type(model)==gensim.models.word2vec.Word2Vec else word2id[t[br]] # the target word in each sentence
             except Exception, e:
-                print "word {0} does not exist in vectors list".format(t[br])
+                # print "word {0} does not exist in vectors list".format(t[br])
+                continue
             # print "cs_new {0}".format(len(cs_new))
             
             if vt is not None:
-                # v_tc=[[] for y in repeat(None, len(t[br]))]
-                allContOfWord = []
+                allContOfWord = [] # a list of all context words' intersection with target - v(t,C), where c belongs to C
                 for contWord in cs_new:
-                    # print ('vectors[vt] {0}'.format(len(vectors[vt])))
-                    # print 'c[1] {0}'.format(len(c[1]))
-                    add = addition(frequencyVectors[vt],contWord[1]) # must always stay 1
-                    # print "len(add)"
-                    # print len(add)
-                    # print 'add {0}'.format(len(add))
+                    add = addition(model[vt],contWord[1]) # must always stay 1
                     allContOfWord.append([add])
-                # print "len allContOfWord"
-                # print len(allContOfWord)
-                    # znachi allContOfWord ima vsi4ki v(t,c).ta za daden vectors[context] word *addition* with all vectors[target]
-                # print "---------------"
-                # print "Finding the best substitute word..."
-                # print "---------------"
-                # print "thesaurus"
-                # print thesaurus[br]
-                for word in thesaurus[br]:
+                for word in thesaurus[br]: # list of known synonyms
                     score = 0
-                    # word = thesaurus[0]
                     try:
-                        a = word2id[word]
-                        # print "-----------WORD------------"
-                        # print a
-                        vw = frequencyVectors[a]
-                        # print len(vw)
-                        for vtc in allContOfWord:
-                            # print "-----------VTC-----------"
-                            # print type(vw)
-                            # print len(vw)
-                            # print type(vtc)
-                            # print len(vtc[0])
-                            score += cosine_similarity(vw,vtc[0])
-                            # print "Score:"
-                            # print score
-                        #     print "-----------END-----------"
-                        # print "-------------END WORD------------"
+                        vw = model[word] if type(model)==gensim.models.word2vec.Word2Vec else model[word2id[word]] # v(w) from the given equation
+                        for vtc in allContOfWord: # sum over every context word in the list of Context words for a given word in a sentence
+                            score += cosine_similarity(vw,vtc[0]) # only one vtc anyway
                     except Exception, e:
                         continue
                         # print "no such word {0}".format(word)
@@ -267,15 +228,56 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
                         finalWord[br] = word
             br = br + 1
 
-
         return finalWord
          
        
         
     # (c) use multiplication to get context sensitive vectors
     elif csType == "multiplication":
-        #your code here
-        pass
+        br = 0; #indicates the current id of a cycle i.e. count
+        finalScore = numpy.zeros(len(contexts)) # list of all final scores unnecessary imo
+        finalWord = [[] for y in repeat(None, len(contexts))] #list of returned substitution words
+        for context in contexts:
+            cs_new = [] #the id of each context word (document) and the list of context words associated with it 
+            vt = None
+            for position,word in context: # there are four context words before and four after each target word
+                try:
+                    cs_new.append((word2id[word],model[word])) if type(model)==gensim.models.word2vec.Word2Vec else cs_new.append((word2id[word],model[word2id[word]]))
+                    # if model==gensim.models.word2vec.Word2Vec:
+                    #     cs_new.append((word2id[word],model[word])) 
+                    # else: 
+                    #     cs_new.append((word2id[word],model[word2id[word]]))                    
+                except Exception, e:
+                    # print "word {0} does not exist in vectors list".format(word)
+                    continue
+
+            try:
+                vt = t[br] if type(model)==gensim.models.word2vec.Word2Vec else word2id[t[br]] # the target word in each sentence
+            except Exception, e:
+                # print "word {0} does not exist in vectors list".format(t[br])
+                continue
+            # print "cs_new {0}".format(len(cs_new))
+            
+            if vt is not None:
+                allContOfWord = [] # a list of all context words' intersection with target - v(t,C), where c belongs to C
+                for contWord in cs_new:
+                    add = multiplication(model[vt],contWord[1]) # must always stay 1
+                    allContOfWord.append([add])
+                for word in thesaurus[br]: # list of known synonyms
+                    score = 0
+                    try:
+                        vw = model[word] if type(model)==gensim.models.word2vec.Word2Vec else model[word2id[word]] # v(w) from the given equation
+                        for vtc in allContOfWord: # sum over every context word in the list of Context words for a given word in a sentence
+                            score += cosine_similarity(vw,vtc[0]) # only one vtc anyway
+                    except Exception, e:
+                        continue
+                        # print "no such word {0}".format(word)
+                    if score > finalScore[br]:
+                        finalScore[br] = score
+                        finalWord[br] = word
+            br = br + 1
+
+        return finalWord
         
     # (d) use LDA to get context sensitive vectors
     elif csType == "lda":
@@ -328,11 +330,11 @@ if __name__ == "__main__":
         id2word,word2id,vectors=load_corpus(sys.argv[2], sys.argv[3])
         t,i,sent,sentid=load_json()        
         thesaurus=load_tt()
-        # thesaurus = thesaurus[t[0]]
         thesaurus = [thesaurus[topic] for topic in t]
-        frequencyVectors =tf_idf(vectors)
-        # print "Substitute {0}".format(t[0])
-        substitute = best_substitute([t,i,sent], thesaurus, word2id, None, frequencyVectors, "addition")
+        #TF-IDF
+        tfIDFVectors = tf_idf(vectors)
+        print "Substitute {0}".format(t[0])
+        substitute = best_substitute([t,i,sent], thesaurus, word2id, tfIDFVectors, None, "addition")
         outFileTFIDF = open("tf-idf_addition.txt","w")
         for f in xrange(0,len(substitute)):
             outFileTFIDF.write(t[f])
@@ -345,15 +347,59 @@ if __name__ == "__main__":
                 outFileTFIDF.write(" ")
             outFileTFIDF.write("\n")
         outFileTFIDF.close
-        # print substitute[0]
-        # print "---------------------------------"
-        # print " Sentence"
-        # print "---------------------------------"
-        # print sent[0]
+        # word2vec
+        w2v=gensim.models.Word2Vec.load('final-model.bin')
+        substitute = best_substitute([t,i,sent], thesaurus, word2id, w2v, None, "addition") # what's the point ?
+        outFileTFIDF = open("word2vec_addition.txt","w")
+        for f in xrange(0,len(substitute)):
+            outFileTFIDF.write(t[f])
+            outFileTFIDF.write(" ")
+            outFileTFIDF.write(sentid[f])
+            outFileTFIDF.write(" :: ")
+            try:
+                outFileTFIDF.write(substitute[f])
+            except Exception, e:
+                outFileTFIDF.write(" ")
+            outFileTFIDF.write("\n")
+        outFileTFIDF.close
 
     # you may complete this to get answers for part c (best substitution words with tf-idf and word2vec, using multiplication)
     if part == "c":
         print("(c) using multiplication to calculate best substitution words")
+        id2word,word2id,vectors=load_corpus(sys.argv[2], sys.argv[3])
+        t,i,sent,sentid=load_json()        
+        thesaurus=load_tt()
+        thesaurus = [thesaurus[topic] for topic in t]
+        #TF-IDF
+        tfIDFVectors = tf_idf(vectors)
+        substitute = best_substitute([t,i,sent], thesaurus, word2id, tfIDFVectors, None, "multiplication")
+        outFileTFIDF = open("tf-idf_multiplication.txt","w")
+        for f in xrange(0,len(substitute)):
+            outFileTFIDF.write(t[f])
+            outFileTFIDF.write(" ")
+            outFileTFIDF.write(sentid[f])
+            outFileTFIDF.write(" :: ")
+            try:
+                outFileTFIDF.write(substitute[f])
+            except Exception, e:
+                outFileTFIDF.write(" ")
+            outFileTFIDF.write("\n")
+        outFileTFIDF.close
+        # word2vec
+        w2v=gensim.models.Word2Vec.load('final-model.bin')
+        substitute = best_substitute([t,i,sent], thesaurus, word2id, w2v, None, "multiplication") # what's the point ?
+        outFileTFIDF = open("word2vec_multiplication.txt","w")
+        for f in xrange(0,len(substitute)):
+            outFileTFIDF.write(t[f])
+            outFileTFIDF.write(" ")
+            outFileTFIDF.write(sentid[f])
+            outFileTFIDF.write(" :: ")
+            try:
+                outFileTFIDF.write(substitute[f])
+            except Exception, e:
+                outFileTFIDF.write(" ")
+            outFileTFIDF.write("\n")
+        outFileTFIDF.close
     
     # this can give you an indication whether your part d1 (P(Z|w) and P(w|Z)) works
     if part == "d":
