@@ -141,18 +141,15 @@ output: probability of the targetWord, given the topic with topicID in the ldaMo
 def prob_w_given_z(ldaModel, targetWord, topicID):
     # your code here
     return None
-
+'''
+(b) function to set the context documents of a target document t in position i in a 
+given sentence sent.
+'''
 def set_contexts(t,i,sent):
-    # sent=sent.split();
-    # for s in sent:
-    #     print s
-    # print sent
     begin=(int(i)-4)
     end=int(i)+5
     begin=0 if begin<=0 else begin
     end=len(sent) if end>=len(sent) else end
-    # context_first = [sent[c] for c in xrange(begin,int(i))]
-    # context_last = [sent[c] for c in xrange(int(i)+1, end)]
     context_first = [(c,sent[c]) for c in xrange(begin,int(i))]
     context_last = [(c,sent[c]) for c in xrange(int(i)+1, end)]
     cs = context_first+context_last
@@ -178,44 +175,100 @@ def load_tt():
 
     return ttdict
 
-    # opa = [contexts[i].split() for i in xrange(0, len(contexts))]
-    # vectorsFast = [[] for i in repeat(None, len(opa))]
-    # for vector in xrange(0,len(opa)):
-    #     for brei in enumerate(opa[vector]):
-    #         # print brei[0]
-    #         if brei[1].find(":") > -1:
-    #             w,n =  brei[1].split(":")
-    #             vectorsFast[vector].append((int(w),int(n)))
-    #     # vectorsFast[vector] = dict((vectorsFast[vector][element][0],vectors[vector][element][1]) for element in xrange(0,len(vectors)))
-
-    # vectors = vectorsFast
-    # return id2word, word2id, vectors
-
 '''
 get the best substitution word in a given sentence, according to a given model (tf-idf, word2vec, LDA) and type (addition, multiplication, lda)
 '''
 def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, csType):
-    
+    t,i,sent = jsonSentence
+    # context=set_contexts(t[0],i[0],sent[0])
+    # print len(jsonSentence[0])
+    contexts=[set_contexts(t[br],i[br],sent[br]) for br in xrange(0,len(jsonSentence[0]))]
+    # contexts = [contextsAll[0]]
     # (b) use addition to get context sensitive vectors
     if csType == "addition":
-        print "---------------"
-        # sent, thesaurus, word2id, v_tc, vectors
-        # v_w = thesaurus[]
-        print model
-        word = thesaurus[0]
-        a = word2id[word]
-        wordVector =[]
-        vw = frequencyVectors[a]
-        print vw
-        # for key in xrange(0,len(frequencyVectors)):
-        #     for element in xrange(0,len(frequencyVectors[key])):
-        #         if frequencyVectors[key][element][0]==a:
-        #             wordVector.append((key,frequencyVectors[key][element][1]))
+        # cs_new=[[] for y in repeat(None, len(contexts))]
+        # for word in context:
+        #     try:
+        #         cs_new.append((word2id[word]))
+        #     except Exception, e:
+        #         continue
         
-        # print wordVector
-        print "----------------"
-        print cosine_similarity(model[1],vw)
-        # pass
+        br = 0;
+        # print len(contexts)
+        finalScore = numpy.zeros(len(contexts))
+        finalWord = [[] for y in repeat(None, len(contexts))]
+        for context in contexts:
+            # print context
+            cs_new = []
+            vt = None
+            for position,word in context:
+                # print word
+                try:
+                    # print "lengths for word {0} with id {1}".format(word,word2id[word])
+                    # print ((len(word2id[word]),len(vectors[word2id[word]])))
+                    cs_new.append((word2id[word],frequencyVectors[word2id[word]]))
+                except Exception, e:
+                    # print "word {0} does not exist in vectors list".format(word)
+                    continue
+            # print len(cs_new)
+            try:
+                # print t[br]
+                vt=word2id[t[br]]
+            except Exception, e:
+                print "word {0} does not exist in vectors list".format(t[br])
+            # print "cs_new {0}".format(len(cs_new))
+            
+            if vt is not None:
+                # v_tc=[[] for y in repeat(None, len(t[br]))]
+                allContOfWord = []
+                for contWord in cs_new:
+                    # print ('vectors[vt] {0}'.format(len(vectors[vt])))
+                    # print 'c[1] {0}'.format(len(c[1]))
+                    add = addition(frequencyVectors[vt],contWord[1]) # must always stay 1
+                    # print "len(add)"
+                    # print len(add)
+                    # print 'add {0}'.format(len(add))
+                    allContOfWord.append([add])
+                # print "len allContOfWord"
+                # print len(allContOfWord)
+                    # znachi allContOfWord ima vsi4ki v(t,c).ta za daden vectors[context] word *addition* with all vectors[target]
+                # print "---------------"
+                # print "Finding the best substitute word..."
+                # print "---------------"
+                # print "thesaurus"
+                # print thesaurus[br]
+                for word in thesaurus[br]:
+                    score = 0
+                    # word = thesaurus[0]
+                    try:
+                        a = word2id[word]
+                        # print "-----------WORD------------"
+                        # print a
+                        vw = frequencyVectors[a]
+                        # print len(vw)
+                        for vtc in allContOfWord:
+                            # print "-----------VTC-----------"
+                            # print type(vw)
+                            # print len(vw)
+                            # print type(vtc)
+                            # print len(vtc[0])
+                            score += cosine_similarity(vw,vtc[0])
+                            # print "Score:"
+                            # print score
+                        #     print "-----------END-----------"
+                        # print "-------------END WORD------------"
+                    except Exception, e:
+                        continue
+                        # print "no such word {0}".format(word)
+                    if score > finalScore[br]:
+                        finalScore[br] = score
+                        finalWord[br] = word
+            br = br + 1
+
+
+        return finalWord
+         
+       
         
     # (c) use multiplication to get context sensitive vectors
     elif csType == "multiplication":
@@ -271,36 +324,18 @@ if __name__ == "__main__":
     if part == "b":
         print("(b) using addition to calculate best substitution words")
         id2word,word2id,vectors=load_corpus(sys.argv[2], sys.argv[3])
-        t,i,sent=load_json()
-        context=set_contexts(t[0],i[0],sent[0])
+        t,i,sent=load_json()        
         thesaurus=load_tt()
-        thesaurus = thesaurus[t[0]]
-        print thesaurus
-        cs_new=[]
-        # for word in context:
-        #     try:
-        #         cs_new.append((word2id[word]))
-        #     except Exception, e:
-        #         continue
-        for position,word in context:
-            try:
-                cs_new.append((position,word2id[word]))
-            except Exception, e:
-                continue
-        vt=word2id[t[0]]
-        v_tc=[[] for y in repeat(None, len(t))]
-        lis=[]
-        print cs_new
-        print vt
-        print "aaaaaaaaaaaa"
-        for c in cs_new:
-            print [(int(i[0]),vt)]
-            print "&&&&&&"
-            add = addition([(int(i[0]),vt)],[c])
-            v_tc[0].append(add)
-        print v_tc
-        
-        best_substitute(sent, thesaurus, word2id, v_tc[0], vectors, "addition")
+        # thesaurus = thesaurus[t[0]]
+        thesaurus = [thesaurus[topic] for topic in t]
+        frequencyVectors =tf_idf(vectors)
+        print "Substitute {0}".format(t[0])
+        substitute = best_substitute([t,i,sent], thesaurus, word2id, None, frequencyVectors, "addition")
+        print substitute[0]
+        print "---------------------------------"
+        print " Sentence"
+        print "---------------------------------"
+        print sent[0]
 
     # you may complete this to get answers for part c (best substitution words with tf-idf and word2vec, using multiplication)
     if part == "c":
