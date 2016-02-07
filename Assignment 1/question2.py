@@ -225,7 +225,8 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
                         # print "no such word {0}".format(word)
                     if score > finalScore[br]:
                         finalScore[br] = score
-                        finalWord[br] = word
+                        word = word.split(".")
+                        finalWord[br] = word[0]
             br = br + 1
 
         return finalWord
@@ -274,7 +275,8 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
                         # print "no such word {0}".format(word)
                     if score > finalScore[br]:
                         finalScore[br] = score
-                        finalWord[br] = word
+                        word = word.split(".")
+                        finalWord[br] = word[0]
             br = br + 1
 
         return finalWord
