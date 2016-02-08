@@ -53,9 +53,10 @@ input: vector2
 output: addVector, the resulting vector when adding vector1 and vector2
 '''
 def addition(vector1, vector2):
-    if type(vector1[0])!=tuple and type(vector1[0])!=list and type(vector2[0])!=tuple and type(vector1[0])!=list:
+    if type(vector1[0])!=tuple and type(vector2[0])!=tuple: #and type(vector1[0])!=list and type(vector1[0])!=list:
+        vector1 = numpy.asarray(vector1)
+        vector2 = numpy.asarray(vector2)
         return vector1+vector2
-
     v1=vector1
     v2=vector2
     keys1=[]
@@ -68,7 +69,6 @@ def addition(vector1, vector2):
     vector1 = map(int, vector1) # provide itemsize for data type
     v1=[] # will be recomuputed
     keys1 = dictionary1.keys() # we need all keys to be able to compare
-
     #convert to dictionary
     dictionary2 = dict((x, y) for x, y in vector2)
     vector2=dictionary2.values() #get all values for the Euclidean distance
@@ -93,22 +93,20 @@ input: vector2
 output: mulVector, the resulting vector when multiplying vector1 and vector2
 '''
 def multiplication(vector1, vector2):
-    if type(vector1[0])!=tuple and type(vector1[0])!=list and type(vector2[0])!=tuple and type(vector1[0])!=list:
-        return vector1+vector2
-
+    if type(vector1[0])!=tuple and type(vector2[0])!=tuple: #and type(vector1[0])!=list and type(vector1[0])!=list:
+        vector1 = numpy.asarray(vector1)
+        vector2 = numpy.asarray(vector2)
+        return vector1*vector2
     v1=vector1
     v2=vector2
     keys1=[]
     keys2=[]
-    # vector1=map(int,vector1)
-    # vector2=map(int,vector2)
     #convert to dictionary
     dictionary1 = dict((x, y) for x, y in vector1)
     vector1=dictionary1.values() #get all values for the Euclidean distance
     vector1 = map(int, vector1) # provide itemsize for data type
     v1=[] # will be recomuputed
     keys1 = dictionary1.keys() # we need all keys to be able to compare
-
     #convert to dictionary
     dictionary2 = dict((x, y) for x, y in vector2)
     vector2=dictionary2.values() #get all values for the Euclidean distance
@@ -118,8 +116,7 @@ def multiplication(vector1, vector2):
     result = []
     for key in keys1:
         if key in keys2: # consider only values which indexes appear in both vectors
-            result.append((key,(dictionary1[key]*dictionary2[key])))
-        
+            result.append((key,(dictionary1[key]*dictionary2[key]))) 
     return result
 
 '''
@@ -130,8 +127,14 @@ input: wordVector in frequency space
 output: probability of the topic with topicID in the ldaModel, given the wordVector
 '''
 def prob_z_given_w(ldaModel, topicID, wordVector):
-    # your code here
-    return None
+    docGivenTopic=ldaModel[wordVector] # wordVector represents the document
+    dictDocGivenTopic = dict((x,y) for x,y in docGivenTopic) 
+    wordsGivenTopic = get_topic_words(ldaModel,topicID)
+    result = 0.0
+    for word,prob in wordsGivenTopic:
+        result += dictDocGivenTopic[topicID]*prob
+
+    return result
 
 '''
 (d) function prob_w_given_z to get probability of target word w, given LDA topic z
@@ -193,11 +196,7 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
             vt = None
             for position,word in context: # there are four context words before and four after each target word
                 try:
-                    cs_new.append((word2id[word],model[word])) if type(model)==gensim.models.word2vec.Word2Vec else cs_new.append((word2id[word],model[word2id[word]]))
-                    # if model==gensim.models.word2vec.Word2Vec:
-                    #     cs_new.append((word2id[word],model[word])) 
-                    # else: 
-                    #     cs_new.append((word2id[word],model[word2id[word]]))                    
+                    cs_new.append((word2id[word],model[word])) if type(model)==gensim.models.word2vec.Word2Vec else cs_new.append((word2id[word],model[word2id[word]]))               
                 except Exception, e:
                     # print "word {0} does not exist in vectors list".format(word)
                     continue
@@ -243,15 +242,10 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
             vt = None
             for position,word in context: # there are four context words before and four after each target word
                 try:
-                    cs_new.append((word2id[word],model[word])) if type(model)==gensim.models.word2vec.Word2Vec else cs_new.append((word2id[word],model[word2id[word]]))
-                    # if model==gensim.models.word2vec.Word2Vec:
-                    #     cs_new.append((word2id[word],model[word])) 
-                    # else: 
-                    #     cs_new.append((word2id[word],model[word2id[word]]))                    
+                    cs_new.append((word2id[word],model[word])) if type(model)==gensim.models.word2vec.Word2Vec else cs_new.append((word2id[word],model[word2id[word]]))          
                 except Exception, e:
                     # print "word {0} does not exist in vectors list".format(word)
                     continue
-
             try:
                 vt = t[br] if type(model)==gensim.models.word2vec.Word2Vec else word2id[t[br]] # the target word in each sentence
             except Exception, e:
@@ -330,7 +324,7 @@ if __name__ == "__main__":
     if part == "b":
         print("(b) using addition to calculate best substitution words")
         id2word,word2id,vectors=load_corpus(sys.argv[2], sys.argv[3])
-        t,i,sent,sentid=load_json()        
+        t,i,sent,sentid=load_json()
         thesaurus=load_tt()
         thesaurus = [thesaurus[topic] for topic in t]
         #TF-IDF
@@ -409,8 +403,12 @@ if __name__ == "__main__":
         print("\tloading corpus")
         id2word,word2id,vectors=load_corpus(sys.argv[2], sys.argv[3])
         print("\tloading LDA model")
-        ldaModel = gensim.models.ldamodel.LdaModel.load("lda.model")
+        ldaModel = gensim.models.ldamodel.LdaModel.load("lda_model_v2") # change to lda.model !!!
         houseTopic = ldaModel[vectors[word2id["house.n"]]][0][0]
+        # house = ldaModel[vectors[word2id["house.n"]]]
+        print ldaModel[vectors[word2id["house.n"]]]
+        print "^^^^^^^^^^^^^^^^^^^^"
+        print houseTopic
         try:
             if prob_z_given_w(ldaModel, houseTopic, vectors[word2id["house.n"]]) > 0.0:
                 print("\tPass: P(Z|w)")
