@@ -105,6 +105,7 @@ def cosine_similarity(vector1, vector2):
     # vector1=map(int,vector1)
     # vector2=map(int,vector2)
     if type(vector1[0])==tuple or type(vector1[0])==list:
+        # print "tuk sam"
         #convert to dictionary
         dictionary1 = dict((x, y) for x, y in vector1)
         vector1=dictionary1.values() #get all values for the Euclidean distance
@@ -545,7 +546,6 @@ if __name__ == '__main__':
         house = ldaModel[vectors[word2id["house.n"]]]
         home = ldaModel[vectors[word2id["home.n"]]]
         time = ldaModel[vectors[word2id["time.n"]]]
-
         print("similarity of house and home is {0}".format(cosine_similarity(house, home)))
         print("similarity of house and time is {0}".format(cosine_similarity(house, time)))
         print("similarity of home and time is {0}".format(cosine_similarity(home, time)))
