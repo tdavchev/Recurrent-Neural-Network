@@ -204,7 +204,7 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
                     add = addition(model[vt],contWord[1]) # must always stay 1
                     allContOfWord.append([add])
                 for word in thesaurus[br]: # list of known synonyms
-                    score = 0
+                    score = -1
                     try:
                         vw = model[word] if type(model)==gensim.models.word2vec.Word2Vec else model[word2id[word]] # v(w) from the given equation
                         for vtc in allContOfWord: # sum over every context word in the list of Context words for a given word in a sentence
@@ -212,7 +212,7 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
                     except Exception, e:
                         continue
                         # print "no such word {0}".format(word)
-                    if score > finalScore[br]:
+                    if score < finalScore[br]:
                         finalScore[br] = score
                         word = word.split(".")
                         finalWord[br] = word[0]
@@ -249,7 +249,7 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
                     add = multiplication(model[vt],contWord[1]) # must always stay 1
                     allContOfWord.append([add])
                 for word in thesaurus[br]: # list of known synonyms
-                    score = 0
+                    score = -1
                     try:
                         vw = model[word] if type(model)==gensim.models.word2vec.Word2Vec else model[word2id[word]] # v(w) from the given equation
                         for vtc in allContOfWord: # sum over every context word in the list of Context words for a given word in a sentence
@@ -257,7 +257,7 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
                     except Exception, e:
                         continue
                         # print "no such word {0}".format(word)
-                    if score > finalScore[br]:
+                    if score < finalScore[br]:
                         finalScore[br] = score
                         word = word.split(".")
                         finalWord[br] = word[0]
@@ -395,6 +395,7 @@ if __name__ == "__main__":
         print("\tloading LDA model")
         ldaModel = gensim.models.ldamodel.LdaModel.load("lda_model_v2") # change to lda.model !!!
         houseTopic = ldaModel[vectors[word2id["house.n"]]][0][0]
+        print ldaModel[vectors[word2id["house.n"]]]
         try:
             if prob_z_given_w(ldaModel, houseTopic, vectors[word2id["house.n"]]) > 0.0:
                 print("\tPass: P(Z|w)")
