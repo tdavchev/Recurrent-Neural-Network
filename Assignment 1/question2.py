@@ -25,24 +25,10 @@ def load_json():
     sentid=[]
     for line in lines:
         s = json.loads(line)
-        # print(s)
         sentid.append(s["id"])
         i.append(s["target_position"])
         sent.append((s["sentence"].split(" ")))
-        # print sent
         t.append(s["target_word"])
-      # print "-------------------"
-      # print t
-      # print "^^^^^^^^^^^^^^^^^^^"
-      # if t == sent[int(i)]:
-      #  outFile.write(json.dumps(s))
-      # else:
-      #  j = str(sent.index(t))
-      #  s["target_position"] = j
-      #  outFile.write(json.dumps(s))
-      # outFile.write("\n")
-
-    # outFile.close()
     return t,i,sent,sentid
 
 
@@ -131,8 +117,12 @@ def prob_z_given_w(ldaModel, topicID, wordVector):
     dictDocGivenTopic = dict((x,y) for x,y in docGivenTopic) 
     wordsGivenTopic = get_topic_words(ldaModel,topicID)
     result = 0.0
-    for word,prob in wordsGivenTopic:
-        result += dictDocGivenTopic[topicID]*prob
+    suma = 0.0
+    for key in dictDocGivenTopic.keys():
+        for word,prob in wordsGivenTopic:
+            suma += (dictDocGivenTopic[key]*prob)
+    for word,prob in wordsGivenTopic: # !!!!!!!!!! this is wrong
+        result += (dictDocGivenTopic[topicID]*prob)/suma
 
     return result
 
@@ -227,7 +217,7 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
                         word = word.split(".")
                         finalWord[br] = word[0]
             br = br + 1
-
+        print "went over all contexts"
         return finalWord
          
        
@@ -405,10 +395,6 @@ if __name__ == "__main__":
         print("\tloading LDA model")
         ldaModel = gensim.models.ldamodel.LdaModel.load("lda_model_v2") # change to lda.model !!!
         houseTopic = ldaModel[vectors[word2id["house.n"]]][0][0]
-        # house = ldaModel[vectors[word2id["house.n"]]]
-        print ldaModel[vectors[word2id["house.n"]]]
-        print "^^^^^^^^^^^^^^^^^^^^"
-        print houseTopic
         try:
             if prob_z_given_w(ldaModel, houseTopic, vectors[word2id["house.n"]]) > 0.0:
                 print("\tPass: P(Z|w)")
