@@ -9,7 +9,7 @@ from sets import Set
 
 from itertools import repeat
 from collections import defaultdict
-logging.basicConfig(filename='task-f-big-final.log',format='%(asctime)s : %(levelname)s : %(message)s',level=logging.INFO)
+logging.basicConfig(filename='task-f02092016.log',format='%(asctime)s : %(levelname)s : %(message)s',level=logging.INFO)
 
 '''
 (f) helper class, do not modify.
@@ -356,7 +356,7 @@ if __name__ == '__main__':
                 print("\tError: tf-idf space does not correspond to original vector space")
             else:
                 print("\tPass: converted to tf-idf space")
-            if not numpy.isclose(29.3685342569, tfIdfSpace[0][0][1]):
+            if not numpy.isclose(29.3685342569, tfIdfSpace[0][0][1]): #precision check
                 print("\tError: tf-idf has miscomputed")
             else:
                 print("\tPass: output from tf-idf is correct")
@@ -477,7 +477,7 @@ if __name__ == '__main__':
         sRate=0.01
         nSampling=10
         logging.info("(f2) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
-        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,-1,"final-model.bin")
+        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,-1,"final-model-temp09022016.bin")
         logging.info("(f2) word2vec, testing model...")
         acc=test_accuracy(sys.argv[3],w2v)
 
