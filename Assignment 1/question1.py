@@ -97,28 +97,36 @@ output: cosine similarity between vector1 and vector2 as a real number
 def cosine_similarity(vector1, vector2):
     if vector1==[] or vector2==[]:
         return 0
-
+    # print vector1
+    # print vector2
     v1=vector1
     v2=vector2
     keys1=[]
     keys2=[]
     # vector1=map(int,vector1)
     # vector2=map(int,vector2)
-    if type(vector1[0])==tuple or type(vector1[0])==list:
+    if type(vector1[0])==tuple:
         # print "tuk sam"
         #convert to dictionary
         dictionary1 = dict((x, y) for x, y in vector1)
         vector1=dictionary1.values() #get all values for the Euclidean distance
+        if type(vector2[0])==list:
+            vector2=vector2[0]
         vector1 = map(float, vector1) # provide itemsize for data type
         v1=[] # will be recomuputed
         keys1 = dictionary1.keys() # we need all keys to be able to compare
-    if type(vector2[0])==tuple or type(vector1[0])==list:
+    if type(vector2[0])==tuple:
         #convert to dictionary
         dictionary2 = dict((x, y) for x, y in vector2)
         vector2=dictionary2.values() #get all values for the Euclidean distance
+        vector2 = numpy.asarray(vector2)
+        vector2=numpy.ndarray.tolist(vector2)
+        if type(vector2[0])==list:
+            vector2=vector2[0]
         vector2 = map(float, vector2) # provide itemsize for data type
         v2=[] # will be recomputed
         keys2 = dictionary2.keys() # we need all keys to be able to compare
+        # print keys2
 
     # handle cases when only one of the vectors is sparse:
     if keys1==[]:
@@ -134,17 +142,22 @@ def cosine_similarity(vector1, vector2):
             keys_ = list(range(0,len(v1)))
         else:
             keys_ = keys2
+        # print keys_
+        # print key
         # If the key is in only one of the vectors then it is not needed
         # because it will be multiplied by 0
         if key in keys_: # consider only values which indexes appear in both vectors
             v1.append(dictionary1[key])
             v2.append(dictionary2[key])
 
-    # provide itemsize for data type
-    v1 = map(float,v1)
-    v2 = map(float,v2)
-
-    return numpy.dot(v1,v2)/numpy.dot(numpy.linalg.norm(vector1),numpy.linalg.norm(vector2))
+    # v1 = map(float,v1)
+    # v2 = map(float,v2)  
+    # print numpy.dot(v1,v2)
+    try:
+        return numpy.dot(v1,v2)/numpy.dot(numpy.linalg.norm(vector1),numpy.linalg.norm(vector2))
+    except Exception, e:
+        return -1
+    
 
 '''
 (d) function tf_idf to turn existing frequency-based vector model into tf-idf-based vector model
