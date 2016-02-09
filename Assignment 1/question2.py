@@ -47,8 +47,6 @@ def addition(vector1, vector2):
     v2=vector2
     keys1=[]
     keys2=[]
-    # vector1=map(int,vector1)
-    # vector2=map(int,vector2)
     #convert to dictionary
     dictionary1 = dict((x, y) for x, y in vector1)
     vector1=dictionary1.values() #get all values for the Euclidean distance
@@ -129,19 +127,13 @@ output: probability of the targetWord, given the topic with topicID in the ldaMo
 '''
 def prob_w_given_z(ldaModel, targetWord, topicID):
     wordsGivenTopic = get_topic_words(ldaModel,topicID,600000)# there are 6 million
-    # print wordsGivenTopic
     targetWord = gensim.utils.any2unicode(targetWord)
-    # print "TARGET WORD"
-    # print targetWord
-    # print "----------"
     dictWordsGivenTopic = dict((x,y) for x,y in wordsGivenTopic)
     wordProbability = []
     for w in dictWordsGivenTopic.keys():
         word = gensim.utils.any2unicode(w)
-        # print word
         if word == targetWord:
             wordProbability.append(dictWordsGivenTopic[word])
-    # wordProbability = (dictWordsGivenTopic[gensim.utils.any2unicode(word)] for word in dictWordsGivenTopic.keys() if ny2unicode(word) == targetWord)
     for probability in wordProbability:
         return probability
     return 0.0
@@ -251,9 +243,6 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
         
     # (d) use LDA to get context sensitive vectors
     elif csType == "lda":
-        # t,i,sent, contexts, word2id, model, frequencyVectors, csType
-        #ldaModel, topicID, wordVector ldaModel, targetWord, topicID
-        # print "I AM HERE"
         finalScore = -2
         finalWord = ''
         cs_new = [] #the id of each context word (document) and the list of context words associated with it 
@@ -272,58 +261,18 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
             for contWord in xrange(0,len(cs_new)):
                 probZgivenTandCi = []
                 for topic in topics:
-                    # print "I AM IN LOOP"
                     probZgivenW = prob_z_given_w(model,topic[0], frequencyVectors[vt])
-                    # print "prob Z given W"
-                    # print probZgivenW
                     probWgivenZ = prob_w_given_z(model, cs_new[contWord][0], topic[0])
-                    # print "prob W given Z"
-                    # print probWgivenZ
-                    # print "**********************"
-                    # print probZgivenW
-                    # print "**********************"
-                    # print probWgivenZ
                     probZgivenTandCi.append((topic[0],probZgivenW*probWgivenZ))
-                # print probZgivenTandCi
-                # print "---------------------------------"
-                # print "---------------------------------"
-                # print "---------------------------------"
-                # print "---------------------------------"
-                # print "---------------------------------"
-                # print "---------------------------------"
-                # print "---------------------------------"
                 for word in thesaurus[t]:
                     score = -1
                     vw = model[frequencyVectors[word2id[word]]]
                     score += cosine_similarity(vw,probZgivenTandCi)
-                    # print score
-                    # print score
                     if score > finalScore:
                         finalScore = score
                         word = word.split(".")
                         finalWord = word[0]
-        # print finalWord
         return t,sentid,finalWord
-
-        # if vt is not None:
-        #     allContOfWord = [] # a list of all context words' intersection with target - v(t,C), where c belongs to C
-        #     topicGivenWords = model[frequencyVectors[vt]]
-        #     dictTopicGivenWords = dict((x,y) for x,y in topicGivenWords) 
-        #     topics = [topic for topic in dictTopicGivenWords.keys()]
-        #     probZgT = [(topicID,prob_z_given_w(model,topicID, frequencyVectors[vt])) for topicID in topics]
-        #     probZgT = numpy.asarray(probZgT)
-        #     probWgZ = [[prob_w_given_z(model, cw, topicID) for cw,prob in cs_new] for topicID in topics]
-        #     probWgZ = numpy.asarray(probWgZ)
-        #     probZgTW = [(probZgT[i][0],numpy.ndarray.tolist(probZgT[i][1]*probWgZ[i])) for i in xrange(0,len(probZgT))]
-        #     for word in thesaurus[t]:
-        #         score = -1
-        #         vw = model[frequencyVectors[word2id[word]]]
-        #         for vtc in probZgTW:
-        #             score += cosine_similarity(vw,[vtc])
-        #         if score > finalScore:
-        #             finalScore = score
-        #             word = word.split(".")
-        #             finalWord = word[0]
 
 if __name__ == "__main__":
     import sys
@@ -365,21 +314,15 @@ if __name__ == "__main__":
     
     # you may complete this to get answers for part b (best substitution words with tf-idf and word2vec, using addition)
     if part == "b":
-        # print("(b) using addition to calculate best substitution words")
-        # id2word,word2id,vectors=load_corpus(sys.argv[2], sys.argv[3])
         print("(b) using addition to calculate best substitution words")
         id2word,word2id,vectors=load_corpus(sys.argv[2], sys.argv[3])
         thesaurus=load_tt()
-        # print type(thesaurus)
-        # thesaurus = dict((x, y) for x, y in thesaurus)
-        # print thesaurus
+        #TF-IDF
         tfIDFVectors = tf_idf(vectors)
         outFileTFIDF = open("tf-idf_addition.txt","w")
         lines=open("data/test.txt").readlines()
-        # outFile = open("test_n.txt","w")
         i=[]
         sent=[]
-        # t=[]
         sentid=[]
         for line in lines:
             jsonENTRY = json.loads(line)
@@ -489,8 +432,6 @@ if __name__ == "__main__":
             print("\tError: exception during P(w|Z)")
             print(e)
 
-
-    
     # you may complete this to get answers for part d2 (best substitution words with LDA)
     if part == "e":
         print("(e): using LDA to calculate best substitution words")

@@ -21,7 +21,7 @@ class BncSentences:
     def __init__(self, corpus, n=-1):
         self.corpus = corpus
         self.n = n
-    
+
     def __iter__(self):
         n = self.n
         ret = []
@@ -59,7 +59,7 @@ def load_corpus(vocabFile, contextFile):
     id2word = {}
     word2id = {}
     vectors = []
-    
+
     fp = open(vocabFile)
     contents = fp.read()
     vocab = contents.split()
@@ -79,11 +79,9 @@ def load_corpus(vocabFile, contextFile):
     vectorsFast = [[] for i in repeat(None, len(opa))]
     for vector in xrange(0,len(opa)):
         for brei in enumerate(opa[vector]):
-            # print brei[0]
             if brei[1].find(":") > -1:
                 w,n =  brei[1].split(":")
                 vectorsFast[vector].append((int(w),int(n)))
-        # vectorsFast[vector] = dict((vectorsFast[vector][element][0],vectors[vector][element][1]) for element in xrange(0,len(vectors)))
 
     vectors = vectorsFast
     return id2word, word2id, vectors
@@ -103,10 +101,7 @@ def cosine_similarity(vector1, vector2):
     v2=vector2
     keys1=[]
     keys2=[]
-    # vector1=map(int,vector1)
-    # vector2=map(int,vector2)
     if type(vector1[0])==tuple:
-        # print "tuk sam"
         #convert to dictionary
         dictionary1 = dict((x, y) for x, y in vector1)
         vector1=dictionary1.values() #get all values for the Euclidean distance
@@ -126,7 +121,6 @@ def cosine_similarity(vector1, vector2):
         vector2 = map(float, vector2) # provide itemsize for data type
         v2=[] # will be recomputed
         keys2 = dictionary2.keys() # we need all keys to be able to compare
-        # print keys2
 
     # handle cases when only one of the vectors is sparse:
     if keys1==[]:
@@ -142,22 +136,18 @@ def cosine_similarity(vector1, vector2):
             keys_ = list(range(0,len(v1)))
         else:
             keys_ = keys2
-        # print keys_
-        # print key
+
         # If the key is in only one of the vectors then it is not needed
         # because it will be multiplied by 0
         if key in keys_: # consider only values which indexes appear in both vectors
             v1.append(dictionary1[key])
             v2.append(dictionary2[key])
 
-    # v1 = map(float,v1)
-    # v2 = map(float,v2)  
-    # print numpy.dot(v1,v2)
     try:
         return numpy.dot(v1,v2)/numpy.dot(numpy.linalg.norm(vector1),numpy.linalg.norm(vector2))
     except Exception, e:
         return -1
-    
+
 
 '''
 (d) function tf_idf to turn existing frequency-based vector model into tf-idf-based vector model
@@ -210,33 +200,6 @@ def tf_idf(freqVectors):
     print "all zeros were removed;"
 
     tfIdfVectors = tf_idf
-    # # for vector in xrange(0, len(freqVectors)):
-    # tf = [float(freqVectors[vector][j][1]) for vector in xrange(0,len(freqVectors)) for j in xrange(0,len(freqVectors[vector]))] # celiq spisuk s sizeove
-    # words = [freqVectors[vector][j][0] for vector in xrange(0,len(freqVectors)) for j in xrange(0,len(freqVectors[vector]))]
-    # print "tf computed"
-    # lengths = [len(freqVectors[vector]) for vector in xrange(0,len(freqVectors))] # broi elementi ot kude do kude znaesh e vseki vector
-    # '''
-    # Computing lengths from vectors 0 to 5 results in --> [4999, 4593, 4602, 3793, 4449] but we want a 0 in front for the tf_ computation
-    # '''
-    # lengths.insert(0,0)
-    # print "lengths computed"
-    # tf_ = [[] for i in repeat(None, len(lengths))]
-    # idf_ = [[] for i in repeat(None, len(lengths))]
-    # for document in xrange(1,len(lengths)):
-    #     for idx,_tf in enumerate(tf[lengths[document-1]:lengths[document]]):
-    #         tf_[document-1].append(float(1+numpy.log2(_tf)))
-    #         idf_[document-1].append(float((numpy.log2(float(N)/float(words[idx])))))
-    
-    # print type(tf_)
-    # print type(idf_)
-    # # tf_idf = numpy.zeros()
-    # # tf_idf = numpy.asarray(tf_idf)
-    # # tf_idf = numpy.dot(a,b)
-    # # print len(tf_idf[0])
-    # print tf_idf
-    # print len(idf_[0])
-    # print len(tf_[0]) # results in 4999
-    # _idf = 
 
     return tfIdfVectors
 
@@ -283,14 +246,14 @@ def get_topic_words(ldaModel, topicID, topn=10):
 
 if __name__ == '__main__':
     import sys
-    
+
     part = sys.argv[1].lower()
-    
+
     # these are indices for house, home and time in the data. Don't change.
     house_noun = 80
     home_noun = 143
     time_noun = 12
-    
+
     # this can give you an indication whether part a (loading a corpus) works.
     # not guaranteed that everything works.
     if part == "a":
@@ -310,7 +273,7 @@ if __name__ == '__main__':
         except Exception as e:
             print("\tError: could not load corpus from disk")
             print(e)
-        
+
         try:
             if not id2word[house_noun] == "house.n" or not id2word[home_noun] == "home.n" or not id2word[time_noun] == "time.n":
                 print("\tError: id2word fails to retrive correct words for ids")
@@ -319,7 +282,7 @@ if __name__ == '__main__':
         except Exception:
             print("\tError: Exception in id2word")
             print(e)
-        
+
         try:
             if not word2id["house.n"] == house_noun or not word2id["home.n"] == home_noun or not word2id["time.n"] == time_noun:
                 print("\tError: word2id fails to retrive correct ids for words")
@@ -328,7 +291,7 @@ if __name__ == '__main__':
         except Exception:
             print("\tError: Exception in word2id")
             print(e)
-    
+
     # this can give you an indication whether part b (cosine similarity) works.
     # these are very simple dummy vectors, no guarantee it works for our actual vectors.
     if part == "b":
@@ -357,7 +320,6 @@ if __name__ == '__main__':
         houseVector=[]
         homeVector=[]
         timeVector=[]
-        # try:
         id2word, word2id, vectors = load_corpus(sys.argv[2], sys.argv[3])
         for key in xrange(0,len(vectors)):
             for element in xrange(0,len(vectors[key])):
@@ -370,12 +332,9 @@ if __name__ == '__main__':
         cos = cosine_similarity(houseVector, homeVector)
         cos2 = cosine_similarity(timeVector, homeVector)
         cos3 = cosine_similarity(houseVector, timeVector)
-        print cos
-        print cos2
-        print cos3
-        # except Exception as e:
-        #     print("\tError: Exception in similarity of house,home and time")
-        #     print(e)
+        print("cosine similarity of house and home is {0}".format(cos))
+        print("cosine similarity of time and home is {0}".format(cos2))
+        print("cosine similarity of time and house is {0}".format(cos3))
         try:
             if not word2id["house.n"] == house_noun or not word2id["home.n"] == home_noun or not word2id["time.n"] == time_noun:
                 print("\tError: word2id fails to retrive correct ids for words")
@@ -384,8 +343,8 @@ if __name__ == '__main__':
         except Exception:
             print("\tError: Exception in word2id")
             print(e)
-    
-    
+
+
     # this gives you an indication whether your conversion into tf-idf space works.
     # this does not test for vector values in tf-idf space, hence can't tell you whether tf-idf has been implemented correctly
     if part == "d":
@@ -404,7 +363,7 @@ if __name__ == '__main__':
         except Exception as e:
             print("\tError: could not convert to tf-idf space")
             print(e)
-        
+
     # you may complete this part to get answers for part e (similarity in tf-idf space)
     if part == "e":
         print("(e) similarity of house, home and time in tf-idf space")
@@ -415,7 +374,7 @@ if __name__ == '__main__':
         print("similarity of house and home is {0}".format(cosine_similarity(tfIdfSpace[word2id["house.n"]], tfIdfSpace[word2id["home.n"]])))
         print("similarity of house and time is {0}".format(cosine_similarity(tfIdfSpace[word2id["house.n"]], tfIdfSpace[word2id["time.n"]])))
         print("similarity of home and time is {0}".format(cosine_similarity(tfIdfSpace[word2id["home.n"]], tfIdfSpace[word2id["time.n"]])))
-    
+
     # you may complete this part for the first part of f (estimating best learning rate, sample rate and negative samplings)
     if part == "f1":
         # Total: 7.0% (243/3476)
@@ -508,13 +467,12 @@ if __name__ == '__main__':
         # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,sys.argv[3])
         # print("(f1) word2vec, testing model...")
         # acc=test_accuracy(sys.argv[3],w2v)
-        
+
     # you may complete this part for the second part of f (training and saving the actual word2vec model)
     if part == "f2":
         import logging
         logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
         print("(f2) word2vec, building full model with best parameters. May take a while.")
-        
         lRate=0.05
         sRate=0.01
         nSampling=10
@@ -522,11 +480,10 @@ if __name__ == '__main__':
         w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,-1,"final-model.bin")
         logging.info("(f2) word2vec, testing model...")
         acc=test_accuracy(sys.argv[3],w2v)
-    
+
     # you may complete this part to get answers for part g (similarity in your word2vec model)
     if part == "g":
         print("(g): word2vec based similarity")
-        # model = gensim.models.Word2Vec(sentences=sntncs, size=100, window=5, alpha = learningRate, negative = negSampling, sg=1, workers=8, sample=downsampleRate)
 
         w2v=gensim.models.Word2Vec.load('final-model.bin')
         houseHome = w2v.similarity('house.n', 'home.n')
@@ -536,21 +493,15 @@ if __name__ == '__main__':
         print("similarity of house and home is {0}".format(houseHome))
         print("similarity of house and time is {0}".format(houseTime))
         print("similarity of home and time is {0}".format(homeTime))
-    
+
     # you may complete this for part h (training and saving the LDA model)
     if part == "h":
         import logging
         logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
         print("(h) LDA model")
         id2word, word2id, vectors = load_corpus(sys.argv[2], sys.argv[3])
-        # since tuples are strings workaround...
-        # iVectors = [[] for i in repeat(None, len(vectors))]
-        # for vector in xrange(0,len(vectors)):
-        #     for item in xrange(0,len(vectors[vector])):
-        #         iVectors[vector].append((int(vectors[vector][item][0]),int(vectors[vector][item][1])))
         ldaModel=lda(vectors,id2word)
-        # your code here
-    
+
     # you may complete this part to get answers for part i (similarity in your LDA model)
     if part == "i":
         print("(i): lda-based similarity")
@@ -562,7 +513,6 @@ if __name__ == '__main__':
         print("similarity of house and home is {0}".format(cosine_similarity(house, home)))
         print("similarity of house and time is {0}".format(cosine_similarity(house, time)))
         print("similarity of home and time is {0}".format(cosine_similarity(home, time)))
-        # your code here
 
     # you may complete this part to get answers for part j (topic words in your LDA model)
     if part == "j":
@@ -577,18 +527,3 @@ if __name__ == '__main__':
             for word,probability in topicWords:
                 realWords.append(id2word[int(word)])
             print "The words associated with topic {0} are: {1}".format(_id, realWords)
-        # print topicWords
-
-
-
-    # topics = []
-    # for tID in topicID:
-    #      topics.append((tID,ldaModel.print_topic(tID)))
-
-    # # what am I expected to do here?
-    # # get the print topic output and then split the string get the ints and index2word them ?
-    # for topic in topics:
-    #     wordsProbs = topic[1].split('+')
-    #     for wp in wordsProbs:
-    #         wordsP = wp.split('*')
-    # return topics
