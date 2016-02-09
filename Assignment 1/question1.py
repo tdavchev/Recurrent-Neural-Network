@@ -265,8 +265,8 @@ input: ldaModel, pre-trained Gensim LDA model
 input: topicID, ID of the topic for which to get topic words
 input: wordMapping, mapping from words to IDs (optional)
 '''
-def get_topic_words(ldaModel, topicID):
-    return ldaModel.show_topic(topicID)
+def get_topic_words(ldaModel, topicID, topn=10):
+    return ldaModel.show_topic(topicID,topn)
 
 if __name__ == '__main__':
     import sys
