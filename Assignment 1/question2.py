@@ -113,18 +113,12 @@ input: wordVector in frequency space
 output: probability of the topic with topicID in the ldaModel, given the wordVector
 '''
 def prob_z_given_w(ldaModel, topicID, wordVector):
-    docGivenTopic=ldaModel[wordVector] # wordVector represents the document
-    dictDocGivenTopic = dict((x,y) for x,y in docGivenTopic) 
-    wordsGivenTopic = get_topic_words(ldaModel,topicID)
-    result = 0.0
-    suma = 0.0
-    for key in dictDocGivenTopic.keys():
-        for word,prob in wordsGivenTopic:
-            suma += (dictDocGivenTopic[key]*prob)
-    for word,prob in wordsGivenTopic: # !!!!!!!!!! this is wrong
-        result += (dictDocGivenTopic[topicID]*prob)/suma
-
-    return result
+    topicGivenWords=ldaModel[wordVector] # wordVector represents the document
+    dictTopicGivenWords = dict((x,y) for x,y in topicGivenWords) 
+    topicProbability = (dictTopicGivenWords[topic] for topic in dictTopicGivenWords.keys() if topic == topicID)
+    for probability in topicProbability:
+        return probability
+    return None
 
 '''
 (d) function prob_w_given_z to get probability of target word w, given LDA topic z
@@ -134,7 +128,11 @@ input: topicID as an integer
 output: probability of the targetWord, given the topic with topicID in the ldaModel
 '''
 def prob_w_given_z(ldaModel, targetWord, topicID):
-    # your code here
+    wordsGivenTopic = get_topic_words(ldaModel,topicID,5000)# there are 6 million
+    dictWordsGivenTopic = dict((x,y) for x,y in wordsGivenTopic)
+    wordProbability = (dictWordsGivenTopic[word] for word in dictWordsGivenTopic.keys() if word == targetWord)
+    for probability in wordProbability:
+        return probability
     return None
 '''
 (b) function to set the context documents of a target document t in position i in a 
@@ -395,7 +393,7 @@ if __name__ == "__main__":
         print("\tloading LDA model")
         ldaModel = gensim.models.ldamodel.LdaModel.load("lda_model_v2") # change to lda.model !!!
         houseTopic = ldaModel[vectors[word2id["house.n"]]][0][0]
-        print ldaModel[vectors[word2id["house.n"]]]
+        # print ldaModel[vectors[word2id["house.n"]]]
         try:
             if prob_z_given_w(ldaModel, houseTopic, vectors[word2id["house.n"]]) > 0.0:
                 print("\tPass: P(Z|w)")
