@@ -1,0 +1,368 @@
+2016-02-10 00:21:56,466 : INFO : using symmetric alpha at 0.01
+2016-02-10 00:21:56,466 : INFO : using symmetric eta at 0.01
+2016-02-10 00:21:56,467 : INFO : using serial LDA version on this node
+2016-02-10 00:21:56,899 : INFO : running batch LDA training, 100 topics, 10 passes over the supplied corpus of 20000 documents, updating model once every 20000 documents, evaluating perplexity every 20000 documents, iterating 50x with a convergence threshold of 0.001000
+2016-02-10 00:21:57,215 : INFO : PROGRESS: pass 0, at document #2000/20000
+2016-02-10 00:22:11,310 : INFO : PROGRESS: pass 0, at document #4000/20000
+2016-02-10 00:22:17,842 : INFO : PROGRESS: pass 0, at document #6000/20000
+2016-02-10 00:22:23,814 : INFO : PROGRESS: pass 0, at document #8000/20000
+2016-02-10 00:22:29,592 : INFO : PROGRESS: pass 0, at document #10000/20000
+2016-02-10 00:22:35,144 : INFO : PROGRESS: pass 0, at document #12000/20000
+2016-02-10 00:22:40,275 : INFO : PROGRESS: pass 0, at document #14000/20000
+2016-02-10 00:22:44,944 : INFO : PROGRESS: pass 0, at document #16000/20000
+2016-02-10 00:22:48,803 : INFO : PROGRESS: pass 0, at document #18000/20000
+2016-02-10 00:22:54,908 : INFO : -21.275 per-word bound, 2536883.6 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:22:54,908 : INFO : PROGRESS: pass 0, at document #20000/20000
+2016-02-10 00:22:57,858 : INFO : topic #10 (0.010): 0.048*have.v + 0.009*will.v + 0.009*do.v + 0.009*would.v + 0.007*can.v + 0.007*get.v + 0.007*go.v + 0.007*say.v + 0.006*year.n + 0.006*up.r
+2016-02-10 00:22:57,863 : INFO : topic #2 (0.010): 0.030*have.v + 0.020*do.v + 0.009*can.v + 0.008*will.v + 0.008*would.v + 0.008*say.v + 0.007*up.r + 0.007*more.r + 0.006*so.r + 0.005*people.n
+2016-02-10 00:22:57,869 : INFO : topic #40 (0.010): 0.037*have.v + 0.013*do.v + 0.010*would.v + 0.009*will.v + 0.008*can.v + 0.007*up.r + 0.007*make.v + 0.006*say.v + 0.006*so.r + 0.006*other.a
+2016-02-10 00:22:57,874 : INFO : topic #56 (0.010): 0.044*have.v + 0.011*do.v + 0.011*will.v + 0.010*would.v + 0.010*say.v + 0.009*go.v + 0.008*get.v + 0.007*that.r + 0.006*time.n + 0.006*up.r
+2016-02-10 00:22:57,878 : INFO : topic #99 (0.010): 0.040*have.v + 0.013*will.v + 0.013*do.v + 0.012*up.r + 0.012*can.v + 0.011*would.v + 0.009*say.v + 0.007*make.v + 0.007*out.r + 0.007*go.v
+2016-02-10 00:22:57,884 : INFO : topic diff=78.033003, rho=1.000000
+2016-02-10 00:22:58,212 : INFO : PROGRESS: pass 1, at document #2000/20000
+2016-02-10 00:23:11,673 : INFO : PROGRESS: pass 1, at document #4000/20000
+2016-02-10 00:23:18,225 : INFO : PROGRESS: pass 1, at document #6000/20000
+2016-02-10 00:23:24,062 : INFO : PROGRESS: pass 1, at document #8000/20000
+2016-02-10 00:23:29,382 : INFO : PROGRESS: pass 1, at document #10000/20000
+2016-02-10 00:23:34,242 : INFO : PROGRESS: pass 1, at document #12000/20000
+2016-02-10 00:23:38,650 : INFO : PROGRESS: pass 1, at document #14000/20000
+2016-02-10 00:23:42,524 : INFO : PROGRESS: pass 1, at document #16000/20000
+2016-02-10 00:23:45,687 : INFO : PROGRESS: pass 1, at document #18000/20000
+2016-02-10 00:23:50,496 : INFO : -11.055 per-word bound, 2127.8 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:23:50,496 : INFO : PROGRESS: pass 1, at document #20000/20000
+2016-02-10 00:23:52,855 : INFO : topic #31 (0.010): 0.045*have.v + 0.010*would.v + 0.008*time.r + 0.008*do.v + 0.008*will.v + 0.008*can.v + 0.008*go.v + 0.007*so.r + 0.007*now.r + 0.007*no.r
+2016-02-10 00:23:52,861 : INFO : topic #81 (0.010): 0.075*have.v + 0.015*do.v + 0.015*will.v + 0.012*take.v + 0.010*make.v + 0.009*other.a + 0.009*would.v + 0.008*can.v + 0.008*up.r + 0.008*say.v
+2016-02-10 00:23:52,866 : INFO : topic #39 (0.010): 0.067*have.v + 0.020*see.v + 0.016*make.v + 0.012*will.v + 0.012*do.v + 0.010*would.v + 0.010*can.v + 0.010*use.v + 0.008*up.r + 0.008*give.v
+2016-02-10 00:23:52,869 : INFO : topic #80 (0.010): 0.042*have.v + 0.012*do.v + 0.012*will.v + 0.008*would.v + 0.008*go.v + 0.008*get.v + 0.007*take.v + 0.007*make.v + 0.007*up.r + 0.007*say.v
+2016-02-10 00:23:52,873 : INFO : topic #42 (0.010): 0.025*have.v + 0.014*do.v + 0.013*say.v + 0.011*would.v + 0.009*go.v + 0.009*get.v + 0.008*can.v + 0.007*know.v + 0.007*so.r + 0.007*see.v
+2016-02-10 00:23:52,880 : INFO : topic diff=0.149735, rho=0.288675
+2016-02-10 00:23:53,199 : INFO : PROGRESS: pass 2, at document #2000/20000
+2016-02-10 00:24:07,302 : INFO : PROGRESS: pass 2, at document #4000/20000
+2016-02-10 00:24:13,874 : INFO : PROGRESS: pass 2, at document #6000/20000
+2016-02-10 00:24:19,566 : INFO : PROGRESS: pass 2, at document #8000/20000
+2016-02-10 00:24:24,702 : INFO : PROGRESS: pass 2, at document #10000/20000
+2016-02-10 00:24:29,318 : INFO : PROGRESS: pass 2, at document #12000/20000
+2016-02-10 00:24:33,464 : INFO : PROGRESS: pass 2, at document #14000/20000
+2016-02-10 00:24:37,041 : INFO : PROGRESS: pass 2, at document #16000/20000
+2016-02-10 00:24:39,954 : INFO : PROGRESS: pass 2, at document #18000/20000
+2016-02-10 00:24:44,433 : INFO : -10.795 per-word bound, 1776.6 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:24:44,434 : INFO : PROGRESS: pass 2, at document #20000/20000
+2016-02-10 00:24:46,629 : INFO : topic #98 (0.010): 0.028*have.v + 0.013*will.v + 0.012*do.v + 0.009*take.v + 0.008*so.r + 0.008*say.v + 0.007*get.v + 0.007*would.v + 0.007*off.r + 0.007*make.v
+2016-02-10 00:24:46,633 : INFO : topic #67 (0.010): 0.023*have.v + 0.020*example.r + 0.008*will.v + 0.007*country.n + 0.006*would.v + 0.006*make.v + 0.006*can.v + 0.006*do.v + 0.005*instance.r + 0.005*world.n
+2016-02-10 00:24:46,636 : INFO : topic #64 (0.010): 0.050*have.v + 0.011*do.v + 0.010*will.v + 0.008*up.r + 0.008*would.v + 0.007*wear.v + 0.007*say.v + 0.007*can.v + 0.007*make.v + 0.006*white.a
+2016-02-10 00:24:46,640 : INFO : topic #6 (0.010): 0.044*have.v + 0.013*on.r + 0.012*take.v + 0.010*would.v + 0.008*do.v + 0.008*go.v + 0.008*get.v + 0.007*will.v + 0.007*make.v + 0.006*out.r
+2016-02-10 00:24:46,644 : INFO : topic #62 (0.010): 0.031*have.v + 0.018*do.v + 0.009*will.v + 0.008*get.v + 0.008*more.r + 0.008*take.v + 0.008*say.v + 0.007*can.v + 0.007*so.r + 0.007*very.r
+2016-02-10 00:24:46,649 : INFO : topic diff=0.179271, rho=0.277350
+2016-02-10 00:24:46,970 : INFO : PROGRESS: pass 3, at document #2000/20000
+2016-02-10 00:25:00,897 : INFO : PROGRESS: pass 3, at document #4000/20000
+2016-02-10 00:25:07,402 : INFO : PROGRESS: pass 3, at document #6000/20000
+2016-02-10 00:25:13,003 : INFO : PROGRESS: pass 3, at document #8000/20000
+2016-02-10 00:25:18,010 : INFO : PROGRESS: pass 3, at document #10000/20000
+2016-02-10 00:25:22,435 : INFO : PROGRESS: pass 3, at document #12000/20000
+2016-02-10 00:25:26,342 : INFO : PROGRESS: pass 3, at document #14000/20000
+2016-02-10 00:25:29,559 : INFO : PROGRESS: pass 3, at document #16000/20000
+2016-02-10 00:25:32,161 : INFO : PROGRESS: pass 3, at document #18000/20000
+2016-02-10 00:25:36,240 : INFO : -10.539 per-word bound, 1487.8 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:25:36,240 : INFO : PROGRESS: pass 3, at document #20000/20000
+2016-02-10 00:25:38,269 : INFO : topic #55 (0.010): 0.138*have.v + 0.030*up.r + 0.025*do.v + 0.023*in.r + 0.019*will.v + 0.016*would.v + 0.016*make.v + 0.015*can.v + 0.013*could.v + 0.013*out.r
+2016-02-10 00:25:38,273 : INFO : topic #67 (0.010): 0.024*have.v + 0.022*example.r + 0.007*will.v + 0.007*country.n + 0.006*instance.r + 0.006*would.v + 0.006*make.v + 0.006*important.a + 0.005*can.v + 0.005*world.n
+2016-02-10 00:25:38,276 : INFO : topic #39 (0.010): 0.069*have.v + 0.023*see.v + 0.019*make.v + 0.014*will.v + 0.012*use.v + 0.012*do.v + 0.011*can.v + 0.010*would.v + 0.009*give.v + 0.008*up.r
+2016-02-10 00:25:38,280 : INFO : topic #68 (0.010): 0.060*have.v + 0.019*minister.n + 0.015*party.n + 0.014*would.v + 0.012*will.v + 0.011*government.n + 0.011*do.v + 0.008*see.v + 0.008*say.v + 0.008*year.n
+2016-02-10 00:25:38,284 : INFO : topic #66 (0.010): 0.050*have.v + 0.022*will.v + 0.013*say.v + 0.011*do.v + 0.010*very.r + 0.009*can.v + 0.008*would.v + 0.008*make.v + 0.008*get.v + 0.008*go.v
+2016-02-10 00:25:38,289 : INFO : topic diff=0.162170, rho=0.267261
+2016-02-10 00:25:38,607 : INFO : PROGRESS: pass 4, at document #2000/20000
+2016-02-10 00:25:52,182 : INFO : PROGRESS: pass 4, at document #4000/20000
+2016-02-10 00:25:58,803 : INFO : PROGRESS: pass 4, at document #6000/20000
+2016-02-10 00:26:04,337 : INFO : PROGRESS: pass 4, at document #8000/20000
+2016-02-10 00:26:09,181 : INFO : PROGRESS: pass 4, at document #10000/20000
+2016-02-10 00:26:13,339 : INFO : PROGRESS: pass 4, at document #12000/20000
+2016-02-10 00:26:16,840 : INFO : PROGRESS: pass 4, at document #14000/20000
+2016-02-10 00:26:19,597 : INFO : PROGRESS: pass 4, at document #16000/20000
+2016-02-10 00:26:21,799 : INFO : PROGRESS: pass 4, at document #18000/20000
+2016-02-10 00:26:25,285 : INFO : -10.306 per-word bound, 1265.8 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:26:25,285 : INFO : PROGRESS: pass 4, at document #20000/20000
+2016-02-10 00:26:27,146 : INFO : topic #1 (0.010): 0.083*have.v + 0.027*out.r + 0.022*say.v + 0.016*up.r + 0.016*will.v + 0.015*do.v + 0.012*would.v + 0.012*get.v + 0.011*can.v + 0.010*go.v
+2016-02-10 00:26:27,150 : INFO : topic #16 (0.010): 0.038*have.v + 0.018*go.v + 0.014*do.v + 0.014*will.v + 0.010*would.v + 0.010*road.n + 0.009*can.v + 0.009*get.v + 0.007*more.r + 0.007*just.r
+2016-02-10 00:26:27,154 : INFO : topic #46 (0.010): 0.116*have.v + 0.022*do.v + 0.020*house.n + 0.014*can.v + 0.011*people.n + 0.009*will.v + 0.009*would.v + 0.008*more.r + 0.008*could.v + 0.007*also.r
+2016-02-10 00:26:27,157 : INFO : topic #64 (0.010): 0.054*have.v + 0.015*wear.v + 0.013*white.a + 0.011*do.v + 0.010*black.a + 0.010*will.v + 0.009*up.r + 0.008*would.v + 0.008*make.v + 0.007*can.v
+2016-02-10 00:26:27,161 : INFO : topic #69 (0.010): 0.021*have.v + 0.013*do.v + 0.008*see.v + 0.007*get.v + 0.007*up.r + 0.006*make.v + 0.006*use.v + 0.006*only.r + 0.006*say.v + 0.005*how.r
+2016-02-10 00:26:27,166 : INFO : topic diff=0.138632, rho=0.258199
+2016-02-10 00:26:27,489 : INFO : PROGRESS: pass 5, at document #2000/20000
+2016-02-10 00:26:41,762 : INFO : PROGRESS: pass 5, at document #4000/20000
+2016-02-10 00:26:48,384 : INFO : PROGRESS: pass 5, at document #6000/20000
+2016-02-10 00:26:53,988 : INFO : PROGRESS: pass 5, at document #8000/20000
+2016-02-10 00:26:58,655 : INFO : PROGRESS: pass 5, at document #10000/20000
+2016-02-10 00:27:02,630 : INFO : PROGRESS: pass 5, at document #12000/20000
+2016-02-10 00:27:05,829 : INFO : PROGRESS: pass 5, at document #14000/20000
+2016-02-10 00:27:08,365 : INFO : PROGRESS: pass 5, at document #16000/20000
+2016-02-10 00:27:10,347 : INFO : PROGRESS: pass 5, at document #18000/20000
+2016-02-10 00:27:13,594 : INFO : -10.096 per-word bound, 1094.4 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:27:13,594 : INFO : PROGRESS: pass 5, at document #20000/20000
+2016-02-10 00:27:15,326 : INFO : topic #3 (0.010): 0.054*have.v + 0.014*do.v + 0.013*will.v + 0.010*make.v + 0.009*window.n + 0.008*up.r + 0.008*would.v + 0.008*can.v + 0.006*get.v + 0.006*new.a
+2016-02-10 00:27:15,330 : INFO : topic #63 (0.010): 0.053*have.v + 0.016*play.v + 0.014*will.v + 0.013*say.v + 0.011*more.r + 0.009*do.v + 0.009*director.n + 0.008*would.v + 0.007*can.v + 0.007*take.v
+2016-02-10 00:27:15,333 : INFO : topic #13 (0.010): 0.061*per.n + 0.029*have.v + 0.011*will.v + 0.010*pay.v + 0.010*make.v + 0.008*year.n + 0.008*would.v + 0.007*rate.n + 0.007*take.v + 0.007*up.r
+2016-02-10 00:27:15,337 : INFO : topic #28 (0.010): 0.031*have.v + 0.017*will.v + 0.010*would.v + 0.010*can.v + 0.009*make.v + 0.009*do.v + 0.006*take.v + 0.006*up.r + 0.006*more.r + 0.006*new.a
+2016-02-10 00:27:15,341 : INFO : topic #53 (0.010): 0.053*have.v + 0.023*can.v + 0.017*do.v + 0.012*will.v + 0.011*would.v + 0.010*other.a + 0.010*could.v + 0.009*make.v + 0.009*very.r + 0.007*say.v
+2016-02-10 00:27:15,345 : INFO : topic diff=0.117377, rho=0.250000
+2016-02-10 00:27:15,661 : INFO : PROGRESS: pass 6, at document #2000/20000
+2016-02-10 00:27:29,724 : INFO : PROGRESS: pass 6, at document #4000/20000
+2016-02-10 00:27:36,389 : INFO : PROGRESS: pass 6, at document #6000/20000
+2016-02-10 00:27:42,003 : INFO : PROGRESS: pass 6, at document #8000/20000
+2016-02-10 00:27:46,532 : INFO : PROGRESS: pass 6, at document #10000/20000
+2016-02-10 00:27:50,226 : INFO : PROGRESS: pass 6, at document #12000/20000
+2016-02-10 00:27:53,218 : INFO : PROGRESS: pass 6, at document #14000/20000
+2016-02-10 00:27:55,591 : INFO : PROGRESS: pass 6, at document #16000/20000
+2016-02-10 00:27:57,435 : INFO : PROGRESS: pass 6, at document #18000/20000
+2016-02-10 00:28:00,519 : INFO : -9.905 per-word bound, 958.9 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:28:00,519 : INFO : PROGRESS: pass 6, at document #20000/20000
+2016-02-10 00:28:02,182 : INFO : topic #45 (0.010): 0.047*have.v + 0.020*art.n + 0.019*will.v + 0.011*do.v + 0.009*can.v + 0.007*work.n + 0.007*year.n + 0.007*take.v + 0.007*make.v + 0.006*time.n
+2016-02-10 00:28:02,186 : INFO : topic #57 (0.010): 0.043*have.v + 0.014*will.v + 0.010*course.n + 0.009*can.v + 0.009*do.v + 0.009*hong.n + 0.008*make.v + 0.008*would.v + 0.008*year.n + 0.007*say.v
+2016-02-10 00:28:02,190 : INFO : topic #30 (0.010): 0.076*have.v + 0.030*do.v + 0.028*would.v + 0.016*will.v + 0.015*say.v + 0.015*get.v + 0.015*so.r + 0.014*can.v + 0.013*know.v + 0.013*think.v
+2016-02-10 00:28:02,193 : INFO : topic #7 (0.010): 0.053*have.v + 0.027*cell.n + 0.020*dr.n + 0.016*do.v + 0.012*will.v + 0.010*j.n + 0.009*would.v + 0.009*can.v + 0.008*m.n + 0.007*up.r
+2016-02-10 00:28:02,197 : INFO : topic #8 (0.010): 0.060*have.v + 0.031*problem.n + 0.016*can.v + 0.015*do.v + 0.012*will.v + 0.011*would.v + 0.008*may.v + 0.008*could.v + 0.006*so.r + 0.006*more.r
+2016-02-10 00:28:02,203 : INFO : topic diff=0.104413, rho=0.242536
+2016-02-10 00:28:02,527 : INFO : PROGRESS: pass 7, at document #2000/20000
+2016-02-10 00:28:16,985 : INFO : PROGRESS: pass 7, at document #4000/20000
+2016-02-10 00:28:23,544 : INFO : PROGRESS: pass 7, at document #6000/20000
+2016-02-10 00:28:28,918 : INFO : PROGRESS: pass 7, at document #8000/20000
+2016-02-10 00:28:33,273 : INFO : PROGRESS: pass 7, at document #10000/20000
+2016-02-10 00:28:36,718 : INFO : PROGRESS: pass 7, at document #12000/20000
+2016-02-10 00:28:39,521 : INFO : PROGRESS: pass 7, at document #14000/20000
+2016-02-10 00:28:41,712 : INFO : PROGRESS: pass 7, at document #16000/20000
+2016-02-10 00:28:43,396 : INFO : PROGRESS: pass 7, at document #18000/20000
+2016-02-10 00:28:46,343 : INFO : -9.736 per-word bound, 852.6 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:28:46,343 : INFO : PROGRESS: pass 7, at document #20000/20000
+2016-02-10 00:28:47,981 : INFO : topic #56 (0.010): 0.039*have.v + 0.027*to.r + 0.014*set.v + 0.014*pick.v + 0.013*that.r + 0.011*from.r + 0.011*get.v + 0.011*make.v + 0.010*go.v + 0.010*is.r
+2016-02-10 00:28:47,984 : INFO : topic #59 (0.010): 0.025*have.v + 0.008*will.v + 0.008*other.a + 0.007*people.n + 0.006*can.v + 0.006*part.n + 0.005*do.v + 0.005*may.v + 0.005*group.n + 0.005*also.r
+2016-02-10 00:28:47,989 : INFO : topic #41 (0.010): 0.060*have.v + 0.021*do.v + 0.011*will.v + 0.011*up.r + 0.011*can.v + 0.010*say.v + 0.009*get.v + 0.009*would.v + 0.008*see.v + 0.008*come.v
+2016-02-10 00:28:47,992 : INFO : topic #3 (0.010): 0.054*have.v + 0.014*do.v + 0.014*will.v + 0.012*window.n + 0.010*make.v + 0.009*worker.n + 0.008*door.n + 0.008*up.r + 0.008*can.v + 0.008*would.v
+2016-02-10 00:28:47,996 : INFO : topic #93 (0.010): 0.044*have.v + 0.017*can.v + 0.014*will.v + 0.012*do.v + 0.011*use.v + 0.011*may.v + 0.010*make.v + 0.010*other.a + 0.009*would.v + 0.008*also.r
+2016-02-10 00:28:48,001 : INFO : topic diff=0.095512, rho=0.235702
+2016-02-10 00:28:48,325 : INFO : PROGRESS: pass 8, at document #2000/20000
+2016-02-10 00:29:02,339 : INFO : PROGRESS: pass 8, at document #4000/20000
+2016-02-10 00:29:08,883 : INFO : PROGRESS: pass 8, at document #6000/20000
+2016-02-10 00:29:14,205 : INFO : PROGRESS: pass 8, at document #8000/20000
+2016-02-10 00:29:18,401 : INFO : PROGRESS: pass 8, at document #10000/20000
+2016-02-10 00:29:21,709 : INFO : PROGRESS: pass 8, at document #12000/20000
+2016-02-10 00:29:24,384 : INFO : PROGRESS: pass 8, at document #14000/20000
+2016-02-10 00:29:26,480 : INFO : PROGRESS: pass 8, at document #16000/20000
+2016-02-10 00:29:28,100 : INFO : PROGRESS: pass 8, at document #18000/20000
+2016-02-10 00:29:30,953 : INFO : -9.579 per-word bound, 764.9 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:29:30,954 : INFO : PROGRESS: pass 8, at document #20000/20000
+2016-02-10 00:29:32,538 : INFO : topic #29 (0.010): 0.038*have.v + 0.020*see.v + 0.014*will.v + 0.010*discuss.v + 0.009*can.v + 0.009*describe.v + 0.009*give.v + 0.008*go.v + 0.006*do.v + 0.006*detail.n
+2016-02-10 00:29:32,542 : INFO : topic #58 (0.010): 0.085*have.v + 0.017*do.v + 0.013*will.v + 0.013*say.v + 0.012*would.v + 0.011*up.r + 0.010*make.v + 0.009*can.v + 0.009*people.n + 0.008*take.v
+2016-02-10 00:29:32,545 : INFO : topic #3 (0.010): 0.054*have.v + 0.014*will.v + 0.013*do.v + 0.013*window.n + 0.010*door.n + 0.010*make.v + 0.010*worker.n + 0.008*can.v + 0.008*up.r + 0.008*would.v
+2016-02-10 00:29:32,549 : INFO : topic #59 (0.010): 0.025*have.v + 0.008*will.v + 0.007*other.a + 0.007*people.n + 0.006*can.v + 0.006*part.n + 0.005*group.n + 0.005*may.v + 0.005*do.v + 0.005*also.r
+2016-02-10 00:29:32,553 : INFO : topic #87 (0.010): 0.049*area.n + 0.042*have.v + 0.016*range.n + 0.009*will.v + 0.007*up.r + 0.007*would.v + 0.007*new.a + 0.006*do.v + 0.006*can.v + 0.006*only.r
+2016-02-10 00:29:32,558 : INFO : topic diff=0.091089, rho=0.229416
+2016-02-10 00:29:32,874 : INFO : PROGRESS: pass 9, at document #2000/20000
+2016-02-10 00:29:46,536 : INFO : PROGRESS: pass 9, at document #4000/20000
+2016-02-10 00:29:53,162 : INFO : PROGRESS: pass 9, at document #6000/20000
+2016-02-10 00:29:58,371 : INFO : PROGRESS: pass 9, at document #8000/20000
+2016-02-10 00:30:02,514 : INFO : PROGRESS: pass 9, at document #10000/20000
+2016-02-10 00:30:05,746 : INFO : PROGRESS: pass 9, at document #12000/20000
+2016-02-10 00:30:08,346 : INFO : PROGRESS: pass 9, at document #14000/20000
+2016-02-10 00:30:10,399 : INFO : PROGRESS: pass 9, at document #16000/20000
+2016-02-10 00:30:12,005 : INFO : PROGRESS: pass 9, at document #18000/20000
+2016-02-10 00:30:14,952 : INFO : -9.435 per-word bound, 692.0 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:30:14,953 : INFO : PROGRESS: pass 9, at document #20000/20000
+2016-02-10 00:30:16,591 : INFO : topic #57 (0.010): 0.046*have.v + 0.020*course.n + 0.015*will.v + 0.014*hong.n + 0.010*do.v + 0.009*can.v + 0.009*commit.v + 0.009*year.n + 0.008*would.v + 0.008*make.v
+2016-02-10 00:30:16,594 : INFO : topic #45 (0.010): 0.048*have.v + 0.024*art.n + 0.017*will.v + 0.012*do.v + 0.010*work.n + 0.009*music.n + 0.008*can.v + 0.008*make.v + 0.007*year.n + 0.007*museum.n
+2016-02-10 00:30:16,598 : INFO : topic #55 (0.010): 0.139*have.v + 0.068*up.r + 0.047*in.r + 0.026*do.v + 0.024*will.v + 0.021*out.r + 0.018*can.v + 0.018*would.v + 0.015*make.v + 0.015*could.v
+2016-02-10 00:30:16,603 : INFO : topic #93 (0.010): 0.042*have.v + 0.018*can.v + 0.014*will.v + 0.012*use.v + 0.011*do.v + 0.011*may.v + 0.010*make.v + 0.010*other.a + 0.009*would.v + 0.008*also.r
+2016-02-10 00:30:16,606 : INFO : topic #20 (0.010): 0.049*have.v + 0.014*do.v + 0.014*will.v + 0.012*can.v + 0.010*take.v + 0.010*would.v + 0.009*up.r + 0.008*go.v + 0.008*say.v + 0.007*spirit.n
+2016-02-10 00:30:16,612 : INFO : topic diff=0.087422, rho=0.223607
+2016-02-10 00:30:16,612 : INFO : saving LdaState object under lda_model-09022016.state, separately None
+2016-02-10 00:30:16,815 : INFO : saving LdaModel object under lda_model-09022016, separately None
+2016-02-10 00:30:16,816 : INFO : not storing attribute state
+2016-02-10 00:30:16,816 : INFO : not storing attribute dispatcher
+2016-02-10 00:31:14,558 : INFO : loading LdaModel object from lda_model-09022016
+2016-02-10 00:31:14,583 : INFO : setting ignored attribute state to None
+2016-02-10 00:31:14,584 : INFO : setting ignored attribute dispatcher to None
+2016-02-10 00:31:14,584 : INFO : loading LdaModel object from lda_model-09022016.state
+2016-02-10 00:33:58,171 : INFO : loading LdaModel object from lda_model-09022016
+2016-02-10 00:33:58,197 : INFO : setting ignored attribute state to None
+2016-02-10 00:33:58,197 : INFO : setting ignored attribute dispatcher to None
+2016-02-10 00:33:58,197 : INFO : loading LdaModel object from lda_model-09022016.state
+2016-02-10 00:34:03,725 : INFO : using symmetric alpha at 0.01
+2016-02-10 00:34:03,726 : INFO : using symmetric eta at 0.01
+2016-02-10 00:34:03,726 : INFO : using serial LDA version on this node
+2016-02-10 00:34:04,149 : INFO : running batch LDA training, 100 topics, 10 passes over the supplied corpus of 20000 documents, updating model once every 20000 documents, evaluating perplexity every 20000 documents, iterating 50x with a convergence threshold of 0.001000
+2016-02-10 00:34:04,463 : INFO : PROGRESS: pass 0, at document #2000/20000
+2016-02-10 00:34:17,994 : INFO : PROGRESS: pass 0, at document #4000/20000
+2016-02-10 00:34:24,422 : INFO : PROGRESS: pass 0, at document #6000/20000
+2016-02-10 00:34:30,236 : INFO : PROGRESS: pass 0, at document #8000/20000
+2016-02-10 00:34:35,861 : INFO : PROGRESS: pass 0, at document #10000/20000
+2016-02-10 00:34:41,276 : INFO : PROGRESS: pass 0, at document #12000/20000
+2016-02-10 00:34:46,342 : INFO : PROGRESS: pass 0, at document #14000/20000
+2016-02-10 00:34:50,933 : INFO : PROGRESS: pass 0, at document #16000/20000
+2016-02-10 00:34:54,837 : INFO : PROGRESS: pass 0, at document #18000/20000
+2016-02-10 00:35:00,939 : INFO : -21.260 per-word bound, 2511051.7 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:35:00,940 : INFO : PROGRESS: pass 0, at document #20000/20000
+2016-02-10 00:35:03,882 : INFO : topic #75 (0.010): 0.042*have.v + 0.017*can.v + 0.014*will.v + 0.014*would.v + 0.012*do.v + 0.012*so.r + 0.007*say.v + 0.007*time.n + 0.006*no.r + 0.006*more.r
+2016-02-10 00:35:03,885 : INFO : topic #78 (0.010): 0.043*have.v + 0.020*do.v + 0.014*say.v + 0.012*will.v + 0.012*can.v + 0.011*get.v + 0.010*make.v + 0.010*so.r + 0.008*would.v + 0.007*know.v
+2016-02-10 00:35:03,889 : INFO : topic #25 (0.010): 0.039*have.v + 0.013*do.v + 0.010*will.v + 0.009*make.v + 0.009*would.v + 0.009*up.r + 0.008*get.v + 0.008*can.v + 0.007*could.v + 0.007*say.v
+2016-02-10 00:35:03,893 : INFO : topic #24 (0.010): 0.036*have.v + 0.017*do.v + 0.017*per.n + 0.015*would.v + 0.011*will.v + 0.009*new.a + 0.009*can.v + 0.009*up.r + 0.008*make.v + 0.008*say.v
+2016-02-10 00:35:03,896 : INFO : topic #48 (0.010): 0.036*have.v + 0.014*do.v + 0.012*give.v + 0.009*say.v + 0.008*would.v + 0.008*will.v + 0.007*go.v + 0.007*make.v + 0.006*can.v + 0.006*up.r
+2016-02-10 00:35:03,901 : INFO : topic diff=78.028670, rho=1.000000
+2016-02-10 00:35:04,215 : INFO : PROGRESS: pass 1, at document #2000/20000
+2016-02-10 00:35:17,786 : INFO : PROGRESS: pass 1, at document #4000/20000
+2016-02-10 00:35:24,312 : INFO : PROGRESS: pass 1, at document #6000/20000
+2016-02-10 00:35:30,084 : INFO : PROGRESS: pass 1, at document #8000/20000
+2016-02-10 00:35:35,389 : INFO : PROGRESS: pass 1, at document #10000/20000
+2016-02-10 00:35:40,216 : INFO : PROGRESS: pass 1, at document #12000/20000
+2016-02-10 00:35:44,562 : INFO : PROGRESS: pass 1, at document #14000/20000
+2016-02-10 00:35:48,349 : INFO : PROGRESS: pass 1, at document #16000/20000
+2016-02-10 00:35:51,427 : INFO : PROGRESS: pass 1, at document #18000/20000
+2016-02-10 00:35:56,182 : INFO : -11.078 per-word bound, 2162.1 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:35:56,182 : INFO : PROGRESS: pass 1, at document #20000/20000
+2016-02-10 00:35:58,495 : INFO : topic #8 (0.010): 0.043*have.v + 0.016*do.v + 0.013*will.v + 0.011*make.v + 0.009*would.v + 0.009*can.v + 0.009*more.r + 0.007*say.v + 0.006*no.r + 0.006*very.r
+2016-02-10 00:35:58,499 : INFO : topic #52 (0.010): 0.041*have.v + 0.009*will.v + 0.009*would.v + 0.007*up.r + 0.007*do.v + 0.007*take.v + 0.006*can.v + 0.006*go.v + 0.006*so.r + 0.006*get.v
+2016-02-10 00:35:58,503 : INFO : topic #64 (0.010): 0.049*have.v + 0.015*will.v + 0.014*would.v + 0.012*do.v + 0.010*can.v + 0.008*say.v + 0.008*make.v + 0.007*no.r + 0.006*give.v + 0.006*more.r
+2016-02-10 00:35:58,506 : INFO : topic #74 (0.010): 0.031*have.v + 0.012*do.v + 0.012*will.v + 0.011*get.v + 0.010*down.r + 0.009*can.v + 0.008*up.r + 0.008*would.v + 0.007*so.r + 0.007*go.v
+2016-02-10 00:35:58,510 : INFO : topic #32 (0.010): 0.052*have.v + 0.019*do.v + 0.014*will.v + 0.012*go.v + 0.011*up.r + 0.011*get.v + 0.010*say.v + 0.009*would.v + 0.009*out.r + 0.007*take.v
+2016-02-10 00:35:58,515 : INFO : topic diff=0.149969, rho=0.288675
+2016-02-10 00:35:58,829 : INFO : PROGRESS: pass 2, at document #2000/20000
+2016-02-10 00:36:12,490 : INFO : PROGRESS: pass 2, at document #4000/20000
+2016-02-10 00:36:18,985 : INFO : PROGRESS: pass 2, at document #6000/20000
+2016-02-10 00:36:24,636 : INFO : PROGRESS: pass 2, at document #8000/20000
+2016-02-10 00:36:29,700 : INFO : PROGRESS: pass 2, at document #10000/20000
+2016-02-10 00:36:34,233 : INFO : PROGRESS: pass 2, at document #12000/20000
+2016-02-10 00:36:38,307 : INFO : PROGRESS: pass 2, at document #14000/20000
+2016-02-10 00:36:41,913 : INFO : PROGRESS: pass 2, at document #16000/20000
+2016-02-10 00:36:44,779 : INFO : PROGRESS: pass 2, at document #18000/20000
+2016-02-10 00:36:49,158 : INFO : -10.798 per-word bound, 1780.6 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:36:49,158 : INFO : PROGRESS: pass 2, at document #20000/20000
+2016-02-10 00:36:51,320 : INFO : topic #51 (0.010): 0.042*have.v + 0.014*do.v + 0.014*use.v + 0.012*can.v + 0.011*will.v + 0.006*other.a + 0.006*up.r + 0.006*also.r + 0.006*how.r + 0.006*would.v
+2016-02-10 00:36:51,324 : INFO : topic #79 (0.010): 0.042*have.v + 0.012*do.v + 0.010*say.v + 0.010*get.v + 0.010*would.v + 0.007*think.v + 0.007*so.r + 0.007*go.v + 0.007*see.v + 0.007*make.v
+2016-02-10 00:36:51,328 : INFO : topic #0 (0.010): 0.043*have.v + 0.014*do.v + 0.010*will.v + 0.009*get.v + 0.008*would.v + 0.008*say.v + 0.008*go.v + 0.007*out.r + 0.007*can.v + 0.007*year.n
+2016-02-10 00:36:51,331 : INFO : topic #49 (0.010): 0.046*have.v + 0.017*see.v + 0.015*do.v + 0.012*can.v + 0.011*will.v + 0.010*say.v + 0.010*would.v + 0.007*make.v + 0.007*go.v + 0.007*up.r
+2016-02-10 00:36:51,335 : INFO : topic #88 (0.010): 0.034*have.v + 0.021*do.v + 0.013*will.v + 0.010*go.v + 0.009*can.v + 0.008*get.v + 0.008*make.v + 0.007*would.v + 0.007*say.v + 0.007*take.v
+2016-02-10 00:36:51,340 : INFO : topic diff=0.180978, rho=0.277350
+2016-02-10 00:36:51,653 : INFO : PROGRESS: pass 3, at document #2000/20000
+2016-02-10 00:37:05,260 : INFO : PROGRESS: pass 3, at document #4000/20000
+2016-02-10 00:37:11,717 : INFO : PROGRESS: pass 3, at document #6000/20000
+2016-02-10 00:37:17,249 : INFO : PROGRESS: pass 3, at document #8000/20000
+2016-02-10 00:37:22,077 : INFO : PROGRESS: pass 3, at document #10000/20000
+2016-02-10 00:37:26,283 : INFO : PROGRESS: pass 3, at document #12000/20000
+2016-02-10 00:37:29,792 : INFO : PROGRESS: pass 3, at document #14000/20000
+2016-02-10 00:37:32,762 : INFO : PROGRESS: pass 3, at document #16000/20000
+2016-02-10 00:37:35,040 : INFO : PROGRESS: pass 3, at document #18000/20000
+2016-02-10 00:37:38,707 : INFO : -10.534 per-word bound, 1482.8 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:37:38,708 : INFO : PROGRESS: pass 3, at document #20000/20000
+2016-02-10 00:37:40,596 : INFO : topic #98 (0.010): 0.077*at.r + 0.055*have.v + 0.017*say.v + 0.016*do.v + 0.011*friend.n + 0.010*will.v + 0.009*that.r + 0.009*can.v + 0.008*would.v + 0.007*more.r
+2016-02-10 00:37:40,600 : INFO : topic #93 (0.010): 0.095*have.v + 0.027*out.r + 0.017*take.v + 0.017*do.v + 0.013*would.v + 0.013*will.v + 0.011*say.v + 0.011*can.v + 0.010*make.v + 0.010*new.a
+2016-02-10 00:37:40,603 : INFO : topic #70 (0.010): 0.029*have.v + 0.016*high.a + 0.015*so.r + 0.010*on.r + 0.009*can.v + 0.008*would.v + 0.008*will.v + 0.008*do.v + 0.007*local.a + 0.006*low.a
+2016-02-10 00:37:40,607 : INFO : topic #71 (0.010): 0.035*have.v + 0.012*will.v + 0.012*do.v + 0.010*make.v + 0.009*get.v + 0.009*would.v + 0.008*go.v + 0.007*can.v + 0.007*up.r + 0.007*then.r
+2016-02-10 00:37:40,611 : INFO : topic #21 (0.010): 0.041*have.v + 0.038*do.v + 0.016*would.v + 0.013*will.v + 0.010*say.v + 0.009*can.v + 0.009*go.v + 0.008*know.v + 0.008*see.v + 0.007*out.r
+2016-02-10 00:37:40,616 : INFO : topic diff=0.162802, rho=0.267261
+2016-02-10 00:37:40,931 : INFO : PROGRESS: pass 4, at document #2000/20000
+2016-02-10 00:37:54,814 : INFO : PROGRESS: pass 4, at document #4000/20000
+2016-02-10 00:38:01,384 : INFO : PROGRESS: pass 4, at document #6000/20000
+2016-02-10 00:38:06,843 : INFO : PROGRESS: pass 4, at document #8000/20000
+2016-02-10 00:38:11,530 : INFO : PROGRESS: pass 4, at document #10000/20000
+2016-02-10 00:38:15,478 : INFO : PROGRESS: pass 4, at document #12000/20000
+2016-02-10 00:38:18,750 : INFO : PROGRESS: pass 4, at document #14000/20000
+2016-02-10 00:38:21,402 : INFO : PROGRESS: pass 4, at document #16000/20000
+2016-02-10 00:38:23,403 : INFO : PROGRESS: pass 4, at document #18000/20000
+2016-02-10 00:38:26,684 : INFO : -10.301 per-word bound, 1261.7 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:38:26,684 : INFO : PROGRESS: pass 4, at document #20000/20000
+2016-02-10 00:38:28,395 : INFO : topic #36 (0.010): 0.038*have.v + 0.038*go.v + 0.015*do.v + 0.015*come.v + 0.014*will.v + 0.014*get.v + 0.012*would.v + 0.011*can.v + 0.010*carry.v + 0.010*take.v
+2016-02-10 00:38:28,399 : INFO : topic #24 (0.010): 0.043*have.v + 0.015*will.v + 0.015*would.v + 0.012*rate.n + 0.012*per.n + 0.011*do.v + 0.010*can.v + 0.010*make.v + 0.008*new.a + 0.008*tax.n
+2016-02-10 00:38:28,403 : INFO : topic #89 (0.010): 0.116*have.v + 0.042*up.r + 0.016*down.r + 0.015*out.r + 0.014*will.v + 0.013*do.v + 0.013*would.v + 0.012*time.n + 0.011*can.v + 0.010*then.r
+2016-02-10 00:38:28,406 : INFO : topic #18 (0.010): 0.051*have.v + 0.015*council.n + 0.010*will.v + 0.009*service.n + 0.008*up.r + 0.008*would.v + 0.008*company.n + 0.007*national.a + 0.007*committee.n + 0.007*new.a
+2016-02-10 00:38:28,410 : INFO : topic #67 (0.010): 0.045*have.v + 0.014*do.v + 0.014*will.v + 0.012*would.v + 0.012*can.v + 0.011*go.v + 0.011*make.v + 0.010*see.v + 0.008*say.v + 0.008*get.v
+2016-02-10 00:38:28,415 : INFO : topic diff=0.144180, rho=0.258199
+2016-02-10 00:38:28,729 : INFO : PROGRESS: pass 5, at document #2000/20000
+2016-02-10 00:38:42,452 : INFO : PROGRESS: pass 5, at document #4000/20000
+2016-02-10 00:38:48,914 : INFO : PROGRESS: pass 5, at document #6000/20000
+2016-02-10 00:38:54,286 : INFO : PROGRESS: pass 5, at document #8000/20000
+2016-02-10 00:38:58,776 : INFO : PROGRESS: pass 5, at document #10000/20000
+2016-02-10 00:39:02,481 : INFO : PROGRESS: pass 5, at document #12000/20000
+2016-02-10 00:39:05,511 : INFO : PROGRESS: pass 5, at document #14000/20000
+2016-02-10 00:39:07,968 : INFO : PROGRESS: pass 5, at document #16000/20000
+2016-02-10 00:39:09,846 : INFO : PROGRESS: pass 5, at document #18000/20000
+2016-02-10 00:39:12,984 : INFO : -10.091 per-word bound, 1090.4 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:39:12,985 : INFO : PROGRESS: pass 5, at document #20000/20000
+2016-02-10 00:39:14,595 : INFO : topic #77 (0.010): 0.081*have.v + 0.014*do.v + 0.010*up.r + 0.010*can.v + 0.009*take.v + 0.009*go.v + 0.009*make.v + 0.008*say.v + 0.008*would.v + 0.008*will.v
+2016-02-10 00:39:14,599 : INFO : topic #95 (0.010): 0.064*have.v + 0.019*will.v + 0.017*would.v + 0.016*do.v + 0.012*say.v + 0.010*make.v + 0.009*year.n + 0.007*go.v + 0.007*more.r + 0.006*so.r
+2016-02-10 00:39:14,602 : INFO : topic #52 (0.010): 0.039*have.v + 0.010*number.n + 0.008*will.v + 0.007*would.v + 0.007*very.r + 0.006*up.r + 0.006*take.v + 0.006*do.v + 0.006*future.n + 0.006*go.v
+2016-02-10 00:39:14,606 : INFO : topic #37 (0.010): 0.046*have.v + 0.021*can.v + 0.018*do.v + 0.016*will.v + 0.013*could.v + 0.011*more.r + 0.010*would.v + 0.010*st.n + 0.009*get.v + 0.008*take.v
+2016-02-10 00:39:14,610 : INFO : topic #6 (0.010): 0.095*have.v + 0.018*will.v + 0.015*do.v + 0.013*make.v + 0.010*take.v + 0.010*can.v + 0.009*would.v + 0.008*give.v + 0.008*up.r + 0.008*use.v
+2016-02-10 00:39:14,615 : INFO : topic diff=0.126678, rho=0.250000
+2016-02-10 00:39:14,929 : INFO : PROGRESS: pass 6, at document #2000/20000
+2016-02-10 00:39:28,612 : INFO : PROGRESS: pass 6, at document #4000/20000
+2016-02-10 00:39:35,081 : INFO : PROGRESS: pass 6, at document #6000/20000
+2016-02-10 00:39:40,400 : INFO : PROGRESS: pass 6, at document #8000/20000
+2016-02-10 00:39:44,758 : INFO : PROGRESS: pass 6, at document #10000/20000
+2016-02-10 00:39:48,257 : INFO : PROGRESS: pass 6, at document #12000/20000
+2016-02-10 00:39:51,079 : INFO : PROGRESS: pass 6, at document #14000/20000
+2016-02-10 00:39:53,345 : INFO : PROGRESS: pass 6, at document #16000/20000
+2016-02-10 00:39:55,101 : INFO : PROGRESS: pass 6, at document #18000/20000
+2016-02-10 00:39:58,033 : INFO : -9.898 per-word bound, 954.2 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:39:58,033 : INFO : PROGRESS: pass 6, at document #20000/20000
+2016-02-10 00:39:59,590 : INFO : topic #12 (0.010): 0.045*have.v + 0.018*will.v + 0.014*school.n + 0.012*education.n + 0.010*can.v + 0.009*do.v + 0.009*make.v + 0.009*would.v + 0.008*take.v + 0.007*training.n
+2016-02-10 00:39:59,594 : INFO : topic #76 (0.010): 0.034*have.v + 0.010*say.v + 0.009*do.v + 0.007*get.v + 0.007*make.v + 0.007*think.v + 0.007*know.v + 0.007*take.v + 0.007*like.v + 0.006*then.r
+2016-02-10 00:39:59,598 : INFO : topic #51 (0.010): 0.043*have.v + 0.019*use.v + 0.016*can.v + 0.013*will.v + 0.011*do.v + 0.009*other.a + 0.007*also.r + 0.007*show.v + 0.007*make.v + 0.006*new.a
+2016-02-10 00:39:59,602 : INFO : topic #44 (0.010): 0.039*have.v + 0.021*northern.n + 0.014*do.v + 0.012*can.v + 0.011*will.v + 0.008*would.v + 0.008*go.v + 0.008*get.v + 0.007*way.n + 0.007*out.r
+2016-02-10 00:39:59,605 : INFO : topic #14 (0.010): 0.044*have.v + 0.020*do.v + 0.011*can.v + 0.011*go.v + 0.011*will.v + 0.011*would.v + 0.009*get.v + 0.009*make.v + 0.008*say.v + 0.007*time.n
+2016-02-10 00:39:59,610 : INFO : topic diff=0.111462, rho=0.242536
+2016-02-10 00:39:59,925 : INFO : PROGRESS: pass 7, at document #2000/20000
+2016-02-10 00:40:13,671 : INFO : PROGRESS: pass 7, at document #4000/20000
+2016-02-10 00:40:20,131 : INFO : PROGRESS: pass 7, at document #6000/20000
+2016-02-10 00:40:25,394 : INFO : PROGRESS: pass 7, at document #8000/20000
+2016-02-10 00:40:29,623 : INFO : PROGRESS: pass 7, at document #10000/20000
+2016-02-10 00:40:33,036 : INFO : PROGRESS: pass 7, at document #12000/20000
+2016-02-10 00:40:35,730 : INFO : PROGRESS: pass 7, at document #14000/20000
+2016-02-10 00:40:37,895 : INFO : PROGRESS: pass 7, at document #16000/20000
+2016-02-10 00:40:39,626 : INFO : PROGRESS: pass 7, at document #18000/20000
+2016-02-10 00:40:42,524 : INFO : -9.720 per-word bound, 843.6 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:40:42,525 : INFO : PROGRESS: pass 7, at document #20000/20000
+2016-02-10 00:40:44,077 : INFO : topic #76 (0.010): 0.036*have.v + 0.011*say.v + 0.009*do.v + 0.008*think.v + 0.007*get.v + 0.007*like.v + 0.007*make.v + 0.007*know.v + 0.007*take.v + 0.006*then.r
+2016-02-10 00:40:44,080 : INFO : topic #6 (0.010): 0.097*have.v + 0.018*will.v + 0.015*do.v + 0.013*make.v + 0.010*take.v + 0.010*can.v + 0.009*would.v + 0.009*up.r + 0.008*give.v + 0.008*use.v
+2016-02-10 00:40:44,084 : INFO : topic #50 (0.010): 0.052*see.v + 0.036*have.v + 0.036*prime.a + 0.017*de.n + 0.011*j..n + 0.008*foreign.a + 0.008*say.v + 0.008*do.v + 0.008*m..n + 0.008*a..n
+2016-02-10 00:40:44,088 : INFO : topic #20 (0.010): 0.073*do.v + 0.035*have.v + 0.016*would.v + 0.014*know.v + 0.013*say.v + 0.012*well.r + 0.011*get.v + 0.011*can.v + 0.010*will.v + 0.010*think.v
+2016-02-10 00:40:44,092 : INFO : topic #2 (0.010): 0.046*have.v + 0.030*get.v + 0.028*go.v + 0.019*do.v + 0.017*say.v + 0.017*will.v + 0.015*come.v + 0.013*know.v + 0.012*would.v + 0.012*out.r
+2016-02-10 00:40:44,097 : INFO : topic diff=0.102059, rho=0.235702
+2016-02-10 00:40:44,421 : INFO : PROGRESS: pass 8, at document #2000/20000
+2016-02-10 00:40:58,523 : INFO : PROGRESS: pass 8, at document #4000/20000
+2016-02-10 00:41:05,096 : INFO : PROGRESS: pass 8, at document #6000/20000
+2016-02-10 00:41:10,351 : INFO : PROGRESS: pass 8, at document #8000/20000
+2016-02-10 00:41:14,547 : INFO : PROGRESS: pass 8, at document #10000/20000
+2016-02-10 00:41:17,852 : INFO : PROGRESS: pass 8, at document #12000/20000
+2016-02-10 00:41:20,480 : INFO : PROGRESS: pass 8, at document #14000/20000
+2016-02-10 00:41:22,564 : INFO : PROGRESS: pass 8, at document #16000/20000
+2016-02-10 00:41:24,161 : INFO : PROGRESS: pass 8, at document #18000/20000
+2016-02-10 00:41:26,873 : INFO : -9.557 per-word bound, 753.2 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:41:26,873 : INFO : PROGRESS: pass 8, at document #20000/20000
+2016-02-10 00:41:28,371 : INFO : topic #80 (0.010): 0.036*have.v + 0.019*university.n + 0.016*college.n + 0.012*london.n + 0.012*royal.a + 0.011*go.v + 0.010*school.n + 0.009*do.v + 0.008*will.v + 0.008*oxford.n
+2016-02-10 00:41:28,374 : INFO : topic #82 (0.010): 0.062*have.v + 0.011*social.a + 0.009*other.a + 0.009*more.r + 0.008*can.v + 0.007*political.a + 0.007*make.v + 0.007*no.r + 0.007*do.v + 0.007*will.v
+2016-02-10 00:41:28,378 : INFO : topic #62 (0.010): 0.056*party.n + 0.054*have.v + 0.014*government.n + 0.013*labour.a + 0.013*do.v + 0.012*would.v + 0.011*will.v + 0.009*election.n + 0.009*more.r + 0.008*say.v
+2016-02-10 00:41:28,382 : INFO : topic #84 (0.010): 0.046*have.v + 0.037*per.n + 0.022*south.n + 0.018*north.n + 0.016*west.n + 0.016*east.n + 0.012*area.n + 0.012*new.n + 0.011*country.n + 0.009*england.n
+2016-02-10 00:41:28,386 : INFO : topic #93 (0.010): 0.103*have.v + 0.068*out.r + 0.035*take.v + 0.016*do.v + 0.014*will.v + 0.014*new.a + 0.013*would.v + 0.011*can.v + 0.010*say.v + 0.010*make.v
+2016-02-10 00:41:28,391 : INFO : topic diff=0.095433, rho=0.229416
+2016-02-10 00:41:28,704 : INFO : PROGRESS: pass 9, at document #2000/20000
+2016-02-10 00:41:42,661 : INFO : PROGRESS: pass 9, at document #4000/20000
+2016-02-10 00:41:49,288 : INFO : PROGRESS: pass 9, at document #6000/20000
+2016-02-10 00:41:54,469 : INFO : PROGRESS: pass 9, at document #8000/20000
+2016-02-10 00:41:58,546 : INFO : PROGRESS: pass 9, at document #10000/20000
+2016-02-10 00:42:01,744 : INFO : PROGRESS: pass 9, at document #12000/20000
+2016-02-10 00:42:04,316 : INFO : PROGRESS: pass 9, at document #14000/20000
+2016-02-10 00:42:06,300 : INFO : PROGRESS: pass 9, at document #16000/20000
+2016-02-10 00:42:07,864 : INFO : PROGRESS: pass 9, at document #18000/20000
+2016-02-10 00:42:10,549 : INFO : -9.406 per-word bound, 678.6 perplexity estimate based on a held-out corpus of 2000 documents with 57528 words
+2016-02-10 00:42:10,549 : INFO : PROGRESS: pass 9, at document #20000/20000
+2016-02-10 00:42:12,030 : INFO : topic #45 (0.010): 0.030*have.v + 0.013*will.v + 0.008*do.v + 0.008*take.v + 0.007*provide.v + 0.006*use.v + 0.006*give.v + 0.006*least.r + 0.006*people.n + 0.006*can.v
+2016-02-10 00:42:12,034 : INFO : topic #52 (0.010): 0.036*have.v + 0.013*number.n + 0.008*very.r + 0.007*will.v + 0.006*would.v + 0.006*up.r + 0.005*make.v + 0.005*only.r + 0.005*can.v + 0.005*do.v
+2016-02-10 00:42:12,038 : INFO : topic #91 (0.010): 0.064*have.v + 0.024*make.v + 0.014*do.v + 0.014*give.v + 0.013*can.v + 0.011*no.r + 0.010*would.v + 0.009*will.v + 0.008*more.r + 0.008*take.v
+2016-02-10 00:42:12,041 : INFO : topic #66 (0.010): 0.074*have.v + 0.015*mr.n + 0.013*will.v + 0.012*street.n + 0.010*would.v + 0.009*no.r + 0.009*say.v + 0.008*child.n + 0.008*take.v + 0.008*son.n
+2016-02-10 00:42:12,045 : INFO : topic #26 (0.010): 0.079*as.r + 0.040*have.v + 0.021*do.v + 0.016*so.r + 0.012*go.v + 0.012*from.r + 0.011*will.v + 0.010*say.v + 0.010*may.v + 0.009*would.v
+2016-02-10 00:42:12,050 : INFO : topic diff=0.090551, rho=0.223607
+2016-02-10 00:42:12,051 : INFO : saving LdaState object under lda_model-09022016.state, separately None
+2016-02-10 00:42:12,259 : INFO : saving LdaModel object under lda_model-09022016, separately None
+2016-02-10 00:42:12,260 : INFO : not storing attribute state
+2016-02-10 00:42:12,260 : INFO : not storing attribute dispatcher
+2016-02-10 00:42:19,030 : INFO : loading LdaModel object from lda_model-09022016
+2016-02-10 00:42:19,057 : INFO : setting ignored attribute state to None
+2016-02-10 00:42:19,057 : INFO : setting ignored attribute dispatcher to None
+2016-02-10 00:42:19,057 : INFO : loading LdaModel object from lda_model-09022016.state

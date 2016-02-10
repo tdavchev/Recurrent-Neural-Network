@@ -184,3 +184,12 @@
 2016-02-10 00:15:24,906 : INFO : loading Word2Vec object from final-model-09022016.bin
 2016-02-10 00:15:25,344 : INFO : setting ignored attribute syn0norm to None
 2016-02-10 00:15:25,346 : INFO : setting ignored attribute cum_table to None
+2016-02-10 00:46:01,362 : INFO : loading LdaModel object from lda_model_complete
+2016-02-10 00:46:25,509 : INFO : loading LdaModel object from lda_model-09022016
+2016-02-10 00:46:25,535 : INFO : setting ignored attribute state to None
+2016-02-10 00:46:25,535 : INFO : setting ignored attribute dispatcher to None
+2016-02-10 00:46:25,535 : INFO : loading LdaModel object from lda_model-09022016.state
+2016-02-10 00:47:29,552 : INFO : loading LdaModel object from lda_model-09022016
+2016-02-10 00:47:29,578 : INFO : setting ignored attribute state to None
+2016-02-10 00:47:29,578 : INFO : setting ignored attribute dispatcher to None
+2016-02-10 00:47:29,578 : INFO : loading LdaModel object from lda_model-09022016.state

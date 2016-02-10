@@ -230,7 +230,7 @@ def lda(vectors, wordMapping=None):
     print "Starting lda"
     lda = gensim.models.ldamodel.LdaModel(vectors, id2word=wordMapping, num_topics=100, update_every=0, passes=10)
     print "Lda completed, saving.."
-    lda.save('lda_model_v2', ignore=['state', 'dispatcher'])
+    lda.save('lda_model-09022016', ignore=['state', 'dispatcher'])
     print "Model saved. Showing topics.."
     print lda.show_topics(num_topics=10, num_words=10, log=False, formatted=True)
     print "End."
@@ -506,7 +506,7 @@ if __name__ == '__main__':
     if part == "i":
         print("(i): lda-based similarity")
         id2word, word2id, vectors = load_corpus(sys.argv[2], sys.argv[3])
-        ldaModel = gensim.models.LdaModel.load('lda_model_v2', mmap='r')
+        ldaModel = gensim.models.LdaModel.load('lda_model-09022016', mmap='r')
         house = ldaModel[vectors[word2id["house.n"]]]
         home = ldaModel[vectors[word2id["home.n"]]]
         time = ldaModel[vectors[word2id["time.n"]]]
@@ -518,12 +518,12 @@ if __name__ == '__main__':
     if part == "j":
         print("(j) get topics from LDA model")
         id2word, word2id, vectors = load_corpus(sys.argv[2], sys.argv[3])
-        ldaModel = gensim.models.LdaModel.load('lda_model_complete', mmap='r')
+        ldaModel = gensim.models.LdaModel.load('lda_model-09022016', mmap='r')
         topics = ldaModel.show_topics(num_topics=10, num_words=10, log=False, formatted=True)
         topicIDs = [topics[j][0] for j in xrange(0,len(topics))]
         for _id in topicIDs:
             realWords = []
             topicWords = get_topic_words(ldaModel,_id)
             for word,probability in topicWords:
-                realWords.append(id2word[int(word)])
+                realWords.append(word)
             print "The words associated with topic {0} are: {1}".format(_id, realWords)
