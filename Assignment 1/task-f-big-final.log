@@ -1,0 +1,68 @@
+2016-02-09 23:51:55,377 : INFO : collecting all words and their counts
+2016-02-09 23:51:55,405 : INFO : collected 0 word types from a corpus of 0 raw words and 0 sentences
+2016-02-09 23:51:55,405 : INFO : min_count=5 retains 0 unique words (drops 0)
+2016-02-09 23:51:55,406 : INFO : min_count leaves 0 word corpus (0% of original 0)
+2016-02-09 23:51:55,406 : INFO : deleting the raw counts dictionary of 0 items
+2016-02-09 23:51:55,406 : INFO : sample=0.001 downsamples 0 most-common words
+2016-02-09 23:51:55,406 : INFO : downsampling leaves estimated 0 word corpus (0.0% of prior 0)
+2016-02-09 23:51:55,406 : INFO : estimated required memory for 0 words and 100 dimensions: 0 bytes
+2016-02-09 23:51:55,406 : INFO : min_count=5 retains 0 unique words (drops 0)
+2016-02-09 23:51:55,406 : INFO : min_count leaves 0 word corpus (0% of original 0)
+2016-02-09 23:51:55,406 : INFO : deleting the raw counts dictionary of 0 items
+2016-02-09 23:51:55,406 : INFO : sample=0.001 downsamples 0 most-common words
+2016-02-09 23:51:55,406 : INFO : downsampling leaves estimated 0 word corpus (0.0% of prior 0)
+2016-02-09 23:51:55,406 : INFO : estimated required memory for 0 words and 100 dimensions: 0 bytes
+2016-02-09 23:51:55,407 : INFO : constructing a huffman tree from 0 words
+2016-02-09 23:51:55,407 : INFO : resetting layer weights
+2016-02-09 23:51:55,407 : INFO : training model with 8 workers on 0 vocabulary and 100 features, using sg=1 hs=1 sample=0.001 and negative=10
+2016-02-09 23:55:57,492 : INFO : collecting all words and their counts
+2016-02-09 23:55:57,512 : INFO : collected 0 word types from a corpus of 0 raw words and 0 sentences
+2016-02-09 23:55:57,512 : INFO : min_count=5 retains 0 unique words (drops 0)
+2016-02-09 23:55:57,512 : INFO : min_count leaves 0 word corpus (0% of original 0)
+2016-02-09 23:55:57,512 : INFO : deleting the raw counts dictionary of 0 items
+2016-02-09 23:55:57,513 : INFO : sample=0.001 downsamples 0 most-common words
+2016-02-09 23:55:57,513 : INFO : downsampling leaves estimated 0 word corpus (0.0% of prior 0)
+2016-02-09 23:55:57,513 : INFO : estimated required memory for 0 words and 100 dimensions: 0 bytes
+2016-02-09 23:55:57,513 : INFO : min_count=5 retains 0 unique words (drops 0)
+2016-02-09 23:55:57,513 : INFO : min_count leaves 0 word corpus (0% of original 0)
+2016-02-09 23:55:57,513 : INFO : deleting the raw counts dictionary of 0 items
+2016-02-09 23:55:57,513 : INFO : sample=0.001 downsamples 0 most-common words
+2016-02-09 23:55:57,513 : INFO : downsampling leaves estimated 0 word corpus (0.0% of prior 0)
+2016-02-09 23:55:57,513 : INFO : estimated required memory for 0 words and 100 dimensions: 0 bytes
+2016-02-09 23:55:57,513 : INFO : constructing a huffman tree from 0 words
+2016-02-09 23:55:57,513 : INFO : resetting layer weights
+2016-02-09 23:55:57,513 : INFO : training model with 8 workers on 0 vocabulary and 100 features, using sg=1 hs=1 sample=0.001 and negative=10
+2016-02-09 23:56:15,802 : INFO : collecting all words and their counts
+2016-02-09 23:56:15,823 : INFO : collected 0 word types from a corpus of 0 raw words and 0 sentences
+2016-02-09 23:56:15,823 : INFO : min_count=5 retains 0 unique words (drops 0)
+2016-02-09 23:56:15,823 : INFO : min_count leaves 0 word corpus (0% of original 0)
+2016-02-09 23:56:15,823 : INFO : deleting the raw counts dictionary of 0 items
+2016-02-09 23:56:15,823 : INFO : sample=0.001 downsamples 0 most-common words
+2016-02-09 23:56:15,823 : INFO : downsampling leaves estimated 0 word corpus (0.0% of prior 0)
+2016-02-09 23:56:15,824 : INFO : estimated required memory for 0 words and 100 dimensions: 0 bytes
+2016-02-09 23:56:15,824 : INFO : min_count=5 retains 0 unique words (drops 0)
+2016-02-09 23:56:15,824 : INFO : min_count leaves 0 word corpus (0% of original 0)
+2016-02-09 23:56:15,824 : INFO : deleting the raw counts dictionary of 0 items
+2016-02-09 23:56:15,824 : INFO : sample=0.001 downsamples 0 most-common words
+2016-02-09 23:56:15,824 : INFO : downsampling leaves estimated 0 word corpus (0.0% of prior 0)
+2016-02-09 23:56:15,824 : INFO : estimated required memory for 0 words and 100 dimensions: 0 bytes
+2016-02-09 23:56:15,824 : INFO : constructing a huffman tree from 0 words
+2016-02-09 23:56:15,824 : INFO : resetting layer weights
+2016-02-09 23:56:15,824 : INFO : training model with 2 workers on 0 vocabulary and 100 features, using sg=1 hs=1 sample=0.001 and negative=10
+2016-02-09 23:57:06,610 : INFO : collecting all words and their counts
+2016-02-09 23:57:06,631 : INFO : collected 0 word types from a corpus of 0 raw words and 0 sentences
+2016-02-09 23:57:06,631 : INFO : min_count=1 retains 0 unique words (drops 0)
+2016-02-09 23:57:06,631 : INFO : min_count leaves 0 word corpus (0% of original 0)
+2016-02-09 23:57:06,631 : INFO : deleting the raw counts dictionary of 0 items
+2016-02-09 23:57:06,631 : INFO : sample=0.001 downsamples 0 most-common words
+2016-02-09 23:57:06,631 : INFO : downsampling leaves estimated 0 word corpus (0.0% of prior 0)
+2016-02-09 23:57:06,631 : INFO : estimated required memory for 0 words and 100 dimensions: 0 bytes
+2016-02-09 23:57:06,631 : INFO : min_count=1 retains 0 unique words (drops 0)
+2016-02-09 23:57:06,631 : INFO : min_count leaves 0 word corpus (0% of original 0)
+2016-02-09 23:57:06,632 : INFO : deleting the raw counts dictionary of 0 items
+2016-02-09 23:57:06,632 : INFO : sample=0.001 downsamples 0 most-common words
+2016-02-09 23:57:06,632 : INFO : downsampling leaves estimated 0 word corpus (0.0% of prior 0)
+2016-02-09 23:57:06,632 : INFO : estimated required memory for 0 words and 100 dimensions: 0 bytes
+2016-02-09 23:57:06,632 : INFO : constructing a huffman tree from 0 words
+2016-02-09 23:57:06,632 : INFO : resetting layer weights
+2016-02-09 23:57:06,632 : INFO : training model with 8 workers on 0 vocabulary and 100 features, using sg=1 hs=1 sample=0.001 and negative=10

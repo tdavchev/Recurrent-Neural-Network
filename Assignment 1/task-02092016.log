@@ -1,0 +1,186 @@
+2016-02-10 00:03:37,546 : INFO : collecting all words and their counts
+2016-02-10 00:03:37,566 : INFO : collected 0 word types from a corpus of 0 raw words and 0 sentences
+2016-02-10 00:03:37,567 : INFO : min_count=5 retains 0 unique words (drops 0)
+2016-02-10 00:03:37,567 : INFO : min_count leaves 0 word corpus (0% of original 0)
+2016-02-10 00:03:37,567 : INFO : deleting the raw counts dictionary of 0 items
+2016-02-10 00:03:37,567 : INFO : sample=0.001 downsamples 0 most-common words
+2016-02-10 00:03:37,567 : INFO : downsampling leaves estimated 0 word corpus (0.0% of prior 0)
+2016-02-10 00:03:37,567 : INFO : estimated required memory for 0 words and 100 dimensions: 0 bytes
+2016-02-10 00:03:37,567 : INFO : min_count=5 retains 0 unique words (drops 0)
+2016-02-10 00:03:37,567 : INFO : min_count leaves 0 word corpus (0% of original 0)
+2016-02-10 00:03:37,567 : INFO : deleting the raw counts dictionary of 0 items
+2016-02-10 00:03:37,567 : INFO : sample=0.001 downsamples 0 most-common words
+2016-02-10 00:03:37,567 : INFO : downsampling leaves estimated 0 word corpus (0.0% of prior 0)
+2016-02-10 00:03:37,567 : INFO : estimated required memory for 0 words and 100 dimensions: 0 bytes
+2016-02-10 00:03:37,568 : INFO : constructing a huffman tree from 0 words
+2016-02-10 00:03:37,568 : INFO : resetting layer weights
+2016-02-10 00:03:37,568 : INFO : training model with 8 workers on 0 vocabulary and 100 features, using sg=1 hs=1 sample=0.001 and negative=10
+2016-02-10 00:05:07,509 : INFO : collecting all words and their counts
+2016-02-10 00:05:07,529 : INFO : collected 0 word types from a corpus of 0 raw words and 0 sentences
+2016-02-10 00:05:07,529 : INFO : min_count=5 retains 0 unique words (drops 0)
+2016-02-10 00:05:07,529 : INFO : min_count leaves 0 word corpus (0% of original 0)
+2016-02-10 00:05:07,529 : INFO : deleting the raw counts dictionary of 0 items
+2016-02-10 00:05:07,529 : INFO : sample=0.001 downsamples 0 most-common words
+2016-02-10 00:05:07,530 : INFO : downsampling leaves estimated 0 word corpus (0.0% of prior 0)
+2016-02-10 00:05:07,530 : INFO : estimated required memory for 0 words and 100 dimensions: 0 bytes
+2016-02-10 00:05:07,530 : INFO : min_count=5 retains 0 unique words (drops 0)
+2016-02-10 00:05:07,530 : INFO : min_count leaves 0 word corpus (0% of original 0)
+2016-02-10 00:05:07,530 : INFO : deleting the raw counts dictionary of 0 items
+2016-02-10 00:05:07,530 : INFO : sample=0.001 downsamples 0 most-common words
+2016-02-10 00:05:07,530 : INFO : downsampling leaves estimated 0 word corpus (0.0% of prior 0)
+2016-02-10 00:05:07,530 : INFO : estimated required memory for 0 words and 100 dimensions: 0 bytes
+2016-02-10 00:05:07,530 : INFO : constructing a huffman tree from 0 words
+2016-02-10 00:05:07,530 : INFO : resetting layer weights
+2016-02-10 00:05:07,530 : INFO : training model with 8 workers on 0 vocabulary and 100 features, using sg=1 hs=1 sample=0.001 and negative=10
+2016-02-10 00:09:05,647 : INFO : collecting all words and their counts
+2016-02-10 00:09:05,684 : INFO : PROGRESS: at sentence #0, processed 0 words, keeping 0 word types
+2016-02-10 00:09:07,872 : INFO : PROGRESS: at sentence #10000, processed 205437 words, keeping 14682 word types
+2016-02-10 00:09:10,064 : INFO : PROGRESS: at sentence #20000, processed 419366 words, keeping 20907 word types
+2016-02-10 00:09:12,183 : INFO : PROGRESS: at sentence #30000, processed 621009 words, keeping 25693 word types
+2016-02-10 00:09:14,056 : INFO : PROGRESS: at sentence #40000, processed 803645 words, keeping 30375 word types
+2016-02-10 00:09:15,410 : INFO : PROGRESS: at sentence #50000, processed 934310 words, keeping 31025 word types
+2016-02-10 00:09:17,196 : INFO : PROGRESS: at sentence #60000, processed 1107773 words, keeping 32045 word types
+2016-02-10 00:09:19,053 : INFO : PROGRESS: at sentence #70000, processed 1288903 words, keeping 33184 word types
+2016-02-10 00:09:21,381 : INFO : PROGRESS: at sentence #80000, processed 1519101 words, keeping 37495 word types
+2016-02-10 00:09:23,254 : INFO : PROGRESS: at sentence #90000, processed 1701631 words, keeping 38526 word types
+2016-02-10 00:09:25,156 : INFO : collected 40482 word types from a corpus of 1888390 raw words and 99999 sentences
+2016-02-10 00:09:25,210 : INFO : min_count=5 retains 12673 unique words (drops 27809)
+2016-02-10 00:09:25,210 : INFO : min_count leaves 1844186 word corpus (97% of original 1888390)
+2016-02-10 00:09:25,251 : INFO : deleting the raw counts dictionary of 40482 items
+2016-02-10 00:09:25,254 : INFO : sample=0.001 downsamples 50 most-common words
+2016-02-10 00:09:25,254 : INFO : downsampling leaves estimated 1261472 word corpus (68.4% of prior 1844186)
+2016-02-10 00:09:25,254 : INFO : estimated required memory for 12673 words and 100 dimensions: 24078700 bytes
+2016-02-10 00:09:25,267 : INFO : constructing a huffman tree from 12673 words
+2016-02-10 00:09:25,706 : INFO : built huffman tree with maximum node depth 19
+2016-02-10 00:09:25,728 : INFO : resetting layer weights
+2016-02-10 00:09:25,922 : INFO : training model with 8 workers on 12673 vocabulary and 100 features, using sg=1 hs=1 sample=0.001 and negative=10
+2016-02-10 00:09:25,922 : INFO : expecting 99999 examples, matching count from corpus used for vocabulary survey
+2016-02-10 00:09:26,948 : INFO : PROGRESS: at 0.70% examples, 11609 words/s
+2016-02-10 00:09:27,957 : INFO : PROGRESS: at 3.70% examples, 27825 words/s
+2016-02-10 00:09:28,997 : INFO : PROGRESS: at 6.70% examples, 30585 words/s
+2016-02-10 00:09:30,013 : INFO : PROGRESS: at 9.70% examples, 32771 words/s
+2016-02-10 00:09:31,026 : INFO : PROGRESS: at 12.80% examples, 34424 words/s
+2016-02-10 00:09:32,073 : INFO : PROGRESS: at 15.00% examples, 33449 words/s
+2016-02-10 00:09:33,103 : INFO : PROGRESS: at 17.80% examples, 36430 words/s
+2016-02-10 00:09:34,138 : INFO : PROGRESS: at 21.70% examples, 36591 words/s
+2016-02-10 00:09:35,177 : INFO : PROGRESS: at 24.10% examples, 35401 words/s
+2016-02-10 00:09:36,210 : INFO : PROGRESS: at 26.50% examples, 36368 words/s
+2016-02-10 00:09:37,241 : INFO : PROGRESS: at 29.90% examples, 37012 words/s
+2016-02-10 00:09:38,244 : INFO : PROGRESS: at 32.80% examples, 36842 words/s
+2016-02-10 00:09:39,261 : INFO : PROGRESS: at 35.70% examples, 37261 words/s
+2016-02-10 00:09:40,269 : INFO : PROGRESS: at 40.20% examples, 37861 words/s
+2016-02-10 00:09:41,281 : INFO : PROGRESS: at 44.40% examples, 37824 words/s
+2016-02-10 00:09:42,304 : INFO : PROGRESS: at 48.70% examples, 37613 words/s
+2016-02-10 00:09:43,306 : INFO : PROGRESS: at 51.50% examples, 37457 words/s
+2016-02-10 00:09:44,314 : INFO : PROGRESS: at 55.40% examples, 38218 words/s
+2016-02-10 00:09:45,332 : INFO : PROGRESS: at 59.80% examples, 38146 words/s
+2016-02-10 00:09:46,348 : INFO : PROGRESS: at 63.10% examples, 37666 words/s
+2016-02-10 00:09:47,376 : INFO : PROGRESS: at 66.10% examples, 37681 words/s
+2016-02-10 00:09:48,443 : INFO : PROGRESS: at 69.30% examples, 37868 words/s
+2016-02-10 00:09:49,462 : INFO : PROGRESS: at 71.60% examples, 37610 words/s
+2016-02-10 00:09:50,505 : INFO : PROGRESS: at 74.30% examples, 38073 words/s
+2016-02-10 00:09:51,538 : INFO : PROGRESS: at 77.40% examples, 37921 words/s
+2016-02-10 00:09:52,545 : INFO : PROGRESS: at 80.40% examples, 38206 words/s
+2016-02-10 00:09:53,570 : INFO : PROGRESS: at 83.40% examples, 37984 words/s
+2016-02-10 00:09:54,579 : INFO : PROGRESS: at 87.00% examples, 38287 words/s
+2016-02-10 00:09:55,600 : INFO : PROGRESS: at 89.60% examples, 37947 words/s
+2016-02-10 00:09:56,608 : INFO : PROGRESS: at 93.30% examples, 38532 words/s
+2016-02-10 00:09:57,625 : INFO : PROGRESS: at 96.40% examples, 38205 words/s
+2016-02-10 00:09:57,973 : INFO : reached end of input; waiting to finish 24 outstanding jobs
+2016-02-10 00:09:58,206 : INFO : training on 1888390 raw words took 32.3s, 39073 trained words/s
+2016-02-10 00:09:58,207 : INFO : precomputing L2-norms of word weight vectors
+2016-02-10 00:09:58,329 : INFO : saving Word2Vec object under vector.bin, separately None
+2016-02-10 00:09:58,329 : INFO : not storing attribute syn0norm
+2016-02-10 00:09:58,329 : INFO : not storing attribute cum_table
+2016-02-10 00:09:58,999 : INFO : capital-common-countries: 2.7% (3/110)
+2016-02-10 00:09:59,118 : INFO : capital-world: 1.8% (1/57)
+2016-02-10 00:09:59,157 : INFO : city-in-state: 0.0% (0/3)
+2016-02-10 00:09:59,296 : INFO : family: 18.2% (20/110)
+2016-02-10 00:09:59,766 : INFO : gram1-adjective-to-adverb: 0.0% (0/380)
+2016-02-10 00:10:00,075 : INFO : gram2-opposite: 0.0% (0/240)
+2016-02-10 00:10:01,277 : INFO : gram3-comparative: 5.1% (51/992)
+2016-02-10 00:10:01,708 : INFO : gram4-superlative: 0.3% (1/306)
+2016-02-10 00:10:01,756 : INFO : gram5-present-participle: 0.0% (0/30)
+2016-02-10 00:10:02,589 : INFO : gram6-nationality-adjective: 0.1% (1/685)
+2016-02-10 00:10:02,609 : INFO : gram7-past-tense: 0.0% (0/3)
+2016-02-10 00:10:02,631 : INFO : gram8-plural: 0.0% (0/6)
+2016-02-10 00:10:02,640 : INFO : total: 2.6% (77/2922)
+2016-02-10 00:10:02,641 : INFO : collecting all words and their counts
+2016-02-10 00:10:02,641 : INFO : PROGRESS: at sentence #0, processed 0 words, keeping 0 word types
+2016-02-10 00:10:04,749 : INFO : PROGRESS: at sentence #10000, processed 205437 words, keeping 14682 word types
+2016-02-10 00:10:06,941 : INFO : PROGRESS: at sentence #20000, processed 419366 words, keeping 20907 word types
+2016-02-10 00:10:09,011 : INFO : PROGRESS: at sentence #30000, processed 621009 words, keeping 25693 word types
+2016-02-10 00:10:10,889 : INFO : PROGRESS: at sentence #40000, processed 803645 words, keeping 30375 word types
+2016-02-10 00:10:12,246 : INFO : PROGRESS: at sentence #50000, processed 934310 words, keeping 31025 word types
+2016-02-10 00:10:14,040 : INFO : PROGRESS: at sentence #60000, processed 1107773 words, keeping 32045 word types
+2016-02-10 00:10:15,899 : INFO : PROGRESS: at sentence #70000, processed 1288903 words, keeping 33184 word types
+2016-02-10 00:10:18,239 : INFO : PROGRESS: at sentence #80000, processed 1519101 words, keeping 37495 word types
+2016-02-10 00:10:20,126 : INFO : PROGRESS: at sentence #90000, processed 1701631 words, keeping 38526 word types
+2016-02-10 00:10:22,045 : INFO : collected 40482 word types from a corpus of 1888390 raw words and 99999 sentences
+2016-02-10 00:10:22,113 : INFO : min_count=5 retains 12673 unique words (drops 27809)
+2016-02-10 00:10:22,113 : INFO : min_count leaves 1844186 word corpus (97% of original 1888390)
+2016-02-10 00:10:22,153 : INFO : deleting the raw counts dictionary of 40482 items
+2016-02-10 00:10:22,156 : INFO : sample=0.01 downsamples 5 most-common words
+2016-02-10 00:10:22,156 : INFO : downsampling leaves estimated 1735257 word corpus (94.1% of prior 1844186)
+2016-02-10 00:10:22,157 : INFO : estimated required memory for 12673 words and 100 dimensions: 24078700 bytes
+2016-02-10 00:10:22,170 : INFO : constructing a huffman tree from 12673 words
+2016-02-10 00:10:22,607 : INFO : built huffman tree with maximum node depth 19
+2016-02-10 00:10:22,630 : INFO : resetting layer weights
+2016-02-10 00:10:22,825 : INFO : training model with 8 workers on 12673 vocabulary and 100 features, using sg=1 hs=1 sample=0.01 and negative=10
+2016-02-10 00:10:22,825 : INFO : expecting 99999 examples, matching count from corpus used for vocabulary survey
+2016-02-10 00:10:23,841 : INFO : PROGRESS: at 0.50% examples, 11356 words/s
+2016-02-10 00:10:24,860 : INFO : PROGRESS: at 3.20% examples, 32796 words/s
+2016-02-10 00:10:25,866 : INFO : PROGRESS: at 6.10% examples, 37882 words/s
+2016-02-10 00:10:26,872 : INFO : PROGRESS: at 8.80% examples, 40126 words/s
+2016-02-10 00:10:27,886 : INFO : PROGRESS: at 11.60% examples, 42148 words/s
+2016-02-10 00:10:28,929 : INFO : PROGRESS: at 14.20% examples, 42451 words/s
+2016-02-10 00:10:29,936 : INFO : PROGRESS: at 16.40% examples, 42565 words/s
+2016-02-10 00:10:30,936 : INFO : PROGRESS: at 19.30% examples, 45502 words/s
+2016-02-10 00:10:31,966 : INFO : PROGRESS: at 22.40% examples, 44928 words/s
+2016-02-10 00:10:32,999 : INFO : PROGRESS: at 24.60% examples, 44724 words/s
+2016-02-10 00:10:34,005 : INFO : PROGRESS: at 26.70% examples, 45385 words/s
+2016-02-10 00:10:35,028 : INFO : PROGRESS: at 29.90% examples, 46166 words/s
+2016-02-10 00:10:36,065 : INFO : PROGRESS: at 32.80% examples, 46045 words/s
+2016-02-10 00:10:37,108 : INFO : PROGRESS: at 35.50% examples, 46420 words/s
+2016-02-10 00:10:38,114 : INFO : PROGRESS: at 39.40% examples, 47272 words/s
+2016-02-10 00:10:39,130 : INFO : PROGRESS: at 43.00% examples, 46995 words/s
+2016-02-10 00:10:40,149 : INFO : PROGRESS: at 47.60% examples, 47764 words/s
+2016-02-10 00:10:41,165 : INFO : PROGRESS: at 50.20% examples, 46767 words/s
+2016-02-10 00:10:42,181 : INFO : PROGRESS: at 52.80% examples, 47294 words/s
+2016-02-10 00:10:43,199 : INFO : PROGRESS: at 56.70% examples, 47799 words/s
+2016-02-10 00:10:44,199 : INFO : PROGRESS: at 60.90% examples, 47754 words/s
+2016-02-10 00:10:45,218 : INFO : PROGRESS: at 63.70% examples, 47613 words/s
+2016-02-10 00:10:46,237 : INFO : PROGRESS: at 66.40% examples, 47650 words/s
+2016-02-10 00:10:47,241 : INFO : PROGRESS: at 69.20% examples, 47942 words/s
+2016-02-10 00:10:48,256 : INFO : PROGRESS: at 71.40% examples, 47643 words/s
+2016-02-10 00:10:49,290 : INFO : PROGRESS: at 73.70% examples, 47919 words/s
+2016-02-10 00:10:50,296 : INFO : PROGRESS: at 76.50% examples, 48111 words/s
+2016-02-10 00:10:51,344 : INFO : PROGRESS: at 79.10% examples, 48079 words/s
+2016-02-10 00:10:52,360 : INFO : PROGRESS: at 82.00% examples, 48160 words/s
+2016-02-10 00:10:53,402 : INFO : PROGRESS: at 85.10% examples, 48281 words/s
+2016-02-10 00:10:54,416 : INFO : PROGRESS: at 88.10% examples, 48272 words/s
+2016-02-10 00:10:55,428 : INFO : PROGRESS: at 90.50% examples, 48002 words/s
+2016-02-10 00:10:56,434 : INFO : PROGRESS: at 93.70% examples, 48582 words/s
+2016-02-10 00:10:57,465 : INFO : PROGRESS: at 96.50% examples, 48214 words/s
+2016-02-10 00:10:57,812 : INFO : reached end of input; waiting to finish 24 outstanding jobs
+2016-02-10 00:10:58,113 : INFO : training on 1888390 raw words took 35.3s, 49170 trained words/s
+2016-02-10 00:10:58,113 : INFO : precomputing L2-norms of word weight vectors
+2016-02-10 00:10:58,234 : INFO : saving Word2Vec object under vector.bin, separately None
+2016-02-10 00:10:58,234 : INFO : not storing attribute syn0norm
+2016-02-10 00:10:58,234 : INFO : not storing attribute cum_table
+2016-02-10 00:10:58,828 : INFO : capital-common-countries: 0.9% (1/110)
+2016-02-10 00:10:58,944 : INFO : capital-world: 0.0% (0/57)
+2016-02-10 00:10:58,982 : INFO : city-in-state: 0.0% (0/3)
+2016-02-10 00:10:59,121 : INFO : family: 19.1% (21/110)
+2016-02-10 00:10:59,588 : INFO : gram1-adjective-to-adverb: 0.3% (1/380)
+2016-02-10 00:10:59,894 : INFO : gram2-opposite: 0.8% (2/240)
+2016-02-10 00:11:01,097 : INFO : gram3-comparative: 4.9% (49/992)
+2016-02-10 00:11:01,491 : INFO : gram4-superlative: 1.0% (3/306)
+2016-02-10 00:11:01,538 : INFO : gram5-present-participle: 0.0% (0/30)
+2016-02-10 00:11:02,373 : INFO : gram6-nationality-adjective: 0.3% (2/685)
+2016-02-10 00:11:02,393 : INFO : gram7-past-tense: 0.0% (0/3)
+2016-02-10 00:11:02,416 : INFO : gram8-plural: 0.0% (0/6)
+2016-02-10 00:11:02,425 : INFO : total: 2.7% (79/2922)
+2016-02-10 00:15:24,906 : INFO : loading Word2Vec object from final-model-09022016.bin
+2016-02-10 00:15:25,344 : INFO : setting ignored attribute syn0norm to None
+2016-02-10 00:15:25,346 : INFO : setting ignored attribute cum_table to None

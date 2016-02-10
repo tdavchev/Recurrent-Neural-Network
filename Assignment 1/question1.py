@@ -9,7 +9,7 @@ from sets import Set
 
 from itertools import repeat
 from collections import defaultdict
-logging.basicConfig(filename='task-f02092016.log',format='%(asctime)s : %(levelname)s : %(message)s',level=logging.INFO)
+logging.basicConfig(filename='task-02092016.log',format='%(asctime)s : %(levelname)s : %(message)s',level=logging.INFO)
 
 '''
 (f) helper class, do not modify.
@@ -477,7 +477,7 @@ if __name__ == '__main__':
         sRate=0.01
         nSampling=10
         logging.info("(f2) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
-        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,-1,"final-model-temp09022016.bin")
+        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,-1,"final-model-09022016.bin")
         logging.info("(f2) word2vec, testing model...")
         acc=test_accuracy(sys.argv[3],w2v)
 
@@ -485,7 +485,7 @@ if __name__ == '__main__':
     if part == "g":
         print("(g): word2vec based similarity")
 
-        w2v=gensim.models.Word2Vec.load('final-model.bin')
+        w2v=gensim.models.Word2Vec.load('final-model-09022016.bin')
         houseHome = w2v.similarity('house.n', 'home.n')
         houseTime = w2v.similarity('house.n', 'time.n')
         homeTime = w2v.similarity('time.n', 'home.n')
