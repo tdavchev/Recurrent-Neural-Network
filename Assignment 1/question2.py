@@ -300,7 +300,7 @@ if __name__ == "__main__":
             print("\tError: exception raised in sparse multiplication")
             print(e)
         try:
-            print addition(v3,v4)
+            addition(v3,v4)
             print("\tPass: full addition")
         except Exception as e:
             print("\tError: exception raised in full addition")
@@ -339,7 +339,7 @@ if __name__ == "__main__":
         outFileTFIDF.close
 
         # word2vec
-        w2v=gensim.models.Word2Vec.load('final-model.bin')
+        w2v=gensim.models.Word2Vec.load('final-model-09022016.bin')
         outFilew2v = open("word2vec_addition.txt","w")
         lines=open("data/test.txt").readlines()
         # outFile = open("test_n.txt","w")
@@ -387,7 +387,7 @@ if __name__ == "__main__":
         outFileTFIDF.close
 
         # word2vec
-        w2v=gensim.models.Word2Vec.load('final-model.bin')
+        w2v=gensim.models.Word2Vec.load('final-model-09022016.bin')
         outFilew2v = open("word2vec_multiplication.txt","w")
         lines=open("data/test.txt").readlines()
         i=[]
@@ -413,7 +413,7 @@ if __name__ == "__main__":
         print("\tloading corpus")
         id2word,word2id,vectors=load_corpus(sys.argv[2], sys.argv[3])
         print("\tloading LDA model")
-        ldaModel = gensim.models.ldamodel.LdaModel.load("lda_model_v2") # change to lda.model !!!
+        ldaModel = gensim.models.ldamodel.LdaModel.load("lda_model-09022016") # change to lda.model !!!
         houseTopic = ldaModel[vectors[word2id["house.n"]]][0][0]
         try:
             if prob_z_given_w(ldaModel, houseTopic, vectors[word2id["house.n"]]) > 0.0:
@@ -438,7 +438,7 @@ if __name__ == "__main__":
         id2word,word2id,vectors=load_corpus(sys.argv[2], sys.argv[3])
         t,i,sent,sentid=load_json()
         thesaurus=load_tt()
-        ldaModel = gensim.models.LdaModel.load('lda_model_v2', mmap='r')
+        ldaModel = gensim.models.LdaModel.load('lda_model-09022016', mmap='r')
         outFileLDA = open("output_lda.txt","w")
         lines=open("data/test.txt").readlines()
         i=[]
@@ -457,6 +457,6 @@ if __name__ == "__main__":
             except Exception, e:
                 outFileLDA.write(" ")
             outFileLDA.write("\n")
-            print "here {0}".format(count)
+            print "{0} steps".format(count)
             count += 1
         outFileLDA.close
