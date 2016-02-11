@@ -77,16 +77,9 @@ input: vector2
 output: mulVector, the resulting vector when multiplying vector1 and vector2
 '''
 def multiplication(vector1, vector2):
-    # print vector1
-    # print
-    # print
-    # print
-    # print "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     if vector1==[] or vector2==[]:
         return []
-    # print vector1[0]
     if type(vector1[0])!=tuple and type(vector2[0])!=tuple: #and type(vector1[0])!=list and type(vector1[0])!=list:
-        print vector1
         vector1 = numpy.asarray(vector1)
         vector2 = numpy.asarray(vector2)
         return vector1*vector2
@@ -198,7 +191,7 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
                 add = addition(model[vt],contWord[1]) # must always stay 1
                 allContOfWord.append([add])
             for word in thesaurus[t]: # list of known synonyms
-                score = -1
+                score = 0
                 vw = model[word] if type(model)==gensim.models.word2vec.Word2Vec else model[word2id[word]] # v(w) from the given equation
                 for vtc in allContOfWord: # sum over every context word in the list of Context words for a given word in a sentence
                     score += cosine_similarity(vw,vtc[0]) # only one vtc 
@@ -211,7 +204,7 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
        
     # (c) use multiplication to get context sensitive vectors
     elif csType == "multiplication":
-        finalScore = -1
+        finalScore = -1000000
         finalWord = ''
         cs_new = [] #the id of each context word (document) and the list of context words associated with it 
         vt = None
@@ -230,7 +223,7 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
                 add = multiplication(model[vt],contWord[1]) # must always stay 1
                 allContOfWord.append([add])
             for word in thesaurus[t]: # list of known synonyms
-                score = -1
+                score = 0
                 vw = model[word] if type(model)==gensim.models.word2vec.Word2Vec else model[word2id[word]] # v(w) from the given equation
                 for vtc in allContOfWord: # sum over every context word in the list of Context words for a given word in a sentence
                     score += cosine_similarity(vw,vtc[0]) # only one vtc anyway
@@ -243,7 +236,7 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
         
     # (d) use LDA to get context sensitive vectors
     elif csType == "lda":
-        finalScore = -2
+        finalScore = -1
         finalWord = ''
         cs_new = [] #the id of each context word (document) and the list of context words associated with it 
         vt = None
@@ -265,7 +258,7 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
                     probWgivenZ = prob_w_given_z(model, cs_new[contWord][0], topic[0])
                     probZgivenTandCi.append((topic[0],probZgivenW*probWgivenZ))
                 for word in thesaurus[t]:
-                    score = -1
+                    score = 0
                     vw = model[frequencyVectors[word2id[word]]]
                     score += cosine_similarity(vw,probZgivenTandCi)
                     if score > finalScore:
