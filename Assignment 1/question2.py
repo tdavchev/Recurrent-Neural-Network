@@ -81,21 +81,21 @@ def multiplication(vector1, vector2):
         vector1 = numpy.asarray(vector1)
         vector2 = numpy.asarray(vector2)
         return vector1*vector2
-    v1=vector1
-    v2=vector2
+    # v1=vector1
+    # v2=vector2
     keys1=[]
     keys2=[]
     #convert to dictionary
     dictionary1 = dict((x, y) for x, y in vector1)
-    vector1=dictionary1.values() #get all values for the Euclidean distance
-    vector1 = map(int, vector1) # provide itemsize for data type
-    v1=[] # will be recomuputed
+    # vector11=dictionary1.values() #get all values for the Euclidean distance
+    # vector1 = map(int, vector1) # provide itemsize for data type
+    # v11=[] # will be recomuputed
     keys1 = dictionary1.keys() # we need all keys to be able to compare
     #convert to dictionary
     dictionary2 = dict((x, y) for x, y in vector2)
-    vector2=dictionary2.values() #get all values for the Euclidean distance
-    vector2 = map(int, vector2) # provide itemsize for data type
-    v2=[] # will be recomputed
+    # vector22=dictionary2.values() #get all values for the Euclidean distance
+    # vector22 = map(int, vector2) # provide itemsize for data type
+    # v22=[] # will be recomputed
     keys2 = dictionary2.keys() # we need all keys to be able to compare
     result = []
     for key in keys1:
