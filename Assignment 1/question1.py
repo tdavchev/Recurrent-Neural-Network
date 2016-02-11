@@ -158,7 +158,7 @@ def tf_idf(freqVectors):
     tfIdfVectors = []
     # compute how many times one finds a file
     lista = []
-    N = len(freqVectors)
+    N = 20000#len(freqVectors)
     print "begin..."
     lista=[int(freqVectors[vector][word][0]) for vector in xrange(0,len(freqVectors)) for word in xrange(0,len(freqVectors[vector]))]
     lista.sort()
@@ -166,7 +166,7 @@ def tf_idf(freqVectors):
     wordFreq = []
     idx = ""
     prevWord = ""
-    count = 0
+    count = 1
     countedDict = {}
     for word in lista:
         if idx == "":
