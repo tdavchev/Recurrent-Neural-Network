@@ -31,9 +31,9 @@ def load_json():
         t.append(s["target_word"])
     return t,i,sent,sentid
 
+# (a) function addition for adding 2 vectors
 
 '''
-(a) function addition for adding 2 vectors
 input: vector1
 input: vector2
 output: addVector, the resulting vector when adding vector1 and vector2
@@ -77,25 +77,24 @@ input: vector2
 output: mulVector, the resulting vector when multiplying vector1 and vector2
 '''
 def multiplication(vector1, vector2):
+    # print vector1
+    # print
+    # print
+    # print
+    # print "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    if vector1==[] or vector2==[]:
+        return []
+    # print vector1[0]
     if type(vector1[0])!=tuple and type(vector2[0])!=tuple: #and type(vector1[0])!=list and type(vector1[0])!=list:
+        print vector1
         vector1 = numpy.asarray(vector1)
         vector2 = numpy.asarray(vector2)
         return vector1*vector2
-    # v1=vector1
-    # v2=vector2
-    keys1=[]
-    keys2=[]
+
     #convert to dictionary
     dictionary1 = dict((x, y) for x, y in vector1)
-    # vector11=dictionary1.values() #get all values for the Euclidean distance
-    # vector1 = map(int, vector1) # provide itemsize for data type
-    # v11=[] # will be recomuputed
     keys1 = dictionary1.keys() # we need all keys to be able to compare
-    #convert to dictionary
     dictionary2 = dict((x, y) for x, y in vector2)
-    # vector22=dictionary2.values() #get all values for the Euclidean distance
-    # vector22 = map(int, vector2) # provide itemsize for data type
-    # v22=[] # will be recomputed
     keys2 = dictionary2.keys() # we need all keys to be able to compare
     result = []
     for key in keys1:
@@ -181,7 +180,7 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
     t=(jsonSentence["target_word"])
     context = set_contexts(t,i,sent)
     if csType == "addition":
-        finalScore = -2
+        finalScore = -1
         finalWord=''
         cs_new = [] #the id of each context word (document) and the list of context words associated with it 
         vt = None
@@ -212,13 +211,14 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
        
     # (c) use multiplication to get context sensitive vectors
     elif csType == "multiplication":
-        finalScore = -2
+        finalScore = -1
         finalWord = ''
         cs_new = [] #the id of each context word (document) and the list of context words associated with it 
         vt = None
         for position,word in context: # there are four context words before and four after each target word
             try:
-                cs_new.append((word2id[word],model[word])) if type(model)==gensim.models.word2vec.Word2Vec else cs_new.append((word2id[word],model[word2id[word]]))          
+                cs_new.append((word2id[word],model[word2id[word]]))
+                # cs_new.append((word2id[word],model[word])) if type(model)==gensim.models.word2vec.Word2Vec else cs_new.append((word2id[word],model[word2id[word]]))
             except Exception, e:
                 continue
 
@@ -364,7 +364,7 @@ if __name__ == "__main__":
     if part == "c":
         print("(c) using multiplication to calculate best substitution words")
         id2word,word2id,vectors=load_corpus(sys.argv[2], sys.argv[3])
-        t,i,sent,sentid=load_json()        
+        t,i,sent,sentid=load_json()
         thesaurus=load_tt()
         tfIDFVectors = tf_idf(vectors)
         outFileTFIDF = open("tf-idf_multiplication.txt","w")

@@ -158,7 +158,7 @@ def tf_idf(freqVectors):
     tfIdfVectors = []
     # compute how many times one finds a file
     lista = []
-    N = 20000#len(freqVectors)
+    N = len(freqVectors)
     print "begin..."
     lista=[int(freqVectors[vector][word][0]) for vector in xrange(0,len(freqVectors)) for word in xrange(0,len(freqVectors[vector]))]
     lista.sort()
@@ -166,23 +166,24 @@ def tf_idf(freqVectors):
     wordFreq = []
     idx = ""
     prevWord = ""
-    count = 1
+    count = 0
     countedDict = {}
-    for word in lista:
+    for wordId in lista:
         if idx == "":
-            idx = word
-        elif word == idx:
-            count = count + 1
+            idx = wordId
+            count=1
+        elif wordId == idx:
+            count += 1
         else: # the word has changed
             prevWord = idx
             countedDict[idx]=count
-            idx = word
+            idx = wordId
             count = 1
     if idx not in countedDict.keys():
         countedDict[idx]=count
 
     print "nT computed;"
-    tf_idf = [[] for i in repeat(None, len(freqVectors))]
+    tf_idf = [[] for i in repeat(0, len(freqVectors))]
 
     for vector in xrange(0,len(freqVectors)):
         for item in xrange(0,len(freqVectors[vector])):
@@ -193,12 +194,11 @@ def tf_idf(freqVectors):
             denom=(1.0+float(countedDict[int(word)]))
             _idf = numpy.log2(div/denom)
             tf_idf[vector].append((word,tf_*_idf))
+        tf_idf[vector].sort(key=lambda x:x[0])
     print "tf_idf computed"
-
     for j in xrange(0,len(tf_idf)):
-        tf_idf[j] = filter(lambda a: a != 0, tf_idf[j])
+        tf_idf[j] = filter(lambda a: a != None, tf_idf[j]) # this removes all zero index values
     print "all zeros were removed;"
-
     tfIdfVectors = tf_idf
 
     return tfIdfVectors
