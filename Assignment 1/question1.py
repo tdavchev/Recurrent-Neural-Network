@@ -1,8 +1,13 @@
 # coding: utf-8
+__author__ = "UID:s1045064"
+__credits__ = "Philip Gorinski"
+__version__ = "1.0.1"
+__email__ = "s1045064@sms.ed.ac.uk"
+__status__ = "Submission Ready"
 
 import gensim
 import math
-import numpy # I included this
+import numpy
 from copy import copy
 import logging
 from sets import Set
@@ -63,6 +68,7 @@ def load_corpus(vocabFile, contextFile):
     fp = open(vocabFile)
     contents = fp.read()
     vocab = contents.split()
+    
     keys = list(range(0,len(vocab)))
 
     _id2word = zip(keys,vocab)
@@ -93,60 +99,66 @@ input: vector2
 output: cosine similarity between vector1 and vector2 as a real number
 '''
 def cosine_similarity(vector1, vector2):
+    v1 = []
+    v2 = []
     if vector1==[] or vector2==[]:
-        return 0
-    # print vector1
-    # print vector2
-    v1=vector1
-    v2=vector2
-    keys1=[]
-    keys2=[]
-    if type(vector1[0])==tuple:
-        #convert to dictionary
-        dictionary1 = dict((x, y) for x, y in vector1)
-        vector1=dictionary1.values() #get all values for the Euclidean distance
-        if type(vector2[0])==list:
-            vector2=vector2[0]
-        vector1 = map(float, vector1) # provide itemsize for data type
-        v1=[] # will be recomuputed
-        keys1 = dictionary1.keys() # we need all keys to be able to compare
-    if type(vector2[0])==tuple:
-        #convert to dictionary
-        dictionary2 = dict((x, y) for x, y in vector2)
-        vector2=dictionary2.values() #get all values for the Euclidean distance
-        vector2 = numpy.asarray(vector2)
-        vector2=numpy.ndarray.tolist(vector2)
-        if type(vector2[0])==list:
-            vector2=vector2[0]
-        vector2 = map(float, vector2) # provide itemsize for data type
-        v2=[] # will be recomputed
-        keys2 = dictionary2.keys() # we need all keys to be able to compare
-
-    # handle cases when only one of the vectors is sparse:
-    if keys1==[]:
-        keys=keys2
-    else:
-        keys=keys1
-
-    for key in keys:
-        # handle cases when only one of the vectors is sparse:
-        if keys2==[]:
-            keys_ = list(range(0,len(v2)))
-        elif keys1==[]:
-            keys_ = list(range(0,len(v1)))
-        else:
-            keys_ = keys2
-
-        # If the key is in only one of the vectors then it is not needed
-        # because it will be multiplied by 0
-        if key in keys_: # consider only values which indexes appear in both vectors
-            v1.append(dictionary1[key])
-            v2.append(dictionary2[key])
-
-    try:
-        return numpy.dot(v1,v2)/numpy.dot(numpy.linalg.norm(vector1),numpy.linalg.norm(vector2))
-    except Exception, e:
         return -1
+
+    if type(vector1) == numpy.ndarray:
+        vector1 = vector1.tolist()
+
+    if type(vector2) == numpy.ndarray:
+        vector2 = vector2.tolist()
+
+    if type(vector1) == list and type(vector1[0]) != tuple:
+        #vector one becomes a tuple now....
+        if type(vector1[0])==list:
+            v1 = [(item,element) for item,element in vector1]
+        else:
+            v1=[(i,vector1[i]) for i in xrange(0,len(vector1))]
+        vector1 = v1
+
+    if type(vector2) == list and type(vector2[0]) != tuple:
+        #vector one becomes a tuple now....
+        if type(vector2[0])==list:
+            v2 = [(item,element) for item,element in vector1]
+        else:
+            v2=[(i,vector2[i]) for i in xrange(0,len(vector2))]
+        vector2 = v2
+
+    if type(vector1) == tuple: # we should not get here
+        print "I AM HERE IN V1 a tuple"
+        dictionary1 = dict((x, y) for x, y in vector1)
+        keys1 = dictionary1.keys()
+
+    if type(vector2) == tuple: # we should not get here
+        print "I AM HERE IN V2 a tuple" 
+        dictionary2 = dict((x, y) for x, y in vector2)
+        keys2 = dictionary2.keys()
+
+    if type(vector1[0]) == tuple: # convert to dictionary
+        dictionary1 = dict((x, y) for x, y in vector1)
+        keys1 = dictionary1.keys()
+
+    if type(vector2[0]) == tuple:
+        dictionary2 = dict((x, y) for x, y in vector2)
+        keys2 = dictionary2.keys()
+
+    # use only values from indexes which appeared in both key spaces
+    vec1= [dictionary1[key] for key in keys1 if key in keys2]
+    vec2 = [dictionary2[key] for key in keys1 if key in keys2]
+
+    # compute the norm
+    norm1 = 0
+    norm2 = 0
+    norm1 = [dictionary1[key]**2 for key in keys1]
+    norm1 = sum(norm1)
+    norm1 = numpy.sqrt(norm1)
+    norm2 = [dictionary2[key]**2 for key in keys2]
+    norm2 = sum(norm2)
+    norm2 = numpy.sqrt(norm2)
+
+    return numpy.dot(vec1,vec2)/numpy.dot(norm1,norm2)
 
 
 '''
@@ -197,8 +209,8 @@ def tf_idf(freqVectors):
         tf_idf[vector].sort(key=lambda x:x[0])
     print "tf_idf computed"
     for j in xrange(0,len(tf_idf)):
-        tf_idf[j] = filter(lambda a: a != None, tf_idf[j]) # this removes all zero index values
-    print "all zeros were removed;"
+        tf_idf[j] = filter(lambda a: a != None, tf_idf[j]) # this removes all None index values
+    print "all empty spaces were removed;"
     tfIdfVectors = tf_idf
 
     return tfIdfVectors
@@ -298,13 +310,21 @@ if __name__ == '__main__':
         import numpy
         print("(b): cosine similarity")
         try:
-            cos = cosine_similarity([(0,1), (2,1), (4,2)], [(0,1), (1,2), (4,1)])
+            cos = cosine_similarity([(0,1), (4,2), (2,1)], [(0,1), (1,2), (4,1)])
             if not numpy.isclose(0.5, cos):
                 print("\tError: sparse expected similarity is 0.5, was {0}".format(cos))
             else:
                 print("\tPass: sparse vector similarity")
         except Exception:
             print("\tError: failed for sparse vector")
+        try:
+            cos = cosine_similarity([3, 45, 7, 2],[2, 54, 13, 15])
+            if not numpy.isclose(0.97228425171234989,cos):
+                print("\tError: full expected similarity is 0.5, was {0}".format(cos))
+            else:
+                print("\tPass: manual full vector similarity")
+        except Exception:
+            print("\tError: failed for full vector")
         try:
             cos = cosine_similarity([1, 0, 1, 0, 2], [1, 2, 0, 0, 1])
             if not numpy.isclose(0.5, cos):
@@ -396,77 +416,77 @@ if __name__ == '__main__':
         acc=test_accuracy(sys.argv[3],w2v)
 
 
-        # Total 3.0%
-        # lRate=0.01
-        # sRate=0.01
-        # nSampling=5
-        # print("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
-        # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
-        # print("(f1) word2vec, testing model...")
-        # acc=test_accuracy(sys.argv[3],w2v)
+        #Total 3.0%
+        lRate=0.01
+        sRate=0.01
+        nSampling=5
+        print("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
+        print("(f1) word2vec, testing model...")
+        acc=test_accuracy(sys.argv[3],w2v)
 
-        # # Total 7.6%
-        # lRate=0.03
-        # sRate=0.01
-        # nSampling=5
-        # logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
-        # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
-        # logging.info("(f1) word2vec, testing model...")
-        # acc=test_accuracy(sys.argv[3],w2v)
+        # Total 7.6%
+        lRate=0.03
+        sRate=0.01
+        nSampling=5
+        logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
+        logging.info("(f1) word2vec, testing model...")
+        acc=test_accuracy(sys.argv[3],w2v)
 
-        # # what happens if we ttry the final values suggested in paper
-        # lRate=0.05
-        # sRate=0.00001
-        # nSampling=10
-        # logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
-        # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
-        # logging.info("(f1) word2vec, testing model...")
-        # acc=test_accuracy(sys.argv[3],w2v)
+        # what happens if we ttry the final values suggested in paper
+        lRate=0.05
+        sRate=0.00001
+        nSampling=10
+        logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
+        logging.info("(f1) word2vec, testing model...")
+        acc=test_accuracy(sys.argv[3],w2v)
 
-        # # apparently this shows good performance Total 7.7%
-        # lRate=0.05
-        # sRate=0.01
-        # nSampling=10
-        # logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
-        # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
-        # logging.info("(f1) word2vec, testing model...")
-        # acc=test_accuracy(sys.argv[3],w2v)
+        # apparently this shows good performance Total 7.7%
+        lRate=0.05
+        sRate=0.01
+        nSampling=10
+        logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
+        logging.info("(f1) word2vec, testing model...")
+        acc=test_accuracy(sys.argv[3],w2v)
 
-        # #full vector training will happen on those total 8%
-        # lRate=0.03
-        # sRate=0.01
-        # nSampling=10
-        # logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
-        # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
-        # logging.info("(f1) word2vec, testing model...")
-        # acc=test_accuracy(sys.argv[3],w2v)
+        #full vector training will happen on those total 8%
+        lRate=0.03
+        sRate=0.01
+        nSampling=10
+        logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
+        logging.info("(f1) word2vec, testing model...")
+        acc=test_accuracy(sys.argv[3],w2v)
 
-        # # total: 0.0% (1/3476)
-        # lRate=0.01
-        # sRate=0.01
-        # nSampling=0
-        # logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
-        # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
-        # logging.info("(f1) word2vec, testing model...")
-        # acc=test_accuracy(sys.argv[3],w2v)
+        # total: 0.0% (1/3476)
+        lRate=0.01
+        sRate=0.01
+        nSampling=0
+        logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
+        logging.info("(f1) word2vec, testing model...")
+        acc=test_accuracy(sys.argv[3],w2v)
 
-        # # total: 3.6% (124/3476)
-        # lRate=0.01
-        # sRate=0.01
-        # nSampling=10
-        # logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
-        # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
-        # logging.info("(f1) word2vec, testing model...")
-        # acc=test_accuracy(sys.argv[3],w2v)
+        # total: 3.6% (124/3476)
+        lRate=0.01
+        sRate=0.01
+        nSampling=10
+        logging.info("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,100000)
+        logging.info("(f1) word2vec, testing model...")
+        acc=test_accuracy(sys.argv[3],w2v)
 
-        # # total: 0.4% (14/3476)
-        # lRate=0.01
-        # sRate=0.0001
-        # nSampling=5
-        # print("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
-        # w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,sys.argv[3])
-        # print("(f1) word2vec, testing model...")
-        # acc=test_accuracy(sys.argv[3],w2v)
+        # total: 0.4% (14/3476)
+        lRate=0.01
+        sRate=0.0001
+        nSampling=5
+        print("(f1) word2vec, estimating best learning rate {0}, sample rate {1}, negative sampling {2}".format(lRate,sRate,nSampling))
+        w2v=word2vec(sys.argv[2],lRate,sRate,nSampling,sys.argv[3])
+        print("(f1) word2vec, testing model...")
+        acc=test_accuracy(sys.argv[3],w2v)
 
     # you may complete this part for the second part of f (training and saving the actual word2vec model)
     if part == "f2":
@@ -519,6 +539,7 @@ if __name__ == '__main__':
         print("(j) get topics from LDA model")
         id2word, word2id, vectors = load_corpus(sys.argv[2], sys.argv[3])
         ldaModel = gensim.models.LdaModel.load('lda_model-09022016', mmap='r')
+        # print ldaModel
         topics = ldaModel.show_topics(num_topics=10, num_words=10, log=False, formatted=True)
         topicIDs = [topics[j][0] for j in xrange(0,len(topics))]
         for _id in topicIDs:

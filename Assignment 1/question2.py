@@ -1,5 +1,9 @@
 # coding: utf-8
-
+__author__ = "UID:s1045064"
+__credits__ = "Philip Gorinski"
+__version__ = "1.0.1"
+__email__ = "s1045064@sms.ed.ac.uk"
+__status__ = "Submission Ready"
 from question1 import *
 import json
 
@@ -16,9 +20,12 @@ def load_thesaurus(thesaurusFile):
             thesaurus[word] = subs.split(" ")
     return thesaurus
 
+'''
+helper class to load a json file from disk
+output: the target, index, sentence and the sentence id
+'''
 def load_json():
     lines=open("data/test.txt").readlines()
-    # outFile = open("test_n.txt","w")
     i=[]
     sent=[]
     t=[]
@@ -84,12 +91,17 @@ def multiplication(vector1, vector2):
         vector2 = numpy.asarray(vector2)
         return vector1*vector2
 
-    #convert to dictionary
+    # no real need
+    vector1.sort(key=lambda tup:tup[0])
+    vector2.sort(key=lambda tup:tup[0])
+
+    # convert to dictionary
     dictionary1 = dict((x, y) for x, y in vector1)
     keys1 = dictionary1.keys() # we need all keys to be able to compare
     dictionary2 = dict((x, y) for x, y in vector2)
     keys2 = dictionary2.keys() # we need all keys to be able to compare
     result = []
+
     for key in keys1:
         if key in keys2: # consider only values which indexes appear in both vectors
             result.append((key,(dictionary1[key]*dictionary2[key]))) 
@@ -144,6 +156,9 @@ def set_contexts(t,i,sent):
     
     return cs
 
+'''
+function to load the test thesaurus.
+'''
 def load_tt():
     id2word = {}
     ttdict = {}
@@ -173,7 +188,7 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
     t=(jsonSentence["target_word"])
     context = set_contexts(t,i,sent)
     if csType == "addition":
-        finalScore = -1
+        finalScore = -100
         finalWord=''
         cs_new = [] #the id of each context word (document) and the list of context words associated with it 
         vt = None
@@ -194,6 +209,8 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
                 score = 0
                 vw = model[word] if type(model)==gensim.models.word2vec.Word2Vec else model[word2id[word]] # v(w) from the given equation
                 for vtc in allContOfWord: # sum over every context word in the list of Context words for a given word in a sentence
+                    if cosine_similarity(vw,vtc[0]) < -1 or cosine_similarity(vw,vtc[0]) > 1:
+                        print "WARNING"
                     score += cosine_similarity(vw,vtc[0]) # only one vtc 
                 if score > finalScore:
                     finalScore = score
@@ -204,7 +221,7 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
        
     # (c) use multiplication to get context sensitive vectors
     elif csType == "multiplication":
-        finalScore = -1000000
+        finalScore = -100
         finalWord = ''
         cs_new = [] #the id of each context word (document) and the list of context words associated with it 
         vt = None
@@ -236,7 +253,7 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
         
     # (d) use LDA to get context sensitive vectors
     elif csType == "lda":
-        finalScore = -1
+        finalScore = -100
         finalWord = ''
         cs_new = [] #the id of each context word (document) and the list of context words associated with it 
         vt = None
@@ -251,16 +268,19 @@ def best_substitute(jsonSentence, thesaurus, word2id, model, frequencyVectors, c
         if vt is not None:
             allContOfWord = [] # a list of all context words' intersection with target - v(t,C), where c belongs to C
             topics = model[frequencyVectors[vt]]
+            # calculate for each context word separately
             for contWord in xrange(0,len(cs_new)):
                 probZgivenTandCi = []
+                #obtain all relevant topics
                 for topic in topics:
                     probZgivenW = prob_z_given_w(model,topic[0], frequencyVectors[vt])
                     probWgivenZ = prob_w_given_z(model, cs_new[contWord][0], topic[0])
+                    # compute
                     probZgivenTandCi.append((topic[0],probZgivenW*probWgivenZ))
                 for word in thesaurus[t]:
                     score = 0
                     vw = model[frequencyVectors[word2id[word]]]
-                    score += cosine_similarity(vw,probZgivenTandCi)
+                    score += cosine_similarity(vw,probZgivenTandCi) # calculate similarity
                     if score > finalScore:
                         finalScore = score
                         word = word.split(".")
@@ -335,7 +355,6 @@ if __name__ == "__main__":
         w2v=gensim.models.Word2Vec.load('final-model-09022016.bin')
         outFilew2v = open("word2vec_addition.txt","w")
         lines=open("data/test.txt").readlines()
-        # outFile = open("test_n.txt","w")
         i=[]
         sent=[]
         sentid=[]
@@ -359,6 +378,7 @@ if __name__ == "__main__":
         id2word,word2id,vectors=load_corpus(sys.argv[2], sys.argv[3])
         t,i,sent,sentid=load_json()
         thesaurus=load_tt()
+        #TF-IDF
         tfIDFVectors = tf_idf(vectors)
         outFileTFIDF = open("tf-idf_multiplication.txt","w")
         lines=open("data/test.txt").readlines()
@@ -450,6 +470,6 @@ if __name__ == "__main__":
             except Exception, e:
                 outFileLDA.write(" ")
             outFileLDA.write("\n")
-            print "{0} steps".format(count)
+            print "{0} steps".format(count) # keep track of where we are
             count += 1
         outFileLDA.close
