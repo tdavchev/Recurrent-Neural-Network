@@ -109,24 +109,15 @@ class RNN(object):
         for t in reversed(range(len(x))):
             target = make_onehot(d[t],3)
             deltaOut = target-y[t]
+            print deltaOut
             self.deltaW += outer(deltaOut, s[t]) # no regularization ?
-            deltaSigmoid = dot(s[t],(1-s[t]))
-            print "-----"
-            print deltaSigmoid
-            print "-----"
-            print s[t].shape
-            print "aaaaaaa"
-            print s
-            print s[t]
-            print "aaaaaaa"
+            deltaSigmoid = s[t]*(1-s[t])
+
             e = self.W.T.dot(deltaOut)
-            deltaIn = dot(e,deltaSigmoid)
-            print self.W.T.shape
-            print deltaOut.shape
-            print deltaSigmoid.shape
+            deltaIn = e*deltaSigmoid
             one_hot = make_onehot(x[t],3)
             self.deltaV += outer(deltaIn,one_hot)
-    
+
     def acc_deltas_bptt(self, x, d, y, s, steps):
         '''
         accumulate updates for V, W, U
