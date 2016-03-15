@@ -83,9 +83,9 @@ class RNN(object):
         
         for t in range(len(x)):
             one_hot = make_onehot(x[t],3)
-            netIn = dot(self.V,one_hot)+dot(self.U,s[t-1]) + self.b1
+            netIn = dot(self.V,one_hot)+dot(self.U,s[t-1]) #+ self.b1
             s[t] = sigmoid(netIn)
-            netOut = dot(self.W,s[t]) + self.b2 #+ self.b2
+            netOut = dot(self.W,s[t]) #+ self.b2
             y[t] = softmax(netOut)
         return y,s
     
@@ -105,11 +105,10 @@ class RNN(object):
         
         no return values
         '''
-        
+
         for t in reversed(range(len(x))):
             target = make_onehot(d[t],3)
             deltaOut = target-y[t]
-            print deltaOut
             self.deltaW += outer(deltaOut, s[t]) # no regularization ?
             deltaSigmoid = s[t]*(1-s[t])
 
@@ -117,6 +116,33 @@ class RNN(object):
             deltaIn = e*deltaSigmoid
             one_hot = make_onehot(x[t],3)
             self.deltaV += outer(deltaIn,one_hot)
+            if t >= 1:
+                self.deltaU += outer(deltaIn,s[t-1])
+
+
+    # def bptt(self, x, y):
+    #     T = len(y)
+    #     # Perform forward propagation
+    #     o, s = self.forward_propagation(x)
+    #     # We accumulate the gradients in these variables
+    #     dLdU = np.zeros(self.U.shape)
+    #     dLdV = np.zeros(self.V.shape)
+    #     dLdW = np.zeros(self.W.shape)
+    #     delta_o = o
+    #     delta_o[np.arange(len(y)), y] -= 1.
+    #     # For each output backwards...
+    #     for t in np.arange(T)[::-1]:
+    #         dLdV += np.outer(delta_o[t], s[t].T)
+    #         # Initial delta calculation
+    #         delta_t = self.V.T.dot(delta_o[t]) * (1 - (s[t] ** 2))
+    #         # Backpropagation through time (for at most self.bptt_truncate steps)
+    #         for bptt_step in np.arange(max(0, t-self.bptt_truncate), t+1)[::-1]:
+    #             # print "Backpropagation step t=%d bptt step=%d " % (t, bptt_step)
+    #             dLdW += np.outer(delta_t, s[bptt_step-1])              
+    #             dLdU[:,x[bptt_step]] += delta_t
+    #             # Update delta for next step
+    #             delta_t = self.W.T.dot(delta_t) * (1 - s[bptt_step-1] ** 2)
+    #     return [dLdU, dLdV, dLdW]
 
     def acc_deltas_bptt(self, x, d, y, s, steps):
         '''
@@ -135,11 +161,24 @@ class RNN(object):
         
         no return values
         '''
-        
-        # for t in reversed(range(len(x))):
-        #     ##########################
-        #     # --- your code here --- #
-        #     ##########################
+        for t in arange(len(d))[::-1]:
+            target = make_onehot(d[t],3)
+            deltaOut = target-y[t]
+            # print deltaOut
+            self.deltaW += outer(deltaOut, s[t]) # no regularization ?
+            fPrim = s[t]*(1-s[t])
+            # e = 
+            deltaIn = self.W.T.dot(deltaOut)*fPrim
+
+            for tao in arange(max(0, t-steps), t+1)[::-1]:
+                # print "Backpropagation step t=%d tao step=%d " % (t, tao)
+                one_hotX = make_onehot(x[tao],3)
+                self.deltaV += outer(deltaIn,one_hotX)
+                # self.deltaV[:,x[tao]] += deltaIn
+                self.deltaU += outer(deltaIn,s[tao-1])
+                fPrim = s[tao-1]*(1-s[tao-1])
+                deltaIn = dot(self.U.T,deltaIn)*fPrim
+
 
     def compute_loss(self, x, d):
         '''
