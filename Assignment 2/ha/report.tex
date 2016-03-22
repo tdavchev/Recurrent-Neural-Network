@@ -1,0 +1,154 @@
+%%% Template originaly created by Karol Kozioł (mail@karol-koziol.net) and modified for ShareLaTeX use
+
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{xcolor}
+\usepackage{subcaption}
+\usepackage{tgtermes}
+\usepackage{dsfont}
+
+\usepackage[
+pdftitle={Math Assignment}, 
+pdfauthor={Joe Doe, Some University},
+colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue,bookmarks=true,
+bookmarksopenlevel=2]{hyperref}
+\usepackage{amsmath,amssymb,amsthm,textcomp}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,bayesnet}
+\usetikzlibrary{calc,positioning,mindmap,trees,decorations.pathreplacing}
+\usepackage{natbib}
+% Copyright (C) 2010,2011 Laura Dietz
+% Copyright (C) 2012 Jaakko Luttinen
+\usepackage[latin1]{inputenc}
+\usepackage{geometry}
+\geometry{total={210mm,297mm},
+	left=25mm,right=25mm,%
+	bindingoffset=0mm, top=20mm,bottom=20mm}
+
+
+\linespread{1.3}
+
+\newcommand{\linia}{\rule{\linewidth}{0.5pt}}
+
+% custom theorems if needed
+\newtheoremstyle{mytheor}
+{1ex}{1ex}{\normalfont}{0pt}{\scshape}{.}{1ex}
+{{\thmname{#1 }}{\thmnumber{#2}}{\thmnote{ (#3)}}}
+
+\theoremstyle{mytheor}
+\newtheorem{defi}{Definition}
+
+% my own titles
+\makeatletter
+\renewcommand{\maketitle}{
+	\begin{center}
+		\vspace{2ex}
+		{\huge \textsc{\@title}}
+		\vspace{1ex}
+		\\
+		\linia\\
+		\@author \hfill \@date
+		\vspace{4ex}
+	\end{center}
+}
+\makeatother
+%%%
+
+% custom footers and headers
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{Assignment 2 NLU 2016}
+\cfoot{}
+\rfoot{Page \thepage\ /\ \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+%
+
+% code listing settings
+\usepackage{listings}
+\lstset{
+	language=Matlab,
+	basicstyle=\ttfamily\small,
+	aboveskip={1.0\baselineskip},
+	belowskip={1.0\baselineskip},
+	columns=fixed,
+	extendedchars=true,
+	breaklines=true,
+	tabsize=4,
+	prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+	frame=lines,
+	showtabs=false,
+	showspaces=false,
+	showstringspaces=false,
+	keywordstyle=\color[rgb]{0.627,0.126,0.941},
+	commentstyle=\color[rgb]{0.133,0.545,0.133},
+	stringstyle=\color[rgb]{01,0,0},
+	numbers=left,
+	numberstyle=\small,
+	stepnumber=1,
+	numbersep=10pt,
+	captionpos=t,
+	escapeinside={\%*}{*)}
+}
+
+\begin{document}
+	
+	\title{Natural Language Understanding\\
+	Assignment 1}
+	
+	\author{UID: s1045064, University of Edinburgh}
+	
+	\date{02/12/2016}
+	
+	\maketitle
+	\tableofcontents
+	
+
+\section{Q1}
+\subsection{a}
+	\begin{tikzpicture}
+	
+	\begin{scope}[auto, every node/.style={draw,circle,minimum size=3em,inner sep=1},node distance=2cm]
+	\node[draw, outer sep=2, circle] (x_t) {$x^{(t+1)}$};
+	\node[draw, outer sep=2, align=center, circle] (unit_t) [above=of x_t] {$s^{(t+1)}$};
+	\node[draw, align=center, outer sep=2, circle] (unit_tprev) [left=of unit_t] {$s^{(t)}$};
+	\node[draw, align=center, outer sep=2, circle] (unit_tnext) [right=of unit_t] {$s^{(t+2)}$};
+	\node[draw, align=center, outer sep=2, circle] (unit_tnextdots) [right=of unit_tnext] {$\ldots$};
+	\node[draw, outer sep=2, circle] (y_t) [above=of unit_t] {$\hat{y}^{(t+1)}$};
+	\node[draw, outer sep=2, circle] (y_tnext) [above=of unit_tnext] {$\hat{y}^{(t+2)}$};
+	\node[draw, outer sep=2, circle] (x_tnext) [below=of unit_tnext] {$x^{(t+2)}$};
+	\end{scope}
+	
+	\path[->] (x_t) edge (unit_t);
+	\path[->] (x_tnext) edge (unit_tnext);
+	\path[->] (unit_t) edge (y_t);
+	\path[->] (unit_tprev) edge (unit_t);
+	\path[->] (unit_t) edge (unit_tnext);
+	\path[->] (unit_tnext) edge (y_tnext);
+	\path[->] (unit_tnext) edge (unit_tnextdots);
+	
+	\end{tikzpicture}
+\subsection{b}
+The locality of a sigmoid, as well as that it does not guarantee that its output will sum up to one makes it non-suitable for the output layer \citep{nielsen2015neural}. We are interested in predicting the probability of a given word x to be the next one. However, through the Softmax function, the output activations are guaranteed to sum up to one. In addition Softmax enables them to always be positive. Those two characteristics allow us to think of the output as a probability distribution. Thus, we can interpret the output activations as the network's estimate of the probability that the correct word is x.
+\subsection{c}
+$s^{1}=[0.696, 0.584]$
+\subsection{d}
+$\hat{y}=[0.337, 0.297, 0.366]$
+\section{2}
+\subsection{a}
+$d^{1}=2.302$, $d^{2}=0.506$, $d^{3}=1.149$ %$d^{1}=[1.301,1.301,1.298, 1.307]$
+\subsection{b}
+\end{lstlisting}
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

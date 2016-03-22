@@ -76,13 +76,13 @@ class RNN(object):
         '''
         
         # matrix s for hidden states, y for output states, given input x.
-        #rows correspond to times t, i.e., input words
+        # rows correspond to times t, i.e., input words
         # s has one more row, since we need to look back even at time 0 (s(t=0-1) will just be [0. 0. ....] )
         s = zeros((len(x)+1, self.hidden_dims))
         y = zeros((len(x), self.vocab_size))
         
         for t in range(len(x)):
-            one_hot = make_onehot(x[t],3)
+            one_hot = make_onehot(x[t],self.vocab_size)
             netIn = dot(self.V,one_hot)+dot(self.U,s[t-1]) #+ self.b1
             s[t] = sigmoid(netIn)
             netOut = dot(self.W,s[t]) #+ self.b2
@@ -107,42 +107,17 @@ class RNN(object):
         '''
 
         for t in reversed(range(len(x))):
-            target = make_onehot(d[t],3)
+            target = make_onehot(d[t],self.vocab_size)
             deltaOut = target-y[t]
             self.deltaW += outer(deltaOut, s[t]) # no regularization ?
             deltaSigmoid = s[t]*(1-s[t])
 
             e = self.W.T.dot(deltaOut)
             deltaIn = e*deltaSigmoid
-            one_hot = make_onehot(x[t],3)
+            one_hot = make_onehot(x[t],self.vocab_size)
             self.deltaV += outer(deltaIn,one_hot)
             if t >= 1:
                 self.deltaU += outer(deltaIn,s[t-1])
-
-
-    # def bptt(self, x, y):
-    #     T = len(y)
-    #     # Perform forward propagation
-    #     o, s = self.forward_propagation(x)
-    #     # We accumulate the gradients in these variables
-    #     dLdU = np.zeros(self.U.shape)
-    #     dLdV = np.zeros(self.V.shape)
-    #     dLdW = np.zeros(self.W.shape)
-    #     delta_o = o
-    #     delta_o[np.arange(len(y)), y] -= 1.
-    #     # For each output backwards...
-    #     for t in np.arange(T)[::-1]:
-    #         dLdV += np.outer(delta_o[t], s[t].T)
-    #         # Initial delta calculation
-    #         delta_t = self.V.T.dot(delta_o[t]) * (1 - (s[t] ** 2))
-    #         # Backpropagation through time (for at most self.bptt_truncate steps)
-    #         for bptt_step in np.arange(max(0, t-self.bptt_truncate), t+1)[::-1]:
-    #             # print "Backpropagation step t=%d bptt step=%d " % (t, bptt_step)
-    #             dLdW += np.outer(delta_t, s[bptt_step-1])              
-    #             dLdU[:,x[bptt_step]] += delta_t
-    #             # Update delta for next step
-    #             delta_t = self.W.T.dot(delta_t) * (1 - s[bptt_step-1] ** 2)
-    #     return [dLdU, dLdV, dLdW]
 
     def acc_deltas_bptt(self, x, d, y, s, steps):
         '''
@@ -162,19 +137,17 @@ class RNN(object):
         no return values
         '''
         for t in arange(len(d))[::-1]:
-            target = make_onehot(d[t],3)
+            target = make_onehot(d[t],self.vocab_size)
             deltaOut = target-y[t]
             # print deltaOut
             self.deltaW += outer(deltaOut, s[t]) # no regularization ?
             fPrim = s[t]*(1-s[t])
-            # e = 
             deltaIn = self.W.T.dot(deltaOut)*fPrim
 
             for tao in arange(max(0, t-steps), t+1)[::-1]:
                 # print "Backpropagation step t=%d tao step=%d " % (t, tao)
-                one_hotX = make_onehot(x[tao],3)
+                one_hotX = make_onehot(x[tao],self.vocab_size)
                 self.deltaV += outer(deltaIn,one_hotX)
-                # self.deltaV[:,x[tao]] += deltaIn
                 self.deltaU += outer(deltaIn,s[tao-1])
                 fPrim = s[tao-1]*(1-s[tao-1])
                 deltaIn = dot(self.U.T,deltaIn)*fPrim
@@ -195,11 +168,9 @@ class RNN(object):
         loss = 0.
 
         Y,s = self.predict(x)
-        for t in range(len(Y)):
-            one_hot_d = make_onehot(d[t],3)
-            loss += sum(one_hot_d*log(Y[t]))
+        loss = -sum([make_onehot(d[t],self.vocab_size)*log(Y[t]) for t in xrange(0,len(Y))])
         
-        return -loss
+        return loss
 
     def compute_mean_loss(self, X, D):
         '''
@@ -214,9 +185,8 @@ class RNN(object):
         '''
         
         mean_loss = 0.
-
-        loss = self.compute_loss(X,D)
         total = sum(map(len,D))
+        loss = sum([self.compute_loss(X[item],D[item]) for item in xrange(0,len(X))])
         mean_loss = loss/float(total)
 
         return mean_loss
@@ -369,11 +339,14 @@ if __name__ == "__main__":
         '''
         
         data_folder = sys.argv[2]
-        vocabsize = 200
-        hdim = 5
+        # vocabsize = len(vocab)
+        vocabsize = 2000
+        # hdim = 5
+        hdim = 50
         
         # get the data set vocabulary
         vocab = pd.read_table(data_folder + "/vocab.ptb.txt", header=None, sep="\s+", index_col=0, names=['count', 'freq'], )
+        
         num_to_word = dict(enumerate(vocab.index[:vocabsize]))
         word_to_num = invert_dict(num_to_word)
         
@@ -390,15 +363,15 @@ if __name__ == "__main__":
         S_dev = docs_to_indices(docs, word_to_num)
         X_dev, D_dev = seqs_to_lmXY(S_dev)
         
-        X = X_train[:100]
-        D = D_train[:100]
-        X_dev = X_dev[:100]
-        D_dev = D_dev[:100]
+        X = X_train
+        D = D_train
+        # X_dev = X_dev[:1000]
+        # D_dev = D_dev[:1000]
         r = RNN(vocabsize, hdim)
 
         # train the RNN
         #r.train(X, D, X_dev, D_dev, epochs, learning_rate, anneal, back_steps, batch_size, min_change):
-        r.train(X, D, X_dev, D_dev, 25, 0.5, 5, 3, 100, 0.0001)
+        r.train(X, D, X_dev[:1000], D_dev[:1000], 30, 0.1, 5, 10, 100, 0.0001)
         
         dev_loss = r.compute_mean_loss(X_dev, D_dev)
         print("mean loss: {0}".format(dev_loss))
